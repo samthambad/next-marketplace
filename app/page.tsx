@@ -1,11 +1,11 @@
 import React from "react";
 const Home = () => {
   return (
-    <section className='w-full flex-center flex-col'> 
-      <h1 className='blue_gradient head_text text-center'>Marketplace
+    <section className='w-full flex-center flex-col text-center'> 
+      <h1 className='scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl'>Marketplace
         <br className='max-md:hidden'/>
       </h1>
-        <span className="text-center">An open and free marketplace</span>
+        <span className="leading-7 [&:not(:first-child)]:mt-6">An open and free marketplace</span>
     </section>
   );
 }

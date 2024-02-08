@@ -1,7 +1,7 @@
 'use server';
+import { checkLoggedIn } from '@/app/layout';
 import { createClient } from '@supabase/supabase-js';
-import { timeStamp } from 'console';
-import { z } from 'zod';
+import { z } from 'zod'; //for schema
 require('dotenv').config()
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -12,6 +12,8 @@ if (!supabaseKey || !supabaseUrl) {
 }
 
 const supabase = createClient(supabaseUrl, supabaseKey)
+
+// to insert post data inside supabase
 const PostSchema = z.object({
   id: z.string(),
   title: z.string(),
@@ -22,6 +24,10 @@ const PostSchema = z.object({
 const PostAcceptedSchema = PostSchema.omit({id:true})
 
 export async function createPost(formData: FormData) {
+  const userDetails = await checkLoggedIn();
+  if (userDetails) {
+    console.log(userDetails.id);
+  }
   const { title, description, timestamp } = PostAcceptedSchema.parse({
     title: formData.get("title"),
     description: formData.get("description"),
@@ -32,9 +38,21 @@ export async function createPost(formData: FormData) {
     title: title,
     description: description,
     timestamp: timestamp,
+    user_id: userDetails?.id,
   })
   console.log(title, description)
   if(error) {
     console.log(error);
   }
+}
+
+// fetch data from supabase
+export async function fetchPosts() {
+  // fetch data from supabase and order by timestamp latest and limit 
+  let {data, error} = await supabase.from('posts').select('*').order('timestamp').limit(5)
+  if(error) {
+    console.log(error);
+  }
+  console.log(data);
+  return data;
 }
