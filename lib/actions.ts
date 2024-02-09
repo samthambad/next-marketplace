@@ -1,7 +1,6 @@
 'use server';
 import { checkLoggedIn } from '@/app/layout';
 import { createClient } from '@supabase/supabase-js';
-import { z } from 'zod'; //for schema
 require('dotenv').config()
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -13,34 +12,18 @@ if (!supabaseKey || !supabaseUrl) {
 
 const supabase = createClient(supabaseUrl, supabaseKey)
 
-// to insert post data inside supabase
-const PostSchema = z.object({
-  id: z.string(),
-  title: z.string(),
-  description: z.string(),
-  timestamp: z.string(),
-})
-
-const PostAcceptedSchema = PostSchema.omit({id:true})
-
 export async function createPost(formData: FormData) {
   const userDetails = await checkLoggedIn();
   if (userDetails) {
-    console.log(userDetails.id);
+    console.log(userDetails.user_metadata.name);
   }
-  const { title, description, timestamp } = PostAcceptedSchema.parse({
+  let {error} = await supabase.from('posts').insert({
     title: formData.get("title"),
     description: formData.get("description"),
     timestamp: new Date().toISOString(),
-  })
-  
-  let {error} = await supabase.from('posts').insert({
-    title: title,
-    description: description,
-    timestamp: timestamp,
     user_id: userDetails?.id,
+    user_name: userDetails?.user_metadata.name,
   })
-  console.log(title, description)
   if(error) {
     console.log(error);
   }
@@ -49,10 +32,18 @@ export async function createPost(formData: FormData) {
 // fetch data from supabase
 export async function fetchPosts() {
   // fetch data from supabase and order by timestamp latest and limit 
-  let {data, error} = await supabase.from('posts').select('*').order('timestamp').limit(5)
+  let {data, error} = await supabase.from('posts').select('*').order('timestamp',{ascending: false}).limit(5)
   if(error) {
     console.log(error);
   }
-  console.log(data);
+  return data;
+}
+
+export async function fetchFilteredPosts(query:string) {
+  // fetch data from supabase and order by timestamp latest and limit 
+  let {data, error} = await supabase.from('posts').select('*').filter('title','eq',query).or('description',query).order('timestamp',{ascending: false})
+  if(error) {
+    console.log(error);
+  }
   return data;
 }

@@ -11,7 +11,6 @@ const SearchPage = async ({
     };
 }) => {
   const query = searchParams?.query ?? '';
-  const currentPage = Number(searchParams?.page) || 1;
   return (
     <div className='flex-center flex-col text-center mx-auto'>
       <h1 className='scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl mb-4 mx-auto'> Search </h1>
@@ -20,7 +19,7 @@ const SearchPage = async ({
         <Search placeholder="Search listings"/>
       </div>
       <Suspense>
-        <Posts/>
+        { query.length === 0 ? <Posts/> : <div>(console.log("fetch filtered posts"))</div>}
       </Suspense>
     </div>
     )

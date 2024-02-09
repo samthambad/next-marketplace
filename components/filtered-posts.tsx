@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/card"
 import { fetchFilteredPosts } from '@/lib/actions'
 
-const Posts = async() => {
+const FilteredPosts = async() => {
   const latestPosts = await fetchFilteredPosts(); 
   return (
     <div>
@@ -32,4 +32,4 @@ const Posts = async() => {
   )
   }
   
-export default Posts;
+export default FilteredPosts;
