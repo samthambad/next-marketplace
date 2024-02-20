@@ -19,7 +19,7 @@ const SearchPage = async ({
         <Search placeholder="Search listings"/>
       </div>
       <Suspense>
-        {query.length === 0 ? <Posts query={query } /> : <div>(console.log("fetch filtered posts"))</div>}
+        <Posts query={query }/>
       </Suspense>
     </div>
     )
