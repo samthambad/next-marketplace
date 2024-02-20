@@ -9,8 +9,8 @@ import {
 } from "@/components/ui/card"
 import { fetchFilteredPosts } from '@/lib/actions'
 
-const Posts = async() => {
-  const latestPosts = await fetchFilteredPosts(); 
+const Posts = async ({ query }: { query: string; }) => {
+  const latestPosts = await fetchFilteredPosts(query); 
   return (
     <div>
       <h1 className='mb-8 border border-gray-300 mx-auto w-80 rounded'>Latest Posts</h1>
