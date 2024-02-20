@@ -40,6 +40,9 @@ export async function fetchPosts() {
 }
 
 export async function fetchFilteredPosts(query:string) {
+  if (query.length === 0) {
+    return fetchPosts();
+  }
   // fetch data from supabase and order by timestamp latest and limit 
   let {data, error} = await supabase.from('posts').select('*').filter('title','eq',query).or('description',query).order('timestamp',{ascending: false})
   if(error) {
