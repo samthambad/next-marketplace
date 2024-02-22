@@ -2,9 +2,11 @@ import React from 'react'
 import "@/styles/globals.css"
 import Input from '@/components/input'
 import { checkLoggedIn } from '@/app/layout';
+import {redirect} from 'next/navigation';
 
 const CreatePost = async () => {
   const userDetails = await checkLoggedIn();
+  //redirect to home page if not logged in
   return (
     <div className='text-center'>
       {userDetails ?
@@ -14,7 +16,9 @@ const CreatePost = async () => {
         <Input/>
         </div>
         :
-        <h1 className='scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl mb-4'>You are not logged in!</h1>
+        <>
+          {redirect('/')}
+        </>
       }
     </div>
   ) 

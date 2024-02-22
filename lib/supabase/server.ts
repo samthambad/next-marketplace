@@ -1,4 +1,8 @@
 'use server'
+// To access Supabase from Server Components, Server Actions, and Route Handlers, 
+// which run only on the server.
+// should be same across all apps
+// https://supabase.com/docs/guides/auth/server-side/creating-a-client?environment=server-component&framework=nextjs
 import { createServerClient } from "@supabase/ssr"
 import { cookies } from 'next/headers'
 

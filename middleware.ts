@@ -1,6 +1,7 @@
 import { createServerClient, type CookieOptions } from '@supabase/ssr'
 // https://supabase.com/docs/guides/auth/server-side/creating-a-client?environment=middleware
 // same for all apps
+// middleware runs server-side code before your request reaches your page.
 import { NextResponse, type NextRequest } from 'next/server'
 
 export async function middleware(request: NextRequest) {

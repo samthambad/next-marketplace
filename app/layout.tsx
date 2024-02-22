@@ -1,12 +1,8 @@
-import type { Metadata } from "next";
 import '../styles/globals.css'
 import Navbar from "@/components/navbar";
 import { ThemeProvider } from "@/components/theme-provider";
 import { supabaseServer } from "@/lib/supabase/server";
 
-export const metadata: Metadata = {
-  title: "Marketplace Home",
-};
 export async function checkLoggedIn() {
   const supabase = supabaseServer();
   const {data} = await supabase.auth.getSession();
