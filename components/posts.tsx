@@ -1,21 +1,19 @@
 import React from 'react'
 import {
   Card,
-  CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { fetchFilteredPosts } from '@/lib/actions'
 
-const Posts = async ({ query }: { query: string; }) => {
-  const latestPosts = await fetchFilteredPosts(query); 
+const Posts = ({ postData }: { postData: any[] }) => {
+  console.log(postData)
   return (
     <div>
       <h1 className='mb-8 border border-gray-300 mx-auto w-80 rounded'>Latest Posts</h1>
       <ul className='mx-auto w-80'>
-        {latestPosts?.map((post) => (
+        {postData?.map((post) => (
           <li key={post.id} className='mb-4'>
             <Card>
               <CardHeader>

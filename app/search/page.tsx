@@ -1,8 +1,8 @@
-import Posts from '@/components/posts';
 import Search from '@/components/search'
-import React, { Suspense } from 'react'
+import React, { Suspense} from 'react'
+import PostsFetcher from '@/lib/postsFetcher'
 
-const SearchPage = async ({
+const SearchPage = ({
   searchParams,
 }: {
     searchParams?: {
@@ -19,7 +19,7 @@ const SearchPage = async ({
         <Search placeholder="Search listings"/>
       </div>
       <Suspense>
-        <Posts query={query }/>
+        <PostsFetcher query={query}/>
       </Suspense>
     </div>
     )
