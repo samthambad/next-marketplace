@@ -6,14 +6,17 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import { fetchFilteredPosts } from '@/lib/actions';
 
-const Posts = ({ postData }: { postData: any[] }) => {
-  console.log(postData)
+const Posts = async({query}: {query:string;}) => {
+  console.log("queery in Posts", query);
+  const posts = await fetchFilteredPosts(query);
   return (
     <div>
       <h1 className='mb-8 border border-gray-300 mx-auto w-80 rounded'>Latest Posts</h1>
+      <p className='mb-8'> Refresh the page for new posts</p>
       <ul className='mx-auto w-80'>
-        {postData?.map((post) => (
+        {posts?.map((post) => (
           <li key={post.id} className='mb-4'>
             <Card>
               <CardHeader>
