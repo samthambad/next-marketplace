@@ -2,31 +2,28 @@
 import React, { useEffect, useState } from "react";
 import Posts from "@/components/posts";
 
-const PostsFetcher = async ({ query }: { query: string; }) => {
+const PostsFetcher = ({ query }: { query: string; }) => {
   const [postsData, setPostsData] = useState<any[]>([])
+  console.log("query:",query)
   useEffect(() => {
     const fetchData = async () => {
       // different from url on browser
-      try {
-        
-        const response = await fetch(`/api/posts?query=${query}`)
-        if (!response.ok) {
-          throw new Error('Failed to fetch data');
-        }
-        // this line sends a request to the `/api/posts` endpoint with
-        //  a query parameter, waits for the response, and then stores that response in the`response` variable
-        // for further processing, such as extracting the JSON data with `response.json()`.
-        const data = await response.json();
-        console.log(data)
-        setPostsData(data);
-      }
-      catch (error) {
-        console.log("Error is:", error);
-      }
+      const response = await fetch(`/api/posts/`,{
+        method:'POST',
+        headers: {
+          'Content-type':'application/json'
+        },
+        body: JSON.stringify({
+          query:query
+        })
+      })
+      const result = await response.json()
+      setPostsData(result);
+      console.log( "result in postsFetcher",result)
     } 
-    if (query) fetchData();
-
+    fetchData();
   }, [query]);//if anything in array changes trigger fetchFilteredPosts
+  console.log("postsData:",postsData)
   return (
     <Posts postData= {postsData}/>
     )
