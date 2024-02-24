@@ -15,7 +15,7 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 export async function createPost(formData: FormData) {
   const userDetails = await checkLoggedIn();
   if (userDetails) {
-    console.log(userDetails.user_metadata.name);
+    console.log(userDetails.user_metadata.name, "is logged in");
   }
   let {error} = await supabase.from('posts').insert({
     title: formData.get("title"),
@@ -25,7 +25,7 @@ export async function createPost(formData: FormData) {
     user_name: userDetails?.user_metadata.name,
   })
   if(error) {
-    console.log(error);
+    console.log("not logged in and other error",error);
   }
 }
 
@@ -34,13 +34,14 @@ export async function fetchPosts() {
   // fetch data from supabase and order by timestamp latest and limit 
   let {data, error} = await supabase.from('posts').select('*').order('timestamp',{ascending: false}).limit(5)
   if(error) {
-    console.log(error);
+    console.log("fetching all posts error:",error);
   }
   return data;
 }
 
 export async function fetchFilteredPosts(query:string) {
-  if (query.length === 0) {
+  console.log("quuuery:", query)
+  if (query === undefined || query.length === 0) {
     return fetchPosts();
   }
   // fetch data from supabase and order by timestamp latest and limit 
@@ -49,7 +50,8 @@ export async function fetchFilteredPosts(query:string) {
     .select('*')
     .or(`title.ilike.%${query}%,description.ilike.%${query}%`).order('timestamp', { ascending: false })
   if(error) {
-    console.log(error);
+    console.log("fetching filtered posts error",error);
   }
+  console.log("dataa", data)
   return data;
 }
