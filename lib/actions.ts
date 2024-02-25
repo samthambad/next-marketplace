@@ -20,12 +20,13 @@ export async function createPost(formData: FormData) {
   let {error} = await supabase.from('posts').insert({
     title: formData.get("title"),
     description: formData.get("description"),
-    timestamp: new Date().toISOString(),
+    timestamp: (new Date()).toISOString(),
+    readable_time:(new Date()).toString(), 
     user_id: userDetails?.id,
     user_name: userDetails?.user_metadata.name,
   })
   if(error) {
-    console.log("not logged in and other error",error);
+    console.log("logged in and other error",error);
   }
 }
 

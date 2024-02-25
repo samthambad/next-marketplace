@@ -9,12 +9,11 @@ import {
 import { fetchFilteredPosts } from '@/lib/actions';
 
 const Posts = async({query}: {query:string;}) => {
-  console.log("queery in Posts", query);
   const posts = await fetchFilteredPosts(query);
   return (
     <div>
-      <h1 className='mb-8 border border-gray-300 mx-auto w-80 rounded'>Latest Posts</h1>
-      <p className='mb-8'> Refresh the page for new posts</p>
+      <h1 className='mb-8 border border-gray-300 mx-auto w-80 rounded font-bold'>Latest Posts</h1>
+      <p className='mb-8'> <em>Refresh the page for new posts</em></p>
       <ul className='mx-auto w-80'>
         {posts?.map((post) => (
           <li key={post.id} className='mb-4'>
@@ -23,7 +22,7 @@ const Posts = async({query}: {query:string;}) => {
                 <CardTitle>{post.title}</CardTitle>
                 <CardDescription>{post.description}</CardDescription>
               </CardHeader>
-              <CardFooter>{post.timestamp}</CardFooter>
+              <CardFooter>{post.readable_time}</CardFooter>
               <CardFooter>{post.user_name}</CardFooter>
             </Card>
           </li>
