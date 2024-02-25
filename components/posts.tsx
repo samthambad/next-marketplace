@@ -1,3 +1,4 @@
+'use client'
 import React from 'react'
 import {
   Card,
@@ -6,16 +7,14 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { fetchFilteredPosts } from '@/lib/actions';
-
-const Posts = async({query}: {query:string;}) => {
-  const posts = await fetchFilteredPosts(query);
+//interactivity is required soon
+const Posts = ({posts} : {posts:any}) => {
   return (
     <div>
       <h1 className='mb-8 border border-gray-300 mx-auto w-80 rounded font-bold'>Latest Posts</h1>
       <p className='mb-8'> <em>Refresh the page for new posts</em></p>
       <ul className='mx-auto w-80'>
-        {posts?.map((post) => (
+        {posts?.map((post:any) => (
           <li key={post.id} className='mb-4'>
             <Card>
               <CardHeader>
