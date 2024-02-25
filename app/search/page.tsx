@@ -1,14 +1,12 @@
 import Search from '@/components/search'
 import React, { Suspense} from 'react'
-import PostsFetcher from '@/lib/postsFetcher'
-import Posts from '@/components/posts';
+import PostServer from '@/components/postLogic';
 
 const SearchPage = ({
   searchParams,
 }: {
     searchParams?: {
       query?: string;
-      page?: string;
     };
 }) => {
   const query = searchParams?.query ?? '';
@@ -21,7 +19,7 @@ const SearchPage = ({
         <Search placeholder="Search listings"/>
       </div>
       <Suspense>
-        <Posts query={query}/>
+        <PostServer query={query}/>
       </Suspense>
     </div>
     )

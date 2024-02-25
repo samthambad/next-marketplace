@@ -33,23 +33,23 @@ export async function createPost(formData: FormData) {
 // fetch data from supabase
 export async function fetchPosts() {
   // fetch data from supabase and order by timestamp latest and limit 
-  let {data, error} = await supabase.from('posts').select('*').order('timestamp',{ascending: false}).limit(5)
+  let {data, error} = await supabase.from('posts').select().order('timestamp',{ascending: false}).limit(5)
   if(error) {
     console.log("fetching all posts error:",error);
   }
+  console.log(data)
   return data;
 }
 
 export async function fetchFilteredPosts(query:string) {
   console.log("quuuery:", query)
   if (query === undefined || query.length === 0) {
+    console.log("quuuery length is 0:", query.length === 0)
     return fetchPosts();
   }
   // fetch data from supabase and order by timestamp latest and limit 
-  let { data, error } = await supabase
-    .from('posts')
-    .select('*')
-    .or(`title.ilike.%${query}%,description.ilike.%${query}%`).order('timestamp', { ascending: false })
+  console.log("type of query:", typeof(query))
+  let { data, error } = await supabase.from('posts').select().or(`title.ilike.%${query}%,description.ilike.%${query}%`).order('timestamp', { ascending: false })
   if(error) {
     console.log("fetching filtered posts error",error);
   }
