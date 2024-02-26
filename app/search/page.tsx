@@ -23,7 +23,7 @@ const SearchPage = ({
       <div className='mb-8 mx-auto'>
         <Search placeholder="Search listings"/>
       </div>
-      <Suspense>
+      <Suspense fallback=<div>Loading...</div> >
         <PostServer query={query}/>
       </Suspense>
     </div>
