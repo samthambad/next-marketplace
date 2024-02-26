@@ -7,8 +7,16 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import { Button } from './ui/button'
+import { deletePost } from '@/lib/actions'
+import { useRouter } from 'next/navigation'
 //interactivity is required soon
-const Posts = ({posts} : {posts:any}) => {
+const Posts = ({posts, user} : {posts:any, user:any}) => {
+  const router = useRouter();
+  const clickDelete = (id:string) => {
+    deletePost(id);
+    router.refresh();
+  }
   return (
     <div>
       <h1 className='mb-8 border border-gray-300 mx-auto w-80 rounded font-bold'>Latest Posts</h1>
@@ -23,6 +31,7 @@ const Posts = ({posts} : {posts:any}) => {
               </CardHeader>
               <CardFooter>{post.readable_time}</CardFooter>
               <CardFooter>{post.user_name}</CardFooter>
+              {user?.id === post.user_id && <Button onClick={()=>clickDelete(post.id)} variant="outline" className='mb-2'>Delete</Button>}
             </Card>
           </li>
         ))}

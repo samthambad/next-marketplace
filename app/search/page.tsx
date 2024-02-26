@@ -1,7 +1,12 @@
 import Search from '@/components/search'
 import React, { Suspense} from 'react'
 import PostServer from '@/components/postLogic';
-
+export const dynamic = 'auto',
+  dynamicParams = true,
+  revalidate = 0,
+  fetchCache = 'auto',
+  runtime = 'nodejs',
+  preferredRegion = 'auto';
 const SearchPage = ({
   searchParams,
 }: {

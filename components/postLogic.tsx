@@ -1,12 +1,14 @@
 import React from 'react';
 import Posts from '@/components/posts';
 import { fetchFilteredPosts } from '../lib/actions';
+import { checkLoggedIn } from '@/app/layout';
+
 const PostServer= async({query}: {query:string;}) => {
+  const currentUserDetails = await checkLoggedIn();
   const posts = await fetchFilteredPosts(query);
   //client component inside server component
-  console.log("posts in postServer", posts)
   return (
-    <Posts posts = {posts}/> 
+    <Posts posts={posts} user={ currentUserDetails } /> 
   )
 }
 

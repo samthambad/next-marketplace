@@ -56,3 +56,10 @@ export async function fetchFilteredPosts(query:string) {
   console.log("dataa", data)
   return data;
 }
+
+export async function deletePost(id: string) {
+  let {error} = await supabase.from('posts').delete().match({id: id})
+  if(error) {
+    console.log("deleting post error:", error);
+  }
+}
