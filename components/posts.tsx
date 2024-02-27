@@ -14,7 +14,7 @@ import { useRouter } from 'next/navigation'
 const Posts = ({posts, user} : {posts:any, user:any}) => {
   const router = useRouter();
   const clickDelete = (id:string) => {
-    // server function but works in client component
+    // server function but works in client component, same for chatWithPoster
     deletePost(id);
     router.refresh();
   }
