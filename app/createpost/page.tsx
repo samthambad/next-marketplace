@@ -6,7 +6,6 @@ import {redirect} from 'next/navigation';
 
 const CreatePost = async () => {
   const userDetails = await checkLoggedIn();
-  console.log(userDetails);
   //redirect to home page if not logged in
   return (
     <div className='text-center'>

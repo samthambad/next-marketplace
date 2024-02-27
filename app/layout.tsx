@@ -1,5 +1,5 @@
 import '../styles/globals.css'
-import Navbar from "@/components/navbar";
+import Navbar from "@/components/ui/navbar";
 import { ThemeProvider } from "@/components/theme-provider";
 import { supabaseServer } from "@/lib/supabase/server";
 

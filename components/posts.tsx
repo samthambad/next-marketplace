@@ -8,7 +8,7 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { Button } from './ui/button'
-import { deletePost } from '@/lib/actions'
+import { createChat, deletePost } from '@/lib/actions'
 import { useRouter } from 'next/navigation'
 //interactivity is required soon
 const Posts = ({posts, user} : {posts:any, user:any}) => {
@@ -17,6 +17,10 @@ const Posts = ({posts, user} : {posts:any, user:any}) => {
     // server function but works in client component
     deletePost(id);
     router.refresh();
+  }
+  const chatWithPoster = (id:string, otherUserId:string) => {
+    console.log("chat button pressed")
+    createChat(otherUserId, "hi", id);
   }
   return (
     <div>
@@ -33,6 +37,7 @@ const Posts = ({posts, user} : {posts:any, user:any}) => {
               <CardFooter>{post.readable_time}</CardFooter>
               <CardFooter>{post.user_name}</CardFooter>
               {user?.id === post.user_id && <Button onClick={()=>clickDelete(post.id)} variant="outline" className='mb-2'>Delete</Button>}
+              {user && user?.id !== post.user_id && <Button onClick={()=>chatWithPoster(post.id, post.user_id)} variant="outline" className='mb-2'>Chat</Button>}
             </Card>
           </li>
         ))}
