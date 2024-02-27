@@ -78,7 +78,8 @@ export async function createChat(other_user_id: string, firstMessage: string, po
   }
   const dataBeforeAdding = await checkIfAlreadyPresentChat(userId, post_id)
   // chat already present
-  if (dataBeforeAdding !== undefined) {
+  console.log(dataBeforeAdding)
+  if (dataBeforeAdding !== undefined && dataBeforeAdding?.length > 0) {
     console.log("chat already exists");
     // get the messages array from dataBeforeAdding and append firstMessage
     const messagesArray = dataBeforeAdding?.[0].messages
