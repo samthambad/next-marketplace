@@ -5,7 +5,7 @@ import { ColumnDef } from "@tanstack/react-table";
 export type eachChat = {
   title: string,
   latestMessage: string,
-  other_email: string
+  other_name: string
 }
 
 export const columns: ColumnDef<eachChat>[] = [
@@ -18,7 +18,7 @@ export const columns: ColumnDef<eachChat>[] = [
     header: 'Message'
   },
   {
-    accessorKey: 'other_email',
-    header: 'Email'
+    accessorKey: 'other_name',
+    header: 'Name'
   }
 ]
