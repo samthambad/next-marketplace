@@ -68,6 +68,18 @@ export async function fetchFilteredChats(user_id: string) {
   return data;
 }
 
+export async function fetchFilteredChatsFromId(chat_id: string) {
+  if (chat_id === undefined || chat_id.length === 0) {
+    console.log("user id is undefined");
+    return;
+  }
+  let { data, error } = await supabase.from('allChats').select().match({id:chat_id})
+  if(error) {
+    console.log("loading chats for user error:", error);
+  }
+  return data;
+}
+
 export async function createChat(other_user_id: string, firstMessage: string, post_id: string, post_name: string) {
   // if the same post_id and same users are there, then dont create a new chat
   const userDetails = await checkLoggedIn();

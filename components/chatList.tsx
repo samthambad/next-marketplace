@@ -40,7 +40,7 @@ const ChatList = ({data}:{data:Chat[]}) => {
         </TableHeader>
         <TableBody>
           {data.map((chat:Chat) => (
-            <TableRow key={chat.chat_id} onClick={() => goToChat(chat.chat_id)}>
+            <TableRow key={chat.chat_id} onClick={() => goToChat(chat.chat_id)} className='hover:bg-gray-800'>
               <TableCell className="text-center">{chat.title}</TableCell>
               <TableCell>{chat.latestMessage}</TableCell>
               <TableCell className="text-center">{chat.other_name}</TableCell>
