@@ -13,7 +13,7 @@ export default async function RootLayout({children}: Readonly<{children: React.R
   return (
     <html lang="en">
       <body> 
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <main>
             <Navbar user={userDetails} />
             {children}

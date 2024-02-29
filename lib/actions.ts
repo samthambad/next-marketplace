@@ -80,6 +80,11 @@ export async function fetchFilteredChatsFromId(chat_id: string) {
   return data;
 }
 
+export interface message {
+  message: string;
+  user_id: string;
+  user_name: string;
+}
 export async function createChat(other_user_id: string, firstMessage: string, post_id: string, post_name: string) {
   // if the same post_id and same users are there, then dont create a new chat
   const userDetails = await checkLoggedIn();
@@ -94,9 +99,13 @@ export async function createChat(other_user_id: string, firstMessage: string, po
   if (dataBeforeAdding !== undefined && dataBeforeAdding?.length > 0) {
     console.log("chat already exists");
     // get the messages array from dataBeforeAdding and append firstMessage
-    const messagesArray = dataBeforeAdding?.[0].messages
+    const messagesArray:message[] = dataBeforeAdding?.[0].messages
     console.log("previous messagesArray:", messagesArray);
-    messagesArray.push(firstMessage)
+    messagesArray.push({
+      message: firstMessage,
+      user_id: userId,
+      user_name: userDetails?.user_metadata.name 
+    })
     let { error } = await supabase.from('allChats').update({messages: messagesArray}).match({post_id: post_id, p1_id: userDetails?.id})
     if (error) {
       console.log("error updating chat:", error);
@@ -105,8 +114,12 @@ export async function createChat(other_user_id: string, firstMessage: string, po
   }
   // chat not already present
   else {
-    // get the post details from post_id
-    const messagesArray: string[] = [firstMessage]
+    const messagesArray: message[] = [{
+      message: firstMessage,
+      user_id: userId,
+      user_name: userDetails?.user_metadata.name,
+    }]
+    console.log("new messagesArray:", messagesArray);
     let { error }=await supabase.from('allChats').insert({
       messages: messagesArray,
       post_id: post_id,

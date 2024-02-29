@@ -30,7 +30,7 @@ const Posts = ({posts, user} : {posts:any, user:any}) => {
       <ul className='mx-auto w-80'>
         {posts?.map((post:any) => (
           <li key={post.id} className='mb-4'>
-            <Card className='hover:bg-gray-800'>
+            <Card className='hover:bg-gray-400'>
               <CardHeader>
                 <CardTitle>{post.title}</CardTitle>
                 <CardDescription>{post.description}</CardDescription>

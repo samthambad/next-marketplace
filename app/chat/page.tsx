@@ -12,7 +12,7 @@ export const dynamic = 'auto',
 
 export interface Chat {
   title: string;
-  latestMessage: string;
+  latestMessage: any;
   other_name: string;
   chat_id: number;
 }
@@ -38,7 +38,7 @@ const Chat = async() => {
         console.log("name", otherName)
         arrayOfChats.push({
           title: chat.post_name,
-          latestMessage: chat.messages[chat.messages.length-1],
+          latestMessage: chat.messages[chat.messages.length-1].message,
           other_name: otherName,
           chat_id:chat.id
         })
@@ -48,6 +48,9 @@ const Chat = async() => {
     }
   }
   const fetchedChatArray:Chat[] = (await getData()) ?? [];
+  if (fetchedChatArray.length == 0) {
+    return <h1 className='text-center font-extrabold  mb-8 mx-auto'>No Chats found.</h1>
+  }
   const userDetails = await checkLoggedIn();
   // fetch from allChats all rows that have either p1 or p2 == currentUserId
   return (
