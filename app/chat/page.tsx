@@ -1,7 +1,8 @@
 import React, { Suspense } from 'react'
 import { checkLoggedIn } from '../layout';
 import { redirect } from 'next/navigation';
-import ChatList from './chatList';
+import ChatList from '../../components/chatList';
+import { fetchFilteredChats, fetchUserDetails } from '@/lib/actions';
 export const dynamic = 'auto',
   dynamicParams = true,
   revalidate = 0,
@@ -10,6 +11,43 @@ export const dynamic = 'auto',
   preferredRegion = 'auto';
 
 const Chat = async() => {
+  interface Chat {
+    title: string;
+    latestMessage: string;
+    other_name: string;
+    chat_id: number;
+  }
+  async function getData() {
+    const userDetails = await checkLoggedIn();
+    const user_id = userDetails?.id ?? ""
+    const rawData = await fetchFilteredChats(user_id);
+    let otherName:string = ""
+    let other_id = "";
+    let arrayOfChats:Chat[] = []
+    if (user_id.length > 0) {
+      console.log("rawData", rawData)
+      const promiseArray = rawData?.map(async (chat) => {
+        // get the name from auth
+        if (chat.p1_id === user_id) {
+          const otherUserDetails = await fetchUserDetails(chat.p2_id);
+          otherName = otherUserDetails?.user.user_metadata.name;
+        } else if (chat.p2_id === user_id) {
+          const otherUserDetails = await fetchUserDetails(chat.p1_id);
+          otherName = otherUserDetails?.user.user_metadata.name;
+        }
+        console.log("name", otherName)
+        arrayOfChats.push({
+          title: chat.post_name,
+          latestMessage: chat.messages[chat.messages.length-1],
+          other_name: otherName,
+          chat_id:chat.id
+        })
+      })
+      await Promise.all(promiseArray) //wait for all the promises to  resolve
+      return arrayOfChats;
+    }
+  }
+  const fetchedChatArray:Chat[] = (await getData()) ?? [];
   const userDetails = await checkLoggedIn();
   // fetch from allChats all rows that have either p1 or p2 == currentUserId
   return (
@@ -21,7 +59,7 @@ const Chat = async() => {
       </div>
     <br />
     <Suspense fallback=<div>Loading...</div> >
-    <ChatList/>  
+      <ChatList data={fetchedChatArray} />  
     </Suspense>
     </div>
       :

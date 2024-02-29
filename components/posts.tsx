@@ -15,6 +15,7 @@ const Posts = ({posts, user} : {posts:any, user:any}) => {
   const router = useRouter();
   const clickDelete = (id:string) => {
     // server function but works in client component, same for chatWithPoster
+    // works as you don't need to use any data from the function
     deletePost(id);
     router.refresh();
   }
