@@ -30,15 +30,15 @@ const Posts = ({posts, user} : {posts:any, user:any}) => {
       <ul className='mx-auto w-80'>
         {posts?.map((post:any) => (
           <li key={post.id} className='mb-4'>
-            <Card>
+            <Card className='hover:bg-gray-800'>
               <CardHeader>
                 <CardTitle>{post.title}</CardTitle>
                 <CardDescription>{post.description}</CardDescription>
               </CardHeader>
               <CardFooter>{post.readable_time}</CardFooter>
               <CardFooter>{post.user_name}</CardFooter>
-              {user?.id === post.user_id && <Button onClick={()=>clickDelete(post.id)} variant="outline" className='mb-2'>Delete</Button>}
-              {user && user?.id !== post.user_id && <Button onClick={()=>chatWithPoster(post.id, post.user_id, post.title)} variant="outline" className='mb-2'>Chat</Button>}
+              {user?.id === post.user_id && <Button onClick={()=>clickDelete(post.id)} variant="outline" className='mb-2 hover:bg-red-600'>Delete</Button>}
+              {user && user?.id !== post.user_id && <Button onClick={()=>chatWithPoster(post.id, post.user_id, post.title)} variant="outline" className='mb-2 hover:bg-blue-500'>Chat</Button>}
             </Card>
           </li>
         ))}

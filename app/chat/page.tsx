@@ -10,13 +10,13 @@ export const dynamic = 'auto',
   runtime = 'nodejs',
   preferredRegion = 'auto';
 
+export interface Chat {
+  title: string;
+  latestMessage: string;
+  other_name: string;
+  chat_id: number;
+}
 const Chat = async() => {
-  interface Chat {
-    title: string;
-    latestMessage: string;
-    other_name: string;
-    chat_id: number;
-  }
   async function getData() {
     const userDetails = await checkLoggedIn();
     const user_id = userDetails?.id ?? ""
