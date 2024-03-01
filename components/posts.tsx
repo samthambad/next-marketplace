@@ -10,8 +10,10 @@ import {
 import { Button } from './ui/button'
 import { createChat, deletePost } from '@/lib/actions'
 import { useRouter } from 'next/navigation'
+import { useState } from 'react'
 //interactivity is required soon
 const Posts = ({posts, user} : {posts:any, user:any}) => {
+  console.log("inside Posts",posts)
   const router = useRouter();
   const clickDelete = (id:string) => {
     // server function but works in client component, same for chatWithPoster

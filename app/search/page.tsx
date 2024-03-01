@@ -1,12 +1,12 @@
 import Search from '@/components/search'
 import React, { Suspense} from 'react'
 import PostServer from '@/components/postLogic';
-export const dynamic = 'auto',
-  dynamicParams = true,
-  revalidate = 0,
-  fetchCache = 'auto',
-  runtime = 'nodejs',
-  preferredRegion = 'auto';
+// export const dynamic = 'auto',
+//   dynamicParams = true,
+//   revalidate = 0,
+//   fetchCache = 'auto',
+//   runtime = 'nodejs',
+//   preferredRegion = 'auto';
 const SearchPage = ({
   searchParams,
 }: {
@@ -15,7 +15,7 @@ const SearchPage = ({
     };
 }) => {
   const query = searchParams?.query ?? '';
-  console.log("query in page",query)
+  // console.log("query in page",query)
   return (
     <div className='flex-center flex-col text-center mx-auto'>
       <h1 className='scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl mb-4 mx-auto'> Search </h1>
