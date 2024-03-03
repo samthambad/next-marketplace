@@ -37,11 +37,12 @@ export async function fetchPosts() {
 }
 
 export async function fetchFilteredPosts(query:string) {
+  console.log("value of query:", query)
   if (query === undefined || query.length === 0) {
     return fetchPosts();
   }
   // fetch data from supabase and order by timestamp latest and limit 
-  console.log("type of query:", typeof(query))
+
   let { data, error } = await supabase.from('posts').select().or(`title.ilike.%${query}%,description.ilike.%${query}%`).order('timestamp', { ascending: false })
   if(error) {
     console.log("fetching filtered posts error",error);

@@ -12,7 +12,6 @@ const Input = () => {
         <textarea className='border border-gray-300 p-2 rounded-md block mb-4 mx-auto w-4/5' name='description' placeholder="Enter description..."></textarea>  
         <input onClick={() => {
           router.push("/search");
-          router.refresh();
         }} type="submit" placeholder='Submit' className='border border-gray-300 p-2 rounded-md hover:bg-blue-400 mx-auto block' />
       </form>
     </div>

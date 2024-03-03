@@ -6,7 +6,6 @@ import { supabaseServer } from "@/lib/supabase/server";
 export async function checkLoggedIn() {
   const supabase = supabaseServer();
   const {data} = await supabase.auth.getSession();
-  console.log("calling user stuff", data)
   return data.session?.user;
 }
 export default async function RootLayout({children}: Readonly<{children: React.ReactNode;}>) {

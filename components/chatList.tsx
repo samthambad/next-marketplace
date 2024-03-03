@@ -1,9 +1,5 @@
 'use client'
 import React from 'react'
-import { DataTable } from './data-table'
-import { columns } from './columns'
-import { checkLoggedIn } from '../app/layout';
-import { fetchFilteredChats, fetchUserDetails } from '@/lib/actions';
 import {
   Table,
   TableBody,

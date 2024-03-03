@@ -13,7 +13,9 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 //interactivity is required soon
 const Posts = ({posts, user} : {posts:any, user:any}) => {
-  console.log("inside Posts",posts)
+  // make user undefined for conditions below
+  if (user === "") user = undefined;
+  console.log("user in posts", user)
   const router = useRouter();
   const clickDelete = (id:string) => {
     // server function but works in client component, same for chatWithPoster

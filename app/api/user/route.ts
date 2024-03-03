@@ -1,8 +1,6 @@
 import { checkLoggedIn } from '@/app/layout';
 // call server functions here
 export async function GET(req:any, res:any) {
-  const { query }: {query: string;} = req.json();
-  console.log("query in route:",query);
   try {
     const userDetails = await checkLoggedIn();
     if (userDetails) {
@@ -10,10 +8,11 @@ export async function GET(req:any, res:any) {
       return newResponse;
     }
     else {
-      return new Response(JSON.stringify({ status: 200 }), { headers: { "Content-Type": "application/json" } });
+      return "no";
+      // return new Response(JSON.stringify({ status: 200 }), { headers: { "Content-Type": "application/json" } });
     }
   }
   catch (err) {
-    console.log("error in route.ts", err)
+    console.log("error in user route.ts", err)
   }
 }

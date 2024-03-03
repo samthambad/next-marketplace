@@ -1,5 +1,6 @@
+'use client'
 import Search from '@/components/search'
-import React, { Suspense} from 'react'
+import React, { Suspense, useState} from 'react'
 import PostServer from '@/components/postLogic';
 // export const dynamic = 'auto',
 //   dynamicParams = true,
@@ -14,8 +15,9 @@ const SearchPage = ({
       query?: string;
     };
 }) => {
+const[query1, setQuery1] =  useState()
   const query = searchParams?.query ?? '';
-  // console.log("query in page",query)
+  console.log("query in page",query)
   return (
     <div className='flex-center flex-col text-center mx-auto'>
       <h1 className='scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl mb-4 mx-auto'> Search </h1>
