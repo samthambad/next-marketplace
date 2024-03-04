@@ -47,7 +47,7 @@ const ChatDisplay = ({chatId}:{chatId:number}) => {
   return (
     <div>
       <ul className='text-left border w-[50%] mx-auto mb-8 px-4 py-2'>
-        {chats.length>0 && chats[0].messages.map((messageObj) => <li>{ messageObj.user_name}: {messageObj.message}</li>)}
+        {chats.length > 0 && chats[0].messages.map((messageObj) => { messageObj.message.length > 0 && <li>{messageObj.user_name}: {messageObj.message}</li> })}
       </ul>
       <div className='relative w-[50%] mx-auto'>
       <Textarea onChange={(e)=> handleMsg(e.target.value)} className='w-full mx-auto mb-2 px-3 py-2 border rounded-md'/>
