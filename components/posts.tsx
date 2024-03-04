@@ -23,9 +23,10 @@ const Posts = ({posts, user} : {posts:any, user:any}) => {
     deletePost(id);
     router.refresh();
   }
-  const chatWithPoster = (id:string, otherUserId:string, post_name:string) => {
+  const chatWithPoster = async (id:string, post_creator_id:string, post_name:string) => {
     console.log("chat button pressed")
-    createChat(otherUserId, "hi", id, post_name);
+    const chatId = await createChat(post_creator_id, "", id, post_name);
+    router.push(`/chat/${chatId}`)
   }
   return (
     <div>

@@ -25,7 +25,6 @@ const Chat = async() => {
     let other_id = "";
     let arrayOfChats:Chat[] = []
     if (user_id.length > 0) {
-      console.log("rawData", rawData)
       const promiseArray = rawData?.map(async (chat) => {
         // get the name from auth
         if (chat.p1_id === user_id) {

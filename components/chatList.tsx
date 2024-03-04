@@ -10,8 +10,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import Chat from "@/app/chat/page"
-import { redirect, useRouter } from 'next/navigation';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 
 const ChatList = ({data}:{data:Chat[]}) => {
@@ -19,7 +18,6 @@ const ChatList = ({data}:{data:Chat[]}) => {
   const router = useRouter()
   // console.log("dataaa", data)
   function goToChat(chat_id:number) {
-    console.log("chat_id", chat_id)
     router.push(`/chat/${chat_id}`)
   }
   return (
