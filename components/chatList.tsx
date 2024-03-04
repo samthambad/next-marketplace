@@ -33,10 +33,10 @@ const ChatList = ({data}:{data:Chat[]}) => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {data.map((chat:Chat) => (
+          {data.map((chat:typeof Chat) => (
             <TableRow key={chat.chat_id} onClick={() => goToChat(chat.chat_id)} className='hover:bg-blue-500'>
               <TableCell className="text-center">{chat.title}</TableCell>
-              <TableCell>{chat.latestMessage}</TableCell>
+              <TableCell>{chat.latest_message}</TableCell>
               <TableCell className="text-center">{chat.other_name}</TableCell>
             </TableRow>
           ))}

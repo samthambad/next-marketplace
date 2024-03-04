@@ -12,7 +12,7 @@ export const dynamic = 'auto',
 
 export interface Chat {
   title: string;
-  latestMessage: any;
+  latest_message: any;
   other_name: string;
   chat_id: number;
 }
@@ -35,12 +35,21 @@ const Chat = async() => {
           otherName = otherUserDetails?.user.user_metadata.name;
         }
         console.log("name", otherName)
-        arrayOfChats.push({
-          title: chat.post_name,
-          latestMessage: chat.messages[chat.messages.length-1].message,
-          other_name: otherName,
-          chat_id:chat.id
-        })
+        // make sure the chats with all blanks are not displayed
+        let i = chat.messages.length - 1;
+        for (i; i >= 0; i--) {
+          if (chat.messages[chat.messages.length - 1].message !== "") {
+            break;
+          }
+        }
+        if (i >= 0) {
+          arrayOfChats.push({
+            title: chat.post_name,
+            latest_message: chat.messages[chat.messages.length-1].message,
+            other_name: otherName,
+            chat_id:chat.id
+          })
+        }
       })
       await Promise.all(promiseArray) //wait for all the promises to  resolve
       return arrayOfChats;

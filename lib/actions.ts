@@ -14,29 +14,29 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 
 export async function createPost(formData: FormData) {
   const userDetails = await checkLoggedIn();
-  let {error} = await supabase.from('posts').insert({
+  let { error } = await supabase.from('posts').insert({
     title: formData.get("title"),
     description: formData.get("description"),
-    readable_time:(new Date()).toString(), 
+    readable_time: (new Date()).toString(),
     user_id: userDetails?.id,
     user_name: userDetails?.user_metadata.name,
   })
-  if(error) {
-    console.log("logged in and other error",error);
+  if (error) {
+    console.log("logged in and other error", error);
   }
 }
 
 // fetch data from supabase
 export async function fetchPosts() {
   // fetch data from supabase and order by timestamp latest and limit 
-  let {data, error} = await supabase.from('posts').select().order('timestamp',{ascending: false}).limit(5)
-  if(error) {
-    console.log("fetching all posts error:",error);
+  let { data, error } = await supabase.from('posts').select().order('timestamp', { ascending: false }).limit(5)
+  if (error) {
+    console.log("fetching all posts error:", error);
   }
   return data;
 }
 
-export async function fetchFilteredPosts(query:string) {
+export async function fetchFilteredPosts(query: string) {
   console.log("value of query:", query)
   if (query === undefined || query.length === 0) {
     return fetchPosts();
@@ -44,15 +44,15 @@ export async function fetchFilteredPosts(query:string) {
   // fetch data from supabase and order by timestamp latest and limit 
 
   let { data, error } = await supabase.from('posts').select().or(`title.ilike.%${query}%,description.ilike.%${query}%`).order('timestamp', { ascending: false })
-  if(error) {
-    console.log("fetching filtered posts error",error);
+  if (error) {
+    console.log("fetching filtered posts error", error);
   }
   return data;
 }
 
 export async function deletePost(id: string) {
-  let {error} = await supabase.from('posts').delete().match({id: id})
-  if(error) {
+  let { error } = await supabase.from('posts').delete().match({ id: id })
+  if (error) {
     console.log("deleting post error:", error);
   }
 }
@@ -63,7 +63,7 @@ export async function fetchFilteredChats(user_id: string) {
     return;
   }
   let { data, error } = await supabase.from('allChats').select().order('timestamp', { ascending: false })
-  if(error) {
+  if (error) {
     console.log("loading chats for user error:", error);
   }
   return data;
@@ -74,8 +74,8 @@ export async function fetchFilteredChatsFromId(chat_id: string) {
     console.log("user id is undefined");
     return;
   }
-  let { data, error } = await supabase.from('allChats').select().match({id:chat_id})
-  if(error) {
+  let { data, error } = await supabase.from('allChats').select().match({ id: chat_id })
+  if (error) {
     console.log("loading chats for user error:", error);
   }
   return data;
@@ -86,7 +86,7 @@ export interface message {
   user_id: string;
   user_name: string;
 }
-export async function createChat(user_id_post_creator: string, firstMessage: string, post_id: string, post_name: string) {
+export async function createChat(newMessage: string, post_id: string, post_name: string, user_id_post_creator?: string) {
   // if the same post_id and same users are there, then dont create a new chat
   const userDetails = await checkLoggedIn();
   const userId = userDetails?.id ?? ""
@@ -100,15 +100,15 @@ export async function createChat(user_id_post_creator: string, firstMessage: str
   if (dataBeforeAdding !== undefined && dataBeforeAdding?.length > 0) {
     console.log("chat already exists");
     // get the messages array from dataBeforeAdding and append firstMessage
-    const messagesArray:message[] = dataBeforeAdding?.[0].messages
+    const messagesArray: message[] = dataBeforeAdding?.[0].messages
     console.log("previous messagesArray:", messagesArray);
     messagesArray.push({
-      message: firstMessage,
+      message: newMessage,
       user_id: userId,
-      user_name: userDetails?.user_metadata.name 
+      user_name: userDetails?.user_metadata.name
     })
-    let { error } = await supabase.from('allChats').update({messages: messagesArray}).match({post_id: post_id, p1_id: userDetails?.id})
-    let {data} = await supabase.from('allChats').select().match({p1_id: userId, post_id: post_id})
+    let { error } = await supabase.from('allChats').update({ messages: messagesArray }).match({ post_id: post_id, p1_id: userDetails?.id })
+    let { data } = await supabase.from('allChats').select().match({ p1_id: userId, post_id: post_id })
     console.log("checking for chatId:", data);
     if (error) {
       console.log("error updating chat:", error);
@@ -119,19 +119,19 @@ export async function createChat(user_id_post_creator: string, firstMessage: str
   // chat not already present
   else {
     const messagesArray: message[] = [{
-      message: firstMessage,
+      message: newMessage,
       user_id: userId,
       user_name: userDetails?.user_metadata.name,
     }]
     console.log("new messagesArray:", messagesArray);
-    let { error }=await supabase.from('allChats').insert({
+    let { error } = await supabase.from('allChats').insert({
       messages: messagesArray,
       post_id: post_id,
       p1_id: userDetails?.id,
       p2_id: user_id_post_creator,
       post_name: post_name,
     })
-    let {data} = await supabase.from('allChats').select().match({p1_id: userId, post_id: post_id})
+    let { data } = await supabase.from('allChats').select().match({ p1_id: userId, post_id: post_id })
     console.log("checking for chatId:", data?.[0].id);
     return data?.[0].id;
     if (error) {
@@ -140,8 +140,8 @@ export async function createChat(user_id_post_creator: string, firstMessage: str
   }
 }
 
-export async function checkIfAlreadyPresentChat(user_id: string, post_id: string){
-  let {data, error} = await supabase.from('allChats').select().match({p1_id: user_id, post_id: post_id})
+export async function checkIfAlreadyPresentChat(user_id: string, post_id: string) {
+  let { data, error } = await supabase.from('allChats').select().match({ p1_id: user_id, post_id: post_id })
   if (error) {
     console.log("error checking if already present chat:", error);
   }
