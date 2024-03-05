@@ -10,6 +10,8 @@ import { useRouter } from 'next/navigation'
 const ChatDisplay = ({ chatId }: { chatId: number }) => {
   const router = useRouter();
   const [chats, setChats] = useState<typeof Chat[]>([])
+  // to call the chats to refresh
+  const [refresh,setRefresh] = useState(false);
   const [createMsg, setCreateMsg] = useState("")
   useEffect(() => {
     const getChats = async () => {
@@ -30,18 +32,18 @@ const ChatDisplay = ({ chatId }: { chatId: number }) => {
       }
     }
     getChats();
-  }, [createMsg])
+  }, [refresh])
   // if (chats.length > 0) console.log("chats:", chats[0].messages);
 
   const handleMsg = (text: string) => {
     setCreateMsg(text);
   }
 
-  const sendMsg = () => {
+  const sendMsg = async () => {
     console.log("button clicked")
     try {
-      createChat(createMsg, chats[0].post_id, chats[0].post_name)
-      router.refresh();
+      await createChat(createMsg, chats[0].post_id, chats[0].post_name)
+      setRefresh(!refresh)
     } catch (error) {
       console.log("error sending message", error);
     }
