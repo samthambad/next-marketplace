@@ -101,8 +101,10 @@ export async function createChat(newMessage: string, post_id: string, post_name:
   if (dataBeforeAdding !== undefined && dataBeforeAdding?.length > 0) {
     console.log("chat already exists");
     // get the messages array from dataBeforeAdding and append firstMessage
-    const messagesArray: message[] = dataBeforeAdding?.[0].messages
+    let messagesArray: message[] = dataBeforeAdding?.[0].messages
     console.log("previous messagesArray:", messagesArray);
+    // cleanup messageArray by removing messageObj with message = ""
+    messagesArray = messagesArray.filter((messageObj) => messageObj.message.length >0)
     messagesArray.push({
       message: newMessage,
       user_id: userId,
