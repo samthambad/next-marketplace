@@ -31,7 +31,11 @@ const ChatDisplay = ({ chatId }: { chatId: number }) => {
         console.log("error fetching chats", error);
       }
     }
-    getChats();
+    const myInterval = setInterval(getChats, 1000);
+    return () => {
+      clearInterval(myInterval)
+    }
+    // getChats();
   }, [refresh,createMsg])
   // if (chats.length > 0) console.log("chats:", chats[0].messages);
 
