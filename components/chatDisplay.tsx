@@ -32,7 +32,7 @@ const ChatDisplay = ({ chatId }: { chatId: number }) => {
       }
     }
     getChats();
-  }, [refresh])
+  }, [refresh,createMsg])
   // if (chats.length > 0) console.log("chats:", chats[0].messages);
 
   const handleMsg = (text: string) => {
@@ -61,7 +61,7 @@ const ChatDisplay = ({ chatId }: { chatId: number }) => {
         </ul>
       </Suspense>
         <div className='relative w-[50%] mx-auto'>
-          <Textarea onChange={(e) => handleMsg(e.target.value)} className='w-full mx-auto mb-2 px-3 py-2 border rounded-md' />
+          <Textarea onClick={() => setRefresh(!refresh)} onChange={(e) => handleMsg(e.target.value)} className='w-full mx-auto mb-2 px-3 py-2 border rounded-md' />
           <Button onClick={() => sendMsg()} className='absolute bottom-2 right-2' variant="outline" >Send</Button>
         </div>
     </div>
