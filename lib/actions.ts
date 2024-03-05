@@ -88,6 +88,7 @@ export interface message {
 }
 export async function createChat(newMessage: string, post_id: string, post_name: string, user_id_post_creator?: string) {
   // if the same post_id and same users are there, then dont create a new chat
+  console.log("the new msg:",newMessage)
   const userDetails = await checkLoggedIn();
   const userId = userDetails?.id ?? ""
   if (userId.length === 0) {
@@ -96,7 +97,7 @@ export async function createChat(newMessage: string, post_id: string, post_name:
   }
   const dataBeforeAdding = await checkIfAlreadyPresentChat(userId, post_id)
   // chat already present
-  console.log(dataBeforeAdding)
+  console.log("previous data:",dataBeforeAdding)
   if (dataBeforeAdding !== undefined && dataBeforeAdding?.length > 0) {
     console.log("chat already exists");
     // get the messages array from dataBeforeAdding and append firstMessage
@@ -107,8 +108,11 @@ export async function createChat(newMessage: string, post_id: string, post_name:
       user_id: userId,
       user_name: userDetails?.user_metadata.name
     })
-    let { error } = await supabase.from('allChats').update({ messages: messagesArray }).match({ post_id: post_id, p1_id: userDetails?.id })
-    let { data } = await supabase.from('allChats').select().match({ p1_id: userId, post_id: post_id })
+    let { error } = await supabase.from('allChats').update({ messages: messagesArray }).match({ post_id: post_id}).or(`p1_id.eq.${userId},p2_id.eq.${userId}`)
+    let { data } = await supabase.from('allChats')
+      .select()
+      .or(`p1_id.eq.${userId},p2_id.eq.${userId}`)
+      .match({post_id:post_id});
     console.log("checking for chatId:", data);
     if (error) {
       console.log("error updating chat:", error);
@@ -118,6 +122,7 @@ export async function createChat(newMessage: string, post_id: string, post_name:
   }
   // chat not already present
   else {
+    console.log("chat doesn't exist")
     const messagesArray: message[] = [{
       message: newMessage,
       user_id: userId,
@@ -132,19 +137,24 @@ export async function createChat(newMessage: string, post_id: string, post_name:
       post_name: post_name,
     })
     let { data } = await supabase.from('allChats').select().match({ p1_id: userId, post_id: post_id })
-    console.log("checking for chatId:", data?.[0].id);
-    return data?.[0].id;
+    // console.log("checking for chatId:", data?.[0].id);
     if (error) {
       console.log("error creating chat:", error);
     }
+    return data?.[0].id;
   }
 }
 
 export async function checkIfAlreadyPresentChat(user_id: string, post_id: string) {
-  let { data, error } = await supabase.from('allChats').select().match({ p1_id: user_id, post_id: post_id })
+  // let { data, error } = await supabase.from('allChats').select().match({ p1_id: user_id, post_id: post_id })
+  let { data, error } = await supabase.from('allChats')
+    .select()
+    .or(`p1_id.eq.${user_id},p2_id.eq.${user_id}`)
+    .match({post_id:post_id});
   if (error) {
     console.log("error checking if already present chat:", error);
   }
+  // console.log("data", data)
   return data;
 }
 
