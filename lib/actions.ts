@@ -57,19 +57,19 @@ export async function deletePost(id: string) {
   }
 }
 
-export async function fetchFilteredChats(user_id: string) {
+export async function fetchFilteredChatsUserId(user_id: string) {
   if (user_id === undefined || user_id.length === 0) {
     console.log("user id is undefined");
     return;
   }
-  let { data, error } = await supabase.from('allChats').select().order('timestamp', { ascending: false })
+  let { data, error } = await supabase.from('allChats').select().or(`p1_id.eq.${user_id},p2_id.eq.${user_id}`).order('timestamp', { ascending: false })
   if (error) {
     console.log("loading chats for user error:", error);
   }
   return data;
 }
 
-export async function fetchFilteredChatsFromId(chat_id: string) {
+export async function fetchFilteredChatsChatId(chat_id: string) {
   if (chat_id === undefined || chat_id.length === 0) {
     console.log("user id is undefined");
     return;
@@ -161,6 +161,7 @@ export async function checkIfAlreadyPresentChat(user_id: string, post_id: string
 }
 
 export async function fetchUserDetails(user_id: string) {
+  console.log("user_id:",user_id)
   const { data, error } = await supabase.auth.admin.getUserById(user_id)
   if (error) {
     console.log("error fetching user details:", error);

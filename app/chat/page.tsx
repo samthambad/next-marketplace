@@ -2,7 +2,7 @@ import React, { Suspense } from 'react'
 import { checkLoggedIn } from '../layout';
 import { redirect } from 'next/navigation';
 import ChatList from '../../components/chatList';
-import { fetchFilteredChats, fetchUserDetails } from '@/lib/actions';
+import { fetchFilteredChatsUserId, fetchUserDetails } from '@/lib/actions';
 export const dynamic = 'auto',
   dynamicParams = true,
   revalidate = 0,
@@ -20,7 +20,7 @@ const Chat = async() => {
   async function getData() {
     const userDetails = await checkLoggedIn();
     const user_id = userDetails?.id ?? ""
-    const rawData = await fetchFilteredChats(user_id);
+    const rawData = await fetchFilteredChatsUserId(user_id);
     let otherName:string = ""
     let other_id = "";
     let arrayOfChats:Chat[] = []

@@ -13,7 +13,7 @@ import Chat from "@/app/chat/page"
 import { useRouter } from 'next/navigation';
 
 
-const ChatList = ({data}:{data:Chat[]}) => {
+const ChatList = ({data}:{data:typeof Chat[]}) => {
   
   const router = useRouter()
   // console.log("dataaa", data)
