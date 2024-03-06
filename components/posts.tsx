@@ -26,6 +26,7 @@ const Posts = ({ posts, user }: { posts: any, user: any }) => {
     console.log("chat button pressed")
     const chatId = await createChat("", id, post_name, post_creator_id);
     router.push(`/chat/${chatId}`)
+    router.refresh()
   }
   return (
     <div>

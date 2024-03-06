@@ -15,9 +15,10 @@ import { useRouter } from 'next/navigation';
 const ChatList = ({data}:{data:typeof Chat[]}) => {
   
   const router = useRouter()
-  console.log("dataaa", data)
+  // console.log("dataaa", data)
   function goToChat(chat_id:number) {
     router.push(`/chat/${chat_id}`)
+    router.refresh() //refresh otherwise it wont fetch
   }
   return (
     <div>

@@ -10,7 +10,7 @@ const RealtimeChatDisplay = ({chats}:{chats:any}) => {
   const [createMsg, setCreateMsg] = useState("")
   const [chatsDisplayed, setChatsDisplayed] = useState(chats)
   useEffect(() => { 
-    router.refresh();
+    // router.refresh();
     const channel = supabase.channel('realtime chats').on('postgres_changes', {
       event: 'UPDATE', schema: 'public', table: 'allChats'
     }, (payload) => {
