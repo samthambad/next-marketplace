@@ -19,6 +19,7 @@ export interface Chat {
 const Chat = async() => {
   async function getData() {
     const userDetails = await checkLoggedIn();
+    console.log("userDetails", userDetails)
     const user_id = userDetails?.id ?? ""
     const rawData = await fetchFilteredChatsUserId(user_id);
     let otherName:string = ""
@@ -29,23 +30,26 @@ const Chat = async() => {
         // get the name from auth
         if (chat.p1_id === user_id) {
           const otherUserDetails = await fetchUserDetails(chat.p2_id);
+          // console.log("otherUserDetails", otherUserDetails?.user.email)
           otherName = otherUserDetails?.user.user_metadata.name;
         } else if (chat.p2_id === user_id) {
           const otherUserDetails = await fetchUserDetails(chat.p1_id);
+          // console.log("otherUserDetails if p2 is same as current user", otherUserDetails?.user.email)
           otherName = otherUserDetails?.user.user_metadata.name;
         }
         console.log("name", otherName)
         // make sure the chats with all blanks are not displayed
         let i = chat.messages.length - 1;
+        console.log("chat messagess",i)
         for (i; i >= 0; i--) {
-          if (chat.messages[chat.messages.length - 1].message !== "") {
+          if (chat.messages[i].message !== "") {
             break;
           }
         }
         if (i >= 0) {
           arrayOfChats.push({
             title: chat.post_name,
-            latest_message: chat.messages[chat.messages.length-1].message,
+            latest_message: chat.messages[i].message,
             other_name: otherName,
             chat_id:chat.id
           })

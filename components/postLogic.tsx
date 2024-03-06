@@ -38,7 +38,7 @@ const PostServer= ({query}: {query:string;}) => {
     getUser();
   },[query])
   console.log("query in logic", query)
-  console.log("user in logic", user)
+  // console.log("user in logic", user)
   // const currentUserDetails = await checkLoggedIn();
   // const posts = await fetchFilteredPosts(query);
   //client component inside server component
