@@ -4,6 +4,10 @@ This is a online open marketplace with Realtime Chat functionality that is made 
 
 It utilises both server and client components for better speed and efficiency.
 
+## Current Features
+- Create, Delete Posts
+- Send Chats to Users who have posts
+
 ## Getting Started
 
 First, run the development server:
