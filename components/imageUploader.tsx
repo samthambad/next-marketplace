@@ -12,42 +12,56 @@ const ImageUploader = () => {
     handleImages(newFiles);
   };
   
-  const handleImages = (newFiles: File[]) => {
-    const newPreviews: string[] = [];
-    const newCompressedFiles: File[] = [];
-    // convert the files to string and append to newPreviews
-    newFiles.forEach((file) => {
-      // make sure file is <=10mb
-      console.log("file received")
-      if (file.size <= 10 * 1024 * 1024) {
-        // Compress image
-        new Compressor(file, {
-          quality: 0.6,
-          success(result) {
-            newCompressedFiles.push(result as File);
-          },
-          error(err) {
-            console.log('Compression error:', err.message);
-          },
-        });
-      }
-      else {
-        alert(`File ${file.name} exceeds the size limit of 10MB and will not be uploaded`)
-      }
-    });
-    console.log("newcompressedfiles length", newCompressedFiles.length)
-    newCompressedFiles.forEach((compressedFile) => {
+const handleImages = async (newFiles: File[]) => {
+  const newPreviews: string[] = [];
+  const newCompressedFiles: File[] = [];
+
+  // Create an array of promises for compressing each file
+  const compressionPromises = newFiles.map(file => new Promise<File>((resolve, reject) => {
+    if (file.size <= 10 * 1024 * 1024) {
+      // Compress image
+      new Compressor(file, {
+        quality: 0.6,
+        success(result) {
+          newCompressedFiles.push(result as File);
+          resolve(result as File); // Resolve the promise with the compressed file
+        },
+        error(err) {
+          console.log('Compression error:', err.message);
+          reject(err); // Reject the promise if there's an error
+        },
+      });
+    } else {
+      alert(`File ${file.name} exceeds the size limit of 10MB and will not be uploaded`)
+      reject(new Error(`File ${file.name} exceeds the size limit of 10MB`)); // Reject the promise if file size exceeds the limit
+    }
+  }));
+
+  try {
+    // Wait for all compression promises to resolve
+    await Promise.all(compressionPromises);
+
+    // Once all files are compressed, generate previews
+    for (const compressedFile of newCompressedFiles) {
       const reader = new FileReader();
       reader.readAsDataURL(compressedFile);
-      // when the file reading operation completes, the below happens
-      reader.onloadend = () => {
-        console.log("pushing")
-        newPreviews.push(reader.result as string);
-        setPreviews([...previews, ...newPreviews])
-      };
-    });
+      await new Promise<void>((resolve, reject) => {
+        // When the file reading operation completes
+        reader.onloadend = () => {
+          newPreviews.push(reader.result as string);
+          resolve(); // Resolve the inner promise once preview is added
+        };
+      });
+    }
+
+    // Update state with previews and compressed files
+    setPreviews([...previews, ...newPreviews]);
     setFiles([...files, ...newCompressedFiles]);
+  } catch (error) {
+    console.error('Error handling images:', error);
   }
+};
+
   
   return (
     <div className="drop-area border py-10 border-gray-300 p-4 rounded-lg w-3/5 mx-auto"
