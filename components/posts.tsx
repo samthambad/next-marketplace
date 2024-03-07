@@ -31,7 +31,6 @@ const Posts = ({ posts, user }: { posts: any, user: any }) => {
   return (
     <div>
       <h1 className='mb-8 border border-gray-300 mx-auto w-80 rounded font-bold'>Latest Posts</h1>
-      <p className='mb-8'> <em>Refresh the page for new posts</em></p>
       <ul className='mx-auto w-80'>
         {posts?.map((post: any) => (
           <li key={post.id} className='mb-4'>
