@@ -3,6 +3,7 @@ import "@/styles/globals.css"
 import Input from '@/components/input'
 import { checkLoggedIn } from '@/app/layout';
 import {redirect} from 'next/navigation';
+import ImageUploader from '@/components/imageUploader';
 
 const CreatePost = async () => {
   const userDetails = await checkLoggedIn();
@@ -15,6 +16,7 @@ const CreatePost = async () => {
         <br className='max-md:hidden mt-4'/>
         <Suspense fallback=<div>Loading...</div> >
           <Input/>
+          <ImageUploader/>
         </Suspense>
         </div>
         :
