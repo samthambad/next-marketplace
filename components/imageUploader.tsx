@@ -44,7 +44,8 @@ const ImageUploader = () => {
       else {
         alert(`File ${file.name} exceeds the size limit of 10MB and will not be uploaded`)
       }
-  })
+    })
+    console.log(previews)
   };
   
   return (
@@ -53,7 +54,7 @@ const ImageUploader = () => {
     onDrop={handleDrop}
     onDragOver={(e) => e.preventDefault()}
     >
-    <p className='mb-2 border rounded-lg'>Drag and drop your image here</p>
+    <p className='mb-2'><em>Drag and drop your image here</em></p>
       {previews.map((preview) => (
         <div>
           <img
