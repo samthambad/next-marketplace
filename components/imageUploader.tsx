@@ -11,7 +11,10 @@ const ImageUploader = () => {
     const newFiles = Array.from(e.dataTransfer.files);
     handleImages(newFiles);
   };
-  
+const handleFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const newFiles = Array.from(e.target.files);
+  handleImages(newFiles);
+};
 const handleImages = async (newFiles: File[]) => {
   const newPreviews: string[] = [];
   const newCompressedFiles: File[] = [];
@@ -69,6 +72,7 @@ const handleImages = async (newFiles: File[]) => {
     onDragOver={(e) => e.preventDefault()}
     >
       <p className='mb-2'><em>Drag and drop your image here</em></p>
+      <input type="file" accept="image/*" onChange={handleFileInputChange}></input>
       {previews.map((preview) => (
         <div className='mx-auto'>
           <img
@@ -79,6 +83,7 @@ const handleImages = async (newFiles: File[]) => {
           />
         </div>
       ))}
+      <p>Number of files to be uploaded: {previews.length}</p>
     </div>
   );
       };
