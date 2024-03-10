@@ -1,7 +1,7 @@
 'use client'
 import { createPost } from '@/lib/actions'
 import { useRouter } from 'next/navigation'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import Compressor from 'compressorjs';
 
 const Input = () => {
@@ -55,6 +55,7 @@ const handleImages = async (newFiles: File[]) => {
       await new Promise<void>((resolve, reject) => {
         // When the file reading operation completes
         reader.onloadend = () => {
+          // base64 string
           newPreviews.push(reader.result as string);
           resolve(); // Resolve the inner promise once preview is added
         };
@@ -67,13 +68,23 @@ const handleImages = async (newFiles: File[]) => {
   } catch (error) {
     console.error('Error handling images:', error);
   }
+
+  
 };
+  const createPostReq = (formData:FormData) => {
+    previews.forEach((preview, index) => {
+      formData.append(`image${index}`, preview)
+    })
+    console.log("images0",formData.get("images0"))
+    createPost(formData);
+  }
   return (
     <div>
-      <form action={createPost} className='border border-gray-300 p-4 mb-4 rounded-lg w-4/5 mx-auto'>
+      <form action={createPostReq} className='border border-gray-300 p-4 mb-4 rounded-lg w-4/5 mx-auto'>
         <input autoComplete='off' className='border border-gray-300 p-2 rounded-md block mb-4 mx-auto' type='text' name="title" placeholder="Enter title..."></input>  
         <textarea className='border border-gray-300 p-2 rounded-md block mb-4 mx-auto w-4/5' name='description' placeholder="Enter description..."></textarea>  
         <input onClick={() => {
+          // add image to db
           router.push("/search");
           router.refresh()
         }} type="submit" placeholder='Submit' className='border border-gray-300 p-2 rounded-md hover:bg-blue-400 mx-auto block' />
@@ -83,7 +94,7 @@ const handleImages = async (newFiles: File[]) => {
     onDragOver={(e) => e.preventDefault()}
     >
       <p className='mb-2'><em>Drag and drop your image here</em></p>
-      <input type="file" accept="image/*" onChange={handleFileInputChange} name=""></input>
+      <input type="file" accept="image/*" onChange={handleFileInputChange}></input>
       {previews.map((preview) => (
         <div className='mx-auto'>
           <img
