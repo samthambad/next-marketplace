@@ -35,7 +35,7 @@ const RealtimeChatDisplay = ({chats}:{chats:any}) => {
   return (
     <div>
       <Suspense fallback=<div>Loading...</div> >
-        <ul className='text-left border w-[50%] mx-auto mb-8 px-4 py-2'>
+        <ul className='text-left border rounded w-[50%] mx-auto mb-8 px-4 py-2'>
           {chatsDisplayed.messages.map((messageObj: any) => {
             if (messageObj.message.length > 0) {
               return <li>{messageObj.user_name}: {messageObj.message}</li>

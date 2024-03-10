@@ -56,6 +56,15 @@ export async function fetchFilteredPosts(query: string) {
   return data;
 }
 
+export async function fetchFilteredPostId(post_id: string) {
+  let { data, error } = await supabase.from('posts').select().match({ id: post_id })
+  if (error) {
+    console.log("fetching filtered posts error", error);
+  }
+  return data?.[0]
+  
+}
+
 export async function deletePost(id: string) {
   let { error } = await supabase.from('posts').delete().match({ id: id })
   if (error) {
