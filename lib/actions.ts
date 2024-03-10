@@ -13,6 +13,7 @@ if (!supabaseKey || !supabaseUrl) {
 const supabase = createClient(supabaseUrl, supabaseKey)
 
 export async function createPost(formData: FormData) {
+  console.log("uploading images to supabase")
   const userDetails = await checkLoggedIn();
   let { error } = await supabase.from('posts').insert({
     title: formData.get("title"),

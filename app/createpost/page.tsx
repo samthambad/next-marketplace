@@ -16,7 +16,7 @@ const CreatePost = async () => {
         <br className='max-md:hidden mt-4'/>
         <Suspense fallback=<div>Loading...</div> >
           <Input/>
-          <ImageUploader/>
+          {/* <ImageUploader/> */}
         </Suspense>
         </div>
         :

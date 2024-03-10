@@ -83,7 +83,7 @@ const handleImages = async (newFiles: File[]) => {
           />
         </div>
       ))}
-      <p>Number of files to be uploaded: {previews.length}</p>
+      <p className='font-bold mt-2'>Number of files to be uploaded: <em>{previews.length}</em></p>
     </div>
   );
       };
