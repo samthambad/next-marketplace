@@ -176,3 +176,19 @@ export async function fetchUserDetails(user_id: string) {
   // console.log("user details:", data);
   return data;
 }
+
+export async function fetchImageString(post_id: string) {
+  let {data,error} = await supabase.from('posts').select().match({id:post_id})
+  if (error) {
+    console.log("error fetching image string:", error);
+    return;
+  }
+  if (data !== null) {
+    const { image_string } = data[0]
+    if (image_string !== null) return image_string[0];
+  }
+  else {
+    console.log("supabase data is null");
+    return;
+  }
+}

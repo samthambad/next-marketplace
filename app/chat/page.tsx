@@ -2,7 +2,7 @@ import React, { Suspense } from 'react'
 import { checkLoggedIn } from '../layout';
 import { redirect } from 'next/navigation';
 import ChatList from '../../components/chatList';
-import { fetchFilteredChatsUserId, fetchUserDetails } from '@/lib/actions';
+import { fetchFilteredChatsUserId, fetchImageString, fetchUserDetails } from '@/lib/actions';
 export const dynamic = 'auto',
   dynamicParams = true,
   revalidate = 0,
@@ -15,11 +15,11 @@ export interface Chat {
   latest_message: any;
   other_name: string;
   chat_id: number;
+  image_string?: string;
 }
 const Chat = async() => {
   async function getData() {
     const userDetails = await checkLoggedIn();
-    console.log("userDetails", userDetails)
     const user_id = userDetails?.id ?? ""
     const rawData = await fetchFilteredChatsUserId(user_id);
     let otherName:string = ""
@@ -51,13 +51,20 @@ const Chat = async() => {
             title: chat.post_name,
             latest_message: chat.messages[i].message,
             other_name: otherName,
-            chat_id:chat.id
+            chat_id:chat.id,
+            image_string: await fetchImage(chat.post_id)
           })
         }
       })
       await Promise.all(promiseArray) //wait for all the promises to  resolve
       return arrayOfChats;
     }
+  }
+  
+  const fetchImage = async (post_id:string) => {
+    const image_string = await fetchImageString(post_id);
+    console.log("image_string", image_string)
+    return image_string;
   }
   const fetchedChatArray:Chat[] = (await getData()) ?? [];
   if (fetchedChatArray.length == 0) {

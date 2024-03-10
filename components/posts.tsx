@@ -36,6 +36,7 @@ const Posts = ({ posts, user }: { posts: any, user: any }) => {
           <li key={post.id} className='mb-4'>
             <Card className='hover:bg-gray-400'>
               <CardHeader>
+                {post.image_string !== null  && <img src={post.image_string[0]} className='mx-auto mb-1' style={{maxHeight: '300px', maxWidth: '100%'}}></img>}
                 <CardTitle>{post.title}</CardTitle>
                 <CardDescription>{post.description}</CardDescription>
               </CardHeader>
