@@ -18,6 +18,9 @@ export async function createPost(formData: FormData) {
   const imageArray: string[] = [];
   // max 5 images allowed
   for(let i = 0; i<5; i++) {
+    if (formData.get(`image${i}`) === undefined) {
+      break;
+    }
     imageArray.push(formData.get(`image${i}`) ?? "")
   }
   let { error } = await supabase.from('posts').insert({
