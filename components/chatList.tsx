@@ -36,7 +36,7 @@ const ChatList = ({data}:{data:typeof Chat[]}) => {
         <TableBody>
           {data.map((chat: typeof Chat) => (
             <TableRow key={chat.chat_id} onClick={() => goToChat(chat.chat_id)} className='hover:bg-blue-500'>
-            <TableCell>{chat.image_string  !== null && <img src={chat.image_string}></img>}</TableCell>  
+              <TableCell>{chat.image_string !== null && <img src={chat.image_string} style={{ maxHeight: '100px', maxWidth: '100px' }}></img>}</TableCell>  
               <TableCell className="text-center">{chat.title}</TableCell>
               <TableCell>{chat.latest_message}</TableCell>
               <TableCell className="text-center">{chat.other_name}</TableCell>

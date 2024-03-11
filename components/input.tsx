@@ -75,7 +75,7 @@ const handleImages = async (newFiles: File[]) => {
     previews.forEach((preview, index) => {
       formData.append(`image${index}`, preview)
     })
-    console.log("images0",formData.get("images0"))
+    // console.log("images0",formData.get("images0"))
     createPost(formData);
   }
   return (

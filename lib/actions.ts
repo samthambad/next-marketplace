@@ -16,6 +16,7 @@ export async function createPost(formData: FormData) {
   console.log("uploading images to supabase")
   const userDetails = await checkLoggedIn();
   const imageArray: string[] = [];
+  // max 5 images allowed
   for(let i = 0; i<5; i++) {
     imageArray.push(formData.get(`image${i}`) ?? "")
   }
