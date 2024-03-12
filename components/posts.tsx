@@ -29,7 +29,7 @@ const Posts = ({ posts, user }: { posts: any, user: any }) => {
   }
   if (!posts) {
     return (
-      <div>Loading...</div>
+      <div className="font-semibold text-center text-blue-400">Loading...</div>
     )
   }
   return (

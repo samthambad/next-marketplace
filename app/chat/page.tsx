@@ -67,9 +67,6 @@ const Chat = async() => {
     return image_string;
   }
   const fetchedChatArray:Chat[] = (await getData()) ?? [];
-  if (fetchedChatArray.length == 0) {
-    return <h1 className='text-center font-extrabold  mb-8 mx-auto'>No Chats found.</h1>
-  }
   const userDetails = await checkLoggedIn();
   // fetch from allChats all rows that have either p1 or p2 == currentUserId
   return (
