@@ -1,5 +1,4 @@
 'use client'
-import React from 'react'
 import {
   Card,
   CardDescription,
@@ -28,15 +27,20 @@ const Posts = ({ posts, user }: { posts: any, user: any }) => {
     router.push(`/chat/${chatId}`)
     router.refresh()
   }
+  if (!posts) {
+    return (
+      <div>Loading...</div>
+    )
+  }
   return (
     <div>
-      <h1 className='mb-8 border border-gray-300 mx-auto w-80 rounded font-bold'>Latest Posts</h1>
-      <ul className='mx-auto w-80'>
+    <h1 className='mb-8 border border-gray-300 mx-auto w-80 rounded font-bold'>Latest Posts</h1>
+    <ul className='mx-auto w-80'>
         {posts?.map((post: any) => (
           <li key={post.id} className='mb-4'>
-            <Card className='hover:bg-gray-400'>
+            <Card className='hover:bg-gray-400' onClick={() => { router.push(`/post/${post.id}`); router.refresh(); }}>
               <CardHeader>
-                {post.image_string !== null  && <img src={post.image_string[0]} className='mx-auto mb-1' style={{maxHeight: '300px', maxWidth: '100%'}}></img>}
+                {post.image_string !== null && <img src={post.image_string[0]}  className='mx-auto mb-1' style={{maxHeight: '300px', maxWidth: '100%'}}></img>}
                 <CardTitle>{post.title}</CardTitle>
                 <CardDescription>{post.description}</CardDescription>
               </CardHeader>

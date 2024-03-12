@@ -20,6 +20,11 @@ const ChatList = ({data}:{data:typeof Chat[]}) => {
     router.push(`/chat/${chat_id}`)
     router.refresh() //refresh otherwise it wont fetch
   }
+  if (!data) {
+    return (
+      <div>Loading chats...</div>
+    )
+  }
     return (
     <div>
       <h1 className='mb-4 border border-gray-300 mx-auto w-80 rounded font-bold'>All Chats</h1>

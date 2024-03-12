@@ -77,12 +77,13 @@ const Chat = async() => {
     {userDetails ?
     <div className='text-center'>
       <div className='flex-center flex-col text-center mx-auto'>
-      <h1 className='scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl mb-8 mx-auto'> Chat </h1>
+      <h1 className='scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl mb-8 mx-auto'> Chats </h1>
       </div>
     <br />
-    <Suspense fallback=<div>Loading...</div> >
-      <ChatList data={fetchedChatArray} />  
-    </Suspense>
+      {fetchedChatArray.length===0 ?
+        <div>Loading...</div>
+        :
+        <ChatList data={fetchedChatArray} />} 
     </div>
       :
       <>

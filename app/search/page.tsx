@@ -25,9 +25,7 @@ const[query1, setQuery1] =  useState()
       <div className='mb-8 mx-auto'>
         <Search placeholder="Search listings"/>
       </div>
-      <Suspense fallback=<div>Loading...</div> >
-        <PostServer query={query}/>
-      </Suspense>
+      <PostServer query={query}/>
     </div>
     )
   }

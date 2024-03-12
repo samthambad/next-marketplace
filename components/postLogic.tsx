@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import Posts from '@/components/posts';
 
 const PostServer= ({query}: {query:string;}) => {
@@ -43,7 +43,8 @@ const PostServer= ({query}: {query:string;}) => {
   // const posts = await fetchFilteredPosts(query);
   //client component inside server component
   return (
-    <Posts posts={posts} user={ user ?? "" } /> 
+      <Posts posts={posts} user={ user ?? "" } /> 
+    
   )
 }
 
