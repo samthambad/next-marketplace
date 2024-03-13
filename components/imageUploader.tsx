@@ -73,8 +73,8 @@ const handleImages = async (newFiles: File[]) => {
     >
       <p className='mb-2'><em>Drag and drop your image here</em></p>
       <input type="file" accept="image/*" onChange={handleFileInputChange}></input>
-      {previews.map((preview) => (
-        <div className='mx-auto'>
+      {previews.map((preview,index) => (
+        <div className='mx-auto' key={index}>
           <img
             src={preview}
             alt="Preview"
