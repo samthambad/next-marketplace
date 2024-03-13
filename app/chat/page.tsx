@@ -1,4 +1,3 @@
-import React, { Suspense } from 'react'
 import { redirect } from 'next/navigation';
 import ChatList from '../../components/chatList';
 import { checkLoggedIn, fetchFilteredChatsUserId, fetchImageString, fetchUserDetails } from '@/lib/actions';

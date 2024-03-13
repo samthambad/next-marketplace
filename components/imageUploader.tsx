@@ -12,7 +12,7 @@ const ImageUploader = () => {
     handleImages(newFiles);
   };
 const handleFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  const newFiles = Array.from(e.target.files);
+  const newFiles = Array.from(e.target.files ?? []);
   handleImages(newFiles);
 };
 const handleImages = async (newFiles: File[]) => {

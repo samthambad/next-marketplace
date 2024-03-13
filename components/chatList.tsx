@@ -11,6 +11,9 @@ import {
 import Chat from "@/app/chat/page"
 import { useRouter } from 'next/navigation';
 
+interface ChatListProps {
+  data: typeof Chat[];
+}
 
 const ChatList = ({data}:{data:typeof Chat[]}) => {
   

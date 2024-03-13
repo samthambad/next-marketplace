@@ -1,7 +1,5 @@
-import { fetchFilteredChatsChatId, fetchFilteredPostId, fetchImageString } from "@/lib/actions"
+import { fetchFilteredChatsChatId, fetchFilteredPostId } from "@/lib/actions"
 import RealtimeChatDisplay from "./realtimeChatDisplay"
-import fetch from 'node-fetch'
-import {redirect} from 'next/navigation'
 import ChatStatusBar from "./chatStatusBar"
 // client component as I want it to periodically refresh
 const ChatDisplay = async ({ chatId }: { chatId: string }) => {
