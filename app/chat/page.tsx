@@ -1,8 +1,7 @@
 import React, { Suspense } from 'react'
-import { checkLoggedIn } from '../layout';
 import { redirect } from 'next/navigation';
 import ChatList from '../../components/chatList';
-import { fetchFilteredChatsUserId, fetchImageString, fetchUserDetails } from '@/lib/actions';
+import { checkLoggedIn, fetchFilteredChatsUserId, fetchImageString, fetchUserDetails } from '@/lib/actions';
 export const dynamic = 'auto',
   dynamicParams = true,
   revalidate = 0,

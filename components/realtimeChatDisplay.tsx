@@ -6,11 +6,9 @@ import { createChat } from '@/lib/actions'
 import { supabase } from '@/utils/supabase'
 import { useRouter } from 'next/navigation'
 const RealtimeChatDisplay = ({chats}:{chats:any}) => {
-  const router = useRouter();
   const [createMsg, setCreateMsg] = useState("")
   const [chatsDisplayed, setChatsDisplayed] = useState(chats)
   useEffect(() => { 
-    // router.refresh();
     const channel = supabase.channel('realtime chats').on('postgres_changes', {
       event: 'UPDATE', schema: 'public', table: 'allChats'
     }, (payload) => {

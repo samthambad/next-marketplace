@@ -1,13 +1,8 @@
 import '../styles/globals.css'
 import Navbar from "@/components/ui/navbar";
 import { ThemeProvider } from "@/components/theme-provider";
-import { supabaseServer } from "@/lib/supabase/server";
+import { checkLoggedIn } from '@/lib/actions';
 
-export async function checkLoggedIn() {
-  const supabase = supabaseServer();
-  const {data} = await supabase.auth.getSession();
-  return data.session?.user;
-}
 export default async function RootLayout({children}: Readonly<{children: React.ReactNode;}>) {
   const userDetails = await checkLoggedIn();
   return (

@@ -71,12 +71,12 @@ const handleImages = async (newFiles: File[]) => {
 
   
 };
-  const createPostReq = (formData:FormData) => {
+  const createPostReq = async (formData:FormData) => {
     previews.forEach((preview, index) => {
       formData.append(`image${index}`, preview)
     })
     // console.log("images0",formData.get("images0"))
-    createPost(formData);
+    await createPost(formData);
   }
   return (
     <div>
@@ -97,7 +97,7 @@ const handleImages = async (newFiles: File[]) => {
       <input type="file" accept="image/*" onChange={handleFileInputChange}></input>
       {previews.map((preview) => (
         <div className='mx-auto'>
-          <img
+          <img key={preview}
             src={preview}
             alt="Preview"
             style={{ maxWidth: '100%', maxHeight: '300px' }}

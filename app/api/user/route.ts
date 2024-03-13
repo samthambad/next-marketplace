@@ -1,4 +1,5 @@
-import { checkLoggedIn } from '@/app/layout';
+import { checkLoggedIn } from "@/lib/actions";
+
 // call server functions here
 export async function GET(req:any, res:any) {
   try {
@@ -8,8 +9,7 @@ export async function GET(req:any, res:any) {
       return newResponse;
     }
     else {
-      return "no";
-      // return new Response(JSON.stringify({ status: 200 }), { headers: { "Content-Type": "application/json" } });
+      return new Response(JSON.stringify({ status: 200 }), { headers: { "Content-Type": "application/json" } });
     }
   }
   catch (err) {

@@ -5,7 +5,6 @@ import { supabaseBrowser } from '@/lib/supabase/client';
 import { Button } from '@/components/ui/button';
 import { User } from '@supabase/supabase-js';
 import { useRouter } from 'next/navigation';
-import { checkLoggedIn } from '@/app/layout';
 import { ModeToggle } from './dark-mode-toggle';
 
 

@@ -30,3 +30,5 @@ Create chat:
 click on button on the post,
 if there is already a chat present for the post_id, go to that chat
 otherwise make a new chat that is relevant to p1,p2,post_id, if any changes there is new url
+
+add a click timeout for the button

@@ -1,9 +1,9 @@
 import React, { Suspense } from 'react'
 import "@/styles/globals.css"
 import Input from '@/components/input'
-import { checkLoggedIn } from '@/app/layout';
 import {redirect} from 'next/navigation';
 import ImageUploader from '@/components/imageUploader';
+import { checkLoggedIn } from '@/lib/actions';
 
 const CreatePost = async () => {
   const userDetails = await checkLoggedIn();

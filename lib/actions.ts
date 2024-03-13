@@ -1,6 +1,6 @@
 'use server';
-import { checkLoggedIn } from '@/app/layout';
 import { createClient } from '@supabase/supabase-js';
+import { supabaseServer } from "@/lib/supabase/server";
 require('dotenv').config()
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -11,6 +11,12 @@ if (!supabaseKey || !supabaseUrl) {
 }
 
 const supabase = createClient(supabaseUrl, supabaseKey)
+
+export async function checkLoggedIn() {
+  const supabase = supabaseServer();
+  const {data} = await supabase.auth.getSession();
+  return data.session?.user;
+}
 
 export async function createPost(formData: FormData) {
   console.log("uploading images to supabase")
@@ -196,7 +202,7 @@ export async function fetchImageString(post_id: string) {
     console.log("error fetching image string:", error);
     return;
   }
-  if (data !== null) {
+  if (data?.[0] !== undefined) {
     const { image_string } = data[0]
     if (image_string !== null) return image_string[0];
   }
