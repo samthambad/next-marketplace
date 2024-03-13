@@ -29,17 +29,15 @@ const Chat = async() => {
         // get the name from auth
         if (chat.p1_id === user_id) {
           const otherUserDetails = await fetchUserDetails(chat.p2_id);
-          // console.log("otherUserDetails", otherUserDetails?.user.email)
           otherName = otherUserDetails?.user.user_metadata.name;
         } else if (chat.p2_id === user_id) {
           const otherUserDetails = await fetchUserDetails(chat.p1_id);
-          // console.log("otherUserDetails if p2 is same as current user", otherUserDetails?.user.email)
           otherName = otherUserDetails?.user.user_metadata.name;
         }
         console.log("name", otherName)
         // make sure the chats with all blanks are not displayed
         let i = chat.messages.length - 1;
-        console.log("chat messagess",i)
+        console.log("chat messagess", i)
         for (i; i >= 0; i--) {
           if (chat.messages[i].message !== "") {
             break;
@@ -50,12 +48,13 @@ const Chat = async() => {
             title: chat.post_name,
             latest_message: chat.messages[i].message,
             other_name: otherName,
-            chat_id:chat.id,
+            chat_id: chat.id,
             image_string: await fetchImage(chat.post_id)
           })
         }
       })
-      await Promise.all(promiseArray) //wait for all the promises to  resolve
+      const promises = promiseArray ?? [] //make sure it is always an array
+      await Promise.all(promises) //wait for all the promises to  resolve
       return arrayOfChats;
     }
   }
