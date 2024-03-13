@@ -40,7 +40,7 @@ const EachPost = async ({ params }: { params: { postId: string } }) => {
               <div className="p-1">
                 <Card>
                   <CardContent className="flex aspect-square p-1 text-align:center items-center justify-center hover:bg-blue-300">
-                    <Image src={image} alt={`post ${index}`}/>
+                    <Image width={500} height={500} src={image} alt={`post ${index}`}/>
                   </CardContent>
                 </Card>
               </div>

@@ -77,14 +77,14 @@ const PostServer= ({query}: {query:string;}) => {
           <li key={post.id} className='mb-4'>
             <Card className='hover:bg-gray-400' >
               <CardHeader>
-                {post.image_string !== null && <Image src={post.image_string[0]} alt="post-image-1" onClick={() => { router.push(`/post/${post.id}`); router.refresh(); }} className='mx-auto mb-1' style={{maxHeight: '300px', maxWidth: '100%'}}/>}
+                {post.image_string !== null && <Image width={300} height={300} src={post.image_string[0]} alt="post-image-1" onClick={() => { router.push(`/post/${post.id}`); router.refresh(); }} className='mx-auto mb-1' style={{maxHeight: '300px', maxWidth: '100%'}}/>}
                 <CardTitle onClick={() => { router.push(`/post/${post.id}`); router.refresh(); }}>{post.title}</CardTitle>
                 <CardDescription onClick={() => { router.push(`/post/${post.id}`); router.refresh(); }}>{post.description}</CardDescription>
               </CardHeader>
               <CardFooter onClick={() => { router.push(`/post/${post.id}`); router.refresh(); }}>{post.readable_time}</CardFooter>
               <CardFooter onClick={() => { router.push(`/post/${post.id}`); router.refresh(); }}>{post.user_name}</CardFooter>
               {user?.id === post.user_id && <Button onClick={() => clickDelete(post.id)} variant="outline" className='mb-2 hover:bg-red-600'>Delete</Button>}
-              {user?.id !== post.user_id && <Button onClick={() => chatWithPoster(post.id, post.user_id, post.title)} variant="outline" className='mb-2 hover:bg-blue-500'>Chat</Button>}
+              {user !==undefined && user?.id !== post.user_id && <Button onClick={() => chatWithPoster(post.id, post.user_id, post.title)} variant="outline" className='mb-2 hover:bg-blue-500'>Chat</Button>}
             </Card>
           </li>
         ))}

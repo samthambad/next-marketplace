@@ -101,7 +101,8 @@ const handleImages = async (newFiles: File[]) => {
           <Image key={preview}
             src={preview}
             alt="Preview"
-            style={{ maxWidth: '100%', maxHeight: '300px' }}
+            width={900}
+            height={900}
             className='mx-auto'
           />
         </div>

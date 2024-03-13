@@ -39,7 +39,7 @@ const ChatList = ({data}:{data:any[]}) => {
         <TableBody>
           {data.map((chat) => (
             <TableRow key={chat.chat_id} onClick={() => goToChat(chat.chat_id)} className='hover:bg-blue-500'>
-              <TableCell className='flex justify-center'>{chat.image_string !== null && <Image src={chat.image_string} style={{ maxHeight: '100px', maxWidth: '100px' }} alt='post'/>}</TableCell>  
+              <TableCell className='flex justify-center'>{chat.image_string !== null && <Image width={100} height={100} src={chat.image_string} style={{ maxHeight: '100px', maxWidth: '100px' }} alt='post'/>}</TableCell>  
               <TableCell className="text-center">{chat.title}</TableCell>
               <TableCell>{chat.latest_message}</TableCell>
               <TableCell className="text-center">{chat.other_name}</TableCell>
