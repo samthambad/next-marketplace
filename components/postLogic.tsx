@@ -7,15 +7,14 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import React, { Suspense, useEffect, useState } from 'react';
-import Posts from '@/components/posts';
 import { useRouter } from 'next/navigation';
 import { createChat, deletePost } from '@/lib/actions';
 import { Button } from "./ui/button";
 
 const PostServer= ({query}: {query:string;}) => {
-  const [posts, setPosts] = useState()
+  const [posts, setPosts] = useState<any[]>([])
   const [refresh, setRefresh] = useState(false)
-  const [user, setUser] = useState()
+  const [user, setUser] = useState<any>()
   useEffect(() => {
     const getPosts = async (query:string) => {
       try{
@@ -84,7 +83,7 @@ const PostServer= ({query}: {query:string;}) => {
               <CardFooter onClick={() => { router.push(`/post/${post.id}`); router.refresh(); }}>{post.readable_time}</CardFooter>
               <CardFooter onClick={() => { router.push(`/post/${post.id}`); router.refresh(); }}>{post.user_name}</CardFooter>
               {user?.id === post.user_id && <Button onClick={() => clickDelete(post.id)} variant="outline" className='mb-2 hover:bg-red-600'>Delete</Button>}
-              {user && user?.id !== post.user_id && <Button onClick={() => chatWithPoster(post.id, post.user_id, post.title)} variant="outline" className='mb-2 hover:bg-blue-500'>Chat</Button>}
+              {user?.id !== post.user_id && <Button onClick={() => chatWithPoster(post.id, post.user_id, post.title)} variant="outline" className='mb-2 hover:bg-blue-500'>Chat</Button>}
             </Card>
           </li>
         ))}

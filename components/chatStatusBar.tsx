@@ -2,7 +2,7 @@
 import { useRouter } from 'next/navigation'
 import React from 'react'
 
-const ChatStatusBar = ({postTitle, image_string_first, postId}: {postTitle: string, image_string: string, postId:string}) => {
+const ChatStatusBar = ({postTitle, image_string_first, postId}: {postTitle: string, image_string_first: string, postId:string}) => {
   const router = useRouter();
 
   const goToPost = (post_id: string) => {

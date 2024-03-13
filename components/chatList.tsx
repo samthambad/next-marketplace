@@ -8,15 +8,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import Chat from "@/app/chat/page"
 import { useRouter } from 'next/navigation';
 
-interface ChatListProps {
-  data: typeof Chat[];
-}
-
-const ChatList = ({data}:{data:typeof Chat[]}) => {
-  
+const ChatList = ({data}:{data:any[]}) => {
   const router = useRouter()
   // console.log("dataaa", data)
   function goToChat(chat_id:number) {
@@ -42,7 +36,7 @@ const ChatList = ({data}:{data:typeof Chat[]}) => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {data.map((chat: typeof Chat) => (
+          {data.map((chat) => (
             <TableRow key={chat.chat_id} onClick={() => goToChat(chat.chat_id)} className='hover:bg-blue-500'>
               <TableCell className='flex justify-center'>{chat.image_string !== null && <img src={chat.image_string} style={{ maxHeight: '100px', maxWidth: '100px' }} alt='post'></img>}</TableCell>  
               <TableCell className="text-center">{chat.title}</TableCell>

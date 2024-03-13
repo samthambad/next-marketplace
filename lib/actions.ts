@@ -27,7 +27,13 @@ export async function createPost(formData: FormData) {
     if (formData.get(`image${i}`) === undefined) {
       break;
     }
-    imageArray.push(formData.get(`image${i}`) ?? "")
+    const image = formData.get(`image${i}`)
+    if (image === undefined) {
+      break;
+    }
+    if (typeof image === 'string') {
+      imageArray.push(image)
+    }
   }
   let { error } = await supabase.from('posts').insert({
     title: formData.get("title"),
@@ -123,7 +129,7 @@ export async function createChat(newMessage: string, post_id: string, post_name:
   const dataBeforeAdding = await checkIfAlreadyPresentChat(userId, post_id)
   // chat already present
   console.log("previous data:",dataBeforeAdding)
-  if (dataBeforeAdding !== undefined && dataBeforeAdding?.length > 0) {
+  if (dataBeforeAdding?.length !== undefined && dataBeforeAdding?.length > 0) {
     console.log("chat already exists");
     // get the messages array from dataBeforeAdding and append firstMessage
     let messagesArray: message[] = dataBeforeAdding?.[0].messages

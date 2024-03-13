@@ -8,13 +8,6 @@ export const dynamic = 'auto',
   runtime = 'nodejs',
   preferredRegion = 'auto';
 
-export interface Chat {
-  title: string;
-  latest_message: any;
-  other_name: string;
-  chat_id: number;
-  image_string?: string;
-}
 const Chat = async() => {
   async function getData() {
     const userDetails = await checkLoggedIn();
@@ -22,7 +15,7 @@ const Chat = async() => {
     const rawData = await fetchFilteredChatsUserId(user_id);
     let otherName:string = ""
     let other_id = "";
-    let arrayOfChats:Chat[] = []
+    let arrayOfChats:any[] = []
     if (user_id.length > 0) {
       const promiseArray = rawData?.map(async (chat) => {
         // get the name from auth
@@ -63,7 +56,7 @@ const Chat = async() => {
     console.log("image_string", image_string)
     return image_string;
   }
-  const fetchedChatArray:Chat[] = (await getData()) ?? [];
+  const fetchedChatArray = (await getData()) ?? [];
   const userDetails = await checkLoggedIn();
   // fetch from allChats all rows that have either p1 or p2 == currentUserId
   return (
