@@ -5,7 +5,7 @@ const EachChat = async ({params}: {params : {chatId:string}}) => {
   // fetch chat data from supabase using chatId
   return (
     <div>
-      <ChatDisplay chatId={+params.chatId}/>
+      <ChatDisplay chatId={params.chatId}/>
     </div>
   )
 }
