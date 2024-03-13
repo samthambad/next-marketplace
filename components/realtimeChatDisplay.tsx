@@ -16,7 +16,7 @@ const RealtimeChatDisplay = ({chats}:{chats:any}) => {
     }).subscribe()
 
     return () => {supabase.removeChannel(channel)}
-  },[supabase, chatsDisplayed, setChatsDisplayed])
+  },[chatsDisplayed, setChatsDisplayed])
 
   const handleMsg = (text: string) => {
     setCreateMsg(text);

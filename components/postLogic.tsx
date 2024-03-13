@@ -77,7 +77,7 @@ const PostServer= ({query}: {query:string;}) => {
           <li key={post.id} className='mb-4'>
             <Card className='hover:bg-gray-400' >
               <CardHeader>
-                {post.image_string !== null && <Image src={post.image_string[0]} onClick={() => { router.push(`/post/${post.id}`); router.refresh(); }} className='mx-auto mb-1' style={{maxHeight: '300px', maxWidth: '100%'}}/>}
+                {post.image_string !== null && <Image src={post.image_string[0]} alt="post-image-1" onClick={() => { router.push(`/post/${post.id}`); router.refresh(); }} className='mx-auto mb-1' style={{maxHeight: '300px', maxWidth: '100%'}}/>}
                 <CardTitle onClick={() => { router.push(`/post/${post.id}`); router.refresh(); }}>{post.title}</CardTitle>
                 <CardDescription onClick={() => { router.push(`/post/${post.id}`); router.refresh(); }}>{post.description}</CardDescription>
               </CardHeader>
