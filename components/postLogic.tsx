@@ -66,7 +66,7 @@ const PostServer= ({query}: {query:string;}) => {
     router.push(`/chat/${chatId}`)
     router.refresh()
   }
-  if (!posts) {
+  if (posts.length===0) {
     return <div className="font-semibold text-center text-blue-400">Loading...</div>
   }
   return (
