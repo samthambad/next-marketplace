@@ -10,6 +10,7 @@ import React, { Suspense, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { createChat, deletePost } from '@/lib/actions';
 import { Button } from "./ui/button";
+import Image from "next/image";
 
 const PostServer= ({query}: {query:string;}) => {
   const [posts, setPosts] = useState<any[]>([])
@@ -76,7 +77,7 @@ const PostServer= ({query}: {query:string;}) => {
           <li key={post.id} className='mb-4'>
             <Card className='hover:bg-gray-400' >
               <CardHeader>
-                {post.image_string !== null && <img src={post.image_string[0]} onClick={() => { router.push(`/post/${post.id}`); router.refresh(); }} className='mx-auto mb-1' style={{maxHeight: '300px', maxWidth: '100%'}}></img>}
+                {post.image_string !== null && <Image src={post.image_string[0]} onClick={() => { router.push(`/post/${post.id}`); router.refresh(); }} className='mx-auto mb-1' style={{maxHeight: '300px', maxWidth: '100%'}}/>}
                 <CardTitle onClick={() => { router.push(`/post/${post.id}`); router.refresh(); }}>{post.title}</CardTitle>
                 <CardDescription onClick={() => { router.push(`/post/${post.id}`); router.refresh(); }}>{post.description}</CardDescription>
               </CardHeader>

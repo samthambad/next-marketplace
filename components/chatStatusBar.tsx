@@ -1,6 +1,7 @@
 'use client'
 import { useRouter } from 'next/navigation'
 import React from 'react'
+import Image from 'next/image'
 
 const ChatStatusBar = ({postTitle, image_string_first, postId}: {postTitle: string, image_string_first: string, postId:string}) => {
   const router = useRouter();
@@ -12,7 +13,7 @@ const ChatStatusBar = ({postTitle, image_string_first, postId}: {postTitle: stri
   return (
     <div className='flex p-2 items-center w-[50%] justify-between gap-[2vw] mb-10 pt-2 pb-2 border rounded mx-auto'>
       <span className="font-bold">{postTitle}</span>
-      <img src={image_string_first} style={{maxWidth: '100px', maxHeight:'100px'}} onClick={() => {goToPost(postId)}}></img>
+      <Image src={image_string_first} style={{maxWidth: '100px', maxHeight:'100px'}} onClick={() => {goToPost(postId)}} alt='post'/>
     </div>
     )
   }

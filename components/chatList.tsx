@@ -9,6 +9,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 const ChatList = ({data}:{data:any[]}) => {
   const router = useRouter()
@@ -38,7 +39,7 @@ const ChatList = ({data}:{data:any[]}) => {
         <TableBody>
           {data.map((chat) => (
             <TableRow key={chat.chat_id} onClick={() => goToChat(chat.chat_id)} className='hover:bg-blue-500'>
-              <TableCell className='flex justify-center'>{chat.image_string !== null && <img src={chat.image_string} style={{ maxHeight: '100px', maxWidth: '100px' }} alt='post'></img>}</TableCell>  
+              <TableCell className='flex justify-center'>{chat.image_string !== null && <Image src={chat.image_string} style={{ maxHeight: '100px', maxWidth: '100px' }} alt='post'/>}</TableCell>  
               <TableCell className="text-center">{chat.title}</TableCell>
               <TableCell>{chat.latest_message}</TableCell>
               <TableCell className="text-center">{chat.other_name}</TableCell>

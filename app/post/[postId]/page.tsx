@@ -8,6 +8,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel"
 import { Suspense } from "react";
+import Image from 'next/image'
 
 const EachPost = async ({ params }: { params: { postId: string } }) => {
   const postDetails  = await fetchFilteredPostId(params.postId)
@@ -39,7 +40,7 @@ const EachPost = async ({ params }: { params: { postId: string } }) => {
               <div className="p-1">
                 <Card>
                   <CardContent className="flex aspect-square p-1 text-align:center items-center justify-center hover:bg-blue-300">
-                    <img src={image} alt={`post ${index}`}></img>
+                    <Image src={image} alt={`post ${index}`}/>
                   </CardContent>
                 </Card>
               </div>

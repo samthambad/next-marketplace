@@ -3,6 +3,7 @@ import { createPost } from '@/lib/actions'
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 import Compressor from 'compressorjs';
+import Image from 'next/image';
 
 const Input = () => {
   const router = useRouter();
@@ -97,7 +98,7 @@ const handleImages = async (newFiles: File[]) => {
       <input type="file" accept="image/*" onChange={handleFileInputChange}></input>
       {previews.map((preview, index) => (
         <div className='mx-auto' key={index}>
-          <img key={preview}
+          <Image key={preview}
             src={preview}
             alt="Preview"
             style={{ maxWidth: '100%', maxHeight: '300px' }}
