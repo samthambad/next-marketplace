@@ -6,7 +6,7 @@ import ChatStatusBar from "./chatStatusBar"
 // client component as I want it to periodically refresh
 const ChatDisplay = async ({ chatId }: { chatId: string }) => {
   const chats = await fetchFilteredChatsChatId(chatId)
-  const { post_id } = chats?.[0];
+    const { post_id } = chats?.[0];
   const post_details = await fetchFilteredPostId(post_id)
   const { image_string } :{ image_string: string[] }= post_details;
   const image_string_first : string = image_string?.[0]
