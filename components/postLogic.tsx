@@ -93,8 +93,10 @@ const PostServer= ({query}: {query:string;}) => {
                   <CardFooter className='flex justify-end font-thin text-xs' onClick={() => { router.push(`/post/${post.id}`); router.refresh(); }}>{post.readable_time.substring(0,24)}</CardFooter>
                   <CardFooter className='flex justify-end font-thin text-xs' onClick={() => { router.push(`/post/${post.id}`); router.refresh(); }}>{post.user_name}</CardFooter>
                 </div>
+                <div className="text-center">
                 {user?.id === post.user_id && <Button onClick={() => clickDelete(post.id)} variant="outline" className='mb-2 hover:bg-red-600'>Delete</Button>}
                 {user?.id !==undefined && user?.id !== post.user_id && <Button onClick={() => chatWithPoster(post.id, post.user_id, post.title)} variant="outline" className='mb-2 hover:bg-blue-500'>Chat</Button>}
+                </div>
               </Card>
             </li>
           ))}

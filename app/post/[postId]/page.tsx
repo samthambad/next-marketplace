@@ -8,21 +8,20 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel"
 import Image from 'next/image'
-import PostButtons from "@/components/postButtons";
+import PostDetailsAndActions from "@/components/postDetailsAndActions";
 
 const EachPost = async ({ params }: { params: { postId: string } }) => {
   const postDetails  = await fetchFilteredPostId(params.postId)
   const { image_string, title, description, user_id, user_name, readable_time } = postDetails;
+  const user = await checkLoggedIn()
   if (image_string === null) {
     return (
       <div className="p-4 w-[90%] mx-auto">
         <h1 className='scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl mt-4 mb-4'>{title}</h1>
-        <p>{description}</p>
-        <p>{user_name}</p>
+        <PostDetailsAndActions user_id={user_id} post_id={params.postId} title={title} current_user_id={user?.id} description={ description } user_name={ user_name } />
       </div>
     )
   }
-  const user = await checkLoggedIn()
   console.log("image array length",image_string.length)
   const image_string_filtered = image_string.filter((image: string) => image.length>0)
   console.log("post title", description)
@@ -50,9 +49,7 @@ const EachPost = async ({ params }: { params: { postId: string } }) => {
       <CarouselNext />
     </Carousel>
       <h1 className='scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl mt-4 mb-4'>{title}</h1>
-      <p>{description}</p>
-      <p><em>{user_name}</em></p>
-      <PostButtons user_id={user_id} post_id={params.postId} title={title} current_user_id={user?.id}/>
+      <PostDetailsAndActions user_id={user_id} post_id={params.postId} title={title} current_user_id={user?.id} description={ description } user_name={ user_name } />
     </div>
   )
 }
