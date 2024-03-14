@@ -77,7 +77,7 @@ const PostServer= ({query}: {query:string;}) => {
   return (
     <div>
       <h1 className='mb-8 border border-gray-300 mx-auto w-80 rounded font-bold'>Latest Posts</h1>
-        <ul className='grid grid-cols-1 sm:grid-cols-3 gap-2'>
+        <ul className='grid grid-cols-1 sm:grid-cols-4 gap-2'>
           {posts?.map((post: any) => (
             <li key={post.id} className='p-2'>
               <Card style={{width:'100%', height: '100%'}} className=' mx-auto flex flex-col h-full shadow-md hover:shadow-md dark:hover:shadow-white' >
