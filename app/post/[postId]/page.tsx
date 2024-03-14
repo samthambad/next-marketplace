@@ -1,4 +1,4 @@
-import { fetchFilteredPostId } from "@/lib/actions";
+import { checkLoggedIn, createChat, fetchFilteredPostId } from "@/lib/actions";
 import { Card, CardContent } from "@/components/ui/card"
 import {
   Carousel,
@@ -7,8 +7,8 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel"
-import { Suspense } from "react";
 import Image from 'next/image'
+import PostButtons from "@/components/postButtons";
 
 const EachPost = async ({ params }: { params: { postId: string } }) => {
   const postDetails  = await fetchFilteredPostId(params.postId)
@@ -22,18 +22,17 @@ const EachPost = async ({ params }: { params: { postId: string } }) => {
       </div>
     )
   }
-    console.log("image array length",image_string.length)
+  const user = await checkLoggedIn()
+  console.log("image array length",image_string.length)
   const image_string_filtered = image_string.filter((image: string) => image.length>0)
   console.log("post title", description)
   return (
     <div className="p-4 w-[90%] mx-auto">
-      <Suspense fallback=<div>Loading...</div> >
 
       <Carousel
       opts={{
         align: "start",
-      }}
-      >
+      }}>
       <CarouselContent>
         {image_string_filtered.map((image:string, index:number) => (
             <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
@@ -53,7 +52,7 @@ const EachPost = async ({ params }: { params: { postId: string } }) => {
       <h1 className='scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl mt-4 mb-4'>{title}</h1>
       <p>{description}</p>
       <p><em>{user_name}</em></p>
-      </Suspense>
+      <PostButtons user_id={user_id} post_id={params.postId} title={title} current_user_id={user?.id}/>
     </div>
   )
 }
