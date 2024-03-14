@@ -67,28 +67,33 @@ const PostServer= ({query}: {query:string;}) => {
     router.refresh()
   }
   if (posts.length===0) {
-    return <div className="font-semibold text-center text-blue-400">Loading...</div>
-  }
+    return (
+      <div>
+        <div className="font-semibold text-center text-blue-400">Loading...</div>
+        <h1 className='mt-8 border border-gray-300 mx-auto w-80 rounded font-bold'>Latest Posts</h1>
+      </div>
+    )
+    }
   return (
     <div>
       <h1 className='mb-8 border border-gray-300 mx-auto w-80 rounded font-bold'>Latest Posts</h1>
-      <ul className='mx-auto w-80'>
-        {posts?.map((post: any) => (
-          <li key={post.id} className='mb-4'>
-            <Card className='hover:bg-gray-400' >
-              <CardHeader>
-                {post.image_string !== null && <Image width={300} height={300} src={post.image_string[0]} alt="post-image-1" onClick={() => { router.push(`/post/${post.id}`); router.refresh(); }} className='mx-auto mb-1' style={{maxHeight: '300px', maxWidth: '100%'}}/>}
-                <CardTitle onClick={() => { router.push(`/post/${post.id}`); router.refresh(); }}>{post.title}</CardTitle>
-                <CardDescription onClick={() => { router.push(`/post/${post.id}`); router.refresh(); }}>{post.description}</CardDescription>
-              </CardHeader>
-              <CardFooter onClick={() => { router.push(`/post/${post.id}`); router.refresh(); }}>{post.readable_time}</CardFooter>
-              <CardFooter onClick={() => { router.push(`/post/${post.id}`); router.refresh(); }}>{post.user_name}</CardFooter>
-              {user?.id === post.user_id && <Button onClick={() => clickDelete(post.id)} variant="outline" className='mb-2 hover:bg-red-600'>Delete</Button>}
-              {user !==undefined && user?.id !== post.user_id && <Button onClick={() => chatWithPoster(post.id, post.user_id, post.title)} variant="outline" className='mb-2 hover:bg-blue-500'>Chat</Button>}
-            </Card>
-          </li>
-        ))}
-      </ul>
+        <ul className='grid grid-cols-1 sm:grid-cols-3 gap-4'>
+          {posts?.map((post: any) => (
+            <li key={post.id} className='mb-4'>
+              <Card className='shadow-md hover:shadow-md dark:hover:shadow-white' >
+                <CardHeader>
+                  {post.image_string !== null && post.image_string.length>0 && <Image width={300} height={300} src={post.image_string[0]} alt="post-image-1" onClick={() => { router.push(`/post/${post.id}`); router.refresh(); }} className='mx-auto mb-1' style={{maxHeight: '300px', maxWidth: '100%'}}/>}
+                  <CardTitle onClick={() => { router.push(`/post/${post.id}`); router.refresh(); }}>{post.title}</CardTitle>
+                  <CardDescription onClick={() => { router.push(`/post/${post.id}`); router.refresh(); }}>{post.description}</CardDescription>
+                </CardHeader>
+                <CardFooter onClick={() => { router.push(`/post/${post.id}`); router.refresh(); }}>{post.readable_time}</CardFooter>
+                <CardFooter onClick={() => { router.push(`/post/${post.id}`); router.refresh(); }}>{post.user_name}</CardFooter>
+                {user?.id === post.user_id && <Button onClick={() => clickDelete(post.id)} variant="outline" className='mb-2 hover:bg-red-600'>Delete</Button>}
+                {user !==undefined && user?.id !== post.user_id && <Button onClick={() => chatWithPoster(post.id, post.user_id, post.title)} variant="outline" className='mb-2 hover:bg-blue-500'>Chat</Button>}
+              </Card>
+            </li>
+          ))}
+        </ul>
     </div>
     )
   }

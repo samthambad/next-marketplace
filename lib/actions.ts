@@ -51,7 +51,7 @@ export async function createPost(formData: FormData) {
 // fetch data from supabase
 export async function fetchPosts() {
   // fetch data from supabase and order by timestamp latest and limit 
-  let { data, error } = await supabase.from('posts').select().order('timestamp', { ascending: false }).limit(5)
+  let { data, error } = await supabase.from('posts').select().order('timestamp', { ascending: false }).limit(10)
   if (error) {
     console.log("fetching all posts error:", error);
   }
