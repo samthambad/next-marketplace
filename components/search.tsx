@@ -24,7 +24,7 @@ export default function Search({ placeholder }: { placeholder: string }) {
   }, 300);
 
   return (
-    <div className="relative flex flex-1 flex-shrink-0" style={{width: '30rem', margin: '0 auto'}}>
+    <div className="relative flex flex-1 flex-shrink-0 shadow-md hover:shadow-sm dark:hover:shadow-white" style={{width: '30rem', margin: '0 auto'}}>
       <label htmlFor="search" className="sr-only">
         Search
       </label>

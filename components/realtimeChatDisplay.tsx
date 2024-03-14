@@ -32,8 +32,8 @@ const RealtimeChatDisplay = ({chats}:{chats:any}) => {
   console.log("chats:", chatsDisplayed)
   return (
     <div>
-      <Suspense fallback=<div>Loading...</div> >
-        <ul className='text-left border rounded w-[50%] mx-auto mb-8 px-4 py-2'>
+      <Suspense fallback= <div>Loading...</div> >
+        <ul className='text-left border rounded w-[50%] mx-auto mb-8 px-4 py-2 shadow-md hover:shadow-sm dark:hover:shadow-white'>
           {chatsDisplayed.messages.map((messageObj: any, index:number) => {
             if (messageObj.message.length > 0) {
               return <li key={index}>{messageObj.user_name}: {messageObj.message}</li>
@@ -41,7 +41,7 @@ const RealtimeChatDisplay = ({chats}:{chats:any}) => {
           })}
         </ul>
       </Suspense>
-        <div className='relative w-[50%] mx-auto'>
+        <div className='relative w-[50%] mx-auto shadow-md hover:shadow-sm dark:hover:shadow-white'>
           <Textarea onChange={(e) => handleMsg(e.target.value)} className='w-full mx-auto mb-2 px-3 py-2 border rounded-md' />
           <Button onClick={() => sendMsg()} className='absolute bottom-2 right-2' variant="outline" >Send</Button>
         </div>

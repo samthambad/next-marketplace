@@ -38,8 +38,8 @@ const EachPost = async ({ params }: { params: { postId: string } }) => {
         {image_string_filtered.map((image:string, index:number) => (
             <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
               <div className="p-1">
-                <Card>
-                  <CardContent className="flex aspect-square p-1 text-align:center items-center justify-center hover:bg-blue-300">
+                <Card className="shadow-md hover:shadow-sm dark:hover:shadow-white">
+                  <CardContent className="flex aspect-square p-1 text-align:center items-center justify-center hover:bg-grey-700">
                     <Image width={500} height={500} src={image} alt={`post ${index}`}/>
                   </CardContent>
                 </Card>
