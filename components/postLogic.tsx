@@ -13,7 +13,7 @@ import { Button } from "./ui/button";
 import Image from "next/image";
 
 const PostServer = ({ query }: { query?: string }) => {
-  const [posts, setPosts] = useState<any[]>([]);
+  const [posts, setPosts] = useState<any[]>();
   const [refresh, setRefresh] = useState(false);
   const [user, setUser] = useState<any>();
   console.log("query is undefined", query === undefined);
@@ -86,7 +86,7 @@ const PostServer = ({ query }: { query?: string }) => {
     router.push(`/chat/${chatId}`);
     router.refresh();
   };
-  if (posts.length === 0) {
+  if (posts?.length === 0) {
     return (
       <div>
         <h1 className="mt-8 border border-gray-300 mx-auto w-80 rounded font-bold">
