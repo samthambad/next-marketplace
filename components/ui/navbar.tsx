@@ -32,7 +32,7 @@ const Navbar = ({user}:{user:User | undefined}) => {
       <Link href="/search" className='hover:text-blue-500 font-bold'>Search</Link>
       {user && <Link href="/createpost" className='hover:text-blue-500 font-bold'>Create Post</Link>}
       {user && <Link href="/chat" className='hover:text-blue-500 font-bold'>Chats</Link>}
-      <div className='font-bold'>{user?.user_metadata.name}</div>
+      <Link href={`/profile/${user?.id}`} className='font-bold hover:text-blue-500'>{user?.user_metadata.name}</Link>
       {user ? <Button onClick={handleLogoutWithGoogle} variant="outline" className='font-bold'>Log Out</Button> : <Button onClick={handleLoginWithGoogle}  variant="outline">Log In</Button>}
       <ModeToggle/>
     </div>

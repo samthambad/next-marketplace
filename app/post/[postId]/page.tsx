@@ -1,4 +1,4 @@
-import { checkLoggedIn, createChat, fetchFilteredPostId } from "@/lib/actions";
+import { checkLoggedIn, fetchFilteredPostId } from "@/lib/actions";
 import { Card, CardContent } from "@/components/ui/card"
 import {
   Carousel,
@@ -14,10 +14,11 @@ const EachPost = async ({ params }: { params: { postId: string } }) => {
   const postDetails  = await fetchFilteredPostId(params.postId)
   const { image_string, title, description, user_id, user_name, readable_time } = postDetails;
   const user = await checkLoggedIn()
-  if (image_string === null) {
+  if (image_string.length === 0 || image_string === null) {
     return (
       <div className="p-4 w-[90%] mx-auto">
         <h1 className='scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl mt-4 mb-4'>{title}</h1>
+        <p className="text-sm">Listed at : <em>{readable_time}</em></p>
         <PostDetailsAndActions user_id={user_id} post_id={params.postId} title={title} current_user_id={user?.id} description={ description } user_name={ user_name } />
       </div>
     )
@@ -48,8 +49,11 @@ const EachPost = async ({ params }: { params: { postId: string } }) => {
       <CarouselPrevious />
       <CarouselNext />
     </Carousel>
-      <h1 className='scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl mt-4 mb-4'>{title}</h1>
-      <PostDetailsAndActions user_id={user_id} post_id={params.postId} title={title} current_user_id={user?.id} description={ description } user_name={ user_name } />
+      <div className="border rounded-md p-4 mt-4 border-blue-200 shadow-md hover:shadow-sm dark:hover:shadow-white border">
+        <h1 className='scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl mt-4 mb-4'>{title}</h1>
+        <p className="text-sm">Listed at : <em>{readable_time}</em></p>
+        <PostDetailsAndActions user_id={user_id} post_id={params.postId} title={title} current_user_id={user?.id} description={ description } user_name={ user_name } />
+      </div>
     </div>
   )
 }
