@@ -14,5 +14,8 @@ export async function GET(req: any, res: any) {
     }
   } catch (err) {
     console.log("error in route.ts", err);
+    return new Response(JSON.stringify({ status: 400 }), {
+      headers: { "Content-Type": "application/json" },
+    });
   }
 }
