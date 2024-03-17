@@ -45,6 +45,10 @@ const RealtimeChatDisplay = ({ chats }: { chats: any }) => {
         chatsDisplayed.post_id,
         chatsDisplayed.post_name
       );
+      const textElement = document.getElementById("text");
+      if (textElement) {
+        (textElement as HTMLInputElement).value = "";
+      }
     } catch (error) {
       console.log("error sending message", error);
     }
@@ -106,6 +110,7 @@ const RealtimeChatDisplay = ({ chats }: { chats: any }) => {
           )}
         <div className="relative w-[50%] mx-auto shadow-md border-blue-300">
           <Textarea
+            id="text"
             onChange={(e) => handleMsg(e.target.value)}
             className="w-full mx-auto mb-2 px-3 py-2 border-transparent shadow-sm hover:shadow-sm"
             placeholder="Enter message..."

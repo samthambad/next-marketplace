@@ -91,13 +91,15 @@ const PostServer = ({ query }: { query?: string }) => {
         </h1>
       </div>
     );
+  } else if (posts === undefined) {
+    return <div className="mt-8 font-bold text-blue-500">Loading posts...</div>;
   }
   return (
     <div>
       <h1 className="mb-8 border border-gray-300 mx-auto w-80 rounded font-bold">
         Latest Posts
       </h1>
-      <ul className="grid grid-cols-1 sm:grid-cols-4 gap-2">
+      <ul className="grid grid-cols-1 sm:grid-cols-4 gap-2 mx-auto">
         {posts?.map((post: any) => (
           <li key={post.id} className="p-2">
             <Card
