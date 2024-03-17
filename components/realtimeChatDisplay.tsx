@@ -2,10 +2,8 @@
 import React, { Suspense, useEffect, useRef, useState } from "react";
 import { Textarea } from "./ui/textarea";
 import { Button } from "./ui/button";
-import { createChat } from "@/lib/actions";
+import { checkLoggedIn, createChat } from "@/lib/actions";
 import { supabase } from "@/utils/supabase";
-import { useRouter } from "next/navigation";
-import Compressor from "compressorjs";
 import Image from "next/image";
 const RealtimeChatDisplay = ({ chats }: { chats: any }) => {
   const [createMsg, setCreateMsg] = useState("");
@@ -78,59 +76,62 @@ const RealtimeChatDisplay = ({ chats }: { chats: any }) => {
   };
   return (
     <div>
-      <Suspense fallback={<div>Loading...</div>}>
-        <ul className="text-left border rounded w-[50%] mx-auto mb-8 px-4 py-2 shadow-md hover:shadow-sm dark:hover:shadow-white">
-          {chatsDisplayed.messages.map((messageObj: any, index: number) => {
-            if (messageObj.message.substring(0, 4) === "data") {
-              return (
-                <div key={index}>
-                  <div>{messageObj.user_name}:</div>
-                  <Image
-                    src={messageObj.message}
-                    alt="chat"
-                    width={300}
-                    height={100}
-                    className=""
-                  />
-                </div>
-              );
-            } else if (messageObj.message.length > 0) {
-              return (
-                <li key={index}>
-                  {messageObj.user_name}: {messageObj.message}
-                </li>
-              );
-            }
-          })}
-        </ul>
-      </Suspense>
-      <div className="relative w-[50%] mx-auto shadow-md border-blue-300">
-        <Textarea
-          onChange={(e) => handleMsg(e.target.value)}
-          className="w-full mx-auto mb-2 px-3 py-2 border-transparent shadow-sm hover:shadow-sm"
-          placeholder="Enter message..."
-        />
-        <div className="flex justify-end">
-          <Button
-            className="mr-2 mb-2 hover:bg-blue-500 hover:text-white"
-            variant="outline"
-            onClick={fileClick}
-          >
-            Image
-          </Button>
-          <Button
-            onClick={() => sendMsg()}
-            className="mr-2 hover:bg-blue-500 hover:text-white"
-            variant="outline"
-          >
-            Send
-          </Button>
-          <input
-            type="file"
-            id="fileInput"
-            style={{ display: "none" }}
-            onChange={handleFileChange}
+      <div>
+        {chatsDisplayed.messages.length > 0 &&
+          chatsDisplayed.messages[0].message !== "" && (
+            <ul className="text-left border rounded w-[50%] mx-auto mb-8 px-4 py-2 shadow-md hover:shadow-sm dark:hover:shadow-white">
+              {chatsDisplayed.messages.map((messageObj: any, index: number) => {
+                if (messageObj.message.substring(0, 4) === "data") {
+                  return (
+                    <div key={index}>
+                      <div>{messageObj.user_name}:</div>
+                      <Image
+                        src={messageObj.message}
+                        alt="chat"
+                        width={300}
+                        height={100}
+                        className=""
+                      />
+                    </div>
+                  );
+                } else if (messageObj.message.length > 0) {
+                  return (
+                    <li key={index}>
+                      {messageObj.user_name}: {messageObj.message}
+                    </li>
+                  );
+                }
+              })}
+            </ul>
+          )}
+        <div className="relative w-[50%] mx-auto shadow-md border-blue-300">
+          <Textarea
+            onChange={(e) => handleMsg(e.target.value)}
+            className="w-full mx-auto mb-2 px-3 py-2 border-transparent shadow-sm hover:shadow-sm"
+            placeholder="Enter message..."
           />
+          <div className="flex justify-end">
+            <Button
+              className="mr-2 mb-2 hover:bg-blue-500 hover:text-white"
+              variant="outline"
+              onClick={fileClick}
+            >
+              Image
+            </Button>
+            <Button
+              onClick={() => sendMsg()}
+              className="mr-2 hover:bg-blue-500 hover:text-white"
+              variant="outline"
+            >
+              Send
+            </Button>
+            <input
+              type="file"
+              id="fileInput"
+              style={{ display: "none" }}
+              onChange={handleFileChange}
+            />
+          </div>
         </div>
       </div>
     </div>
