@@ -1,6 +1,5 @@
 import PostServer from "@/components/postLogic";
 import { checkLoggedIn } from "@/lib/actions";
-import Image from "next/image";
 
 const ProfilePage = async ({ params }: { params: { user_id: string } }) => {
   const userDetails = await checkLoggedIn();

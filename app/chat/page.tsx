@@ -1,21 +1,26 @@
-import { redirect } from 'next/navigation';
-import ChatList from '../../components/chatList';
-import { checkLoggedIn, fetchFilteredChatsUserId, fetchImageString, fetchUserDetails } from '@/lib/actions';
-export const dynamic = 'auto',
+import { redirect } from "next/navigation";
+import ChatList from "../../components/chatList";
+import {
+  checkLoggedIn,
+  fetchFilteredChatsUserId,
+  fetchImageString,
+  fetchUserDetails,
+} from "@/lib/actions";
+export const dynamic = "auto",
   dynamicParams = true,
   revalidate = 0,
-  fetchCache = 'auto',
-  runtime = 'nodejs',
-  preferredRegion = 'auto';
+  fetchCache = "auto",
+  runtime = "nodejs",
+  preferredRegion = "auto";
 
-const Chat = async() => {
+const Chat = async () => {
   async function getData() {
     const userDetails = await checkLoggedIn();
-    const user_id = userDetails?.id ?? ""
+    const user_id = userDetails?.id ?? "";
     const rawData = await fetchFilteredChatsUserId(user_id);
-    let otherName:string = ""
+    let otherName: string = "";
     let other_id = "";
-    let arrayOfChats:any[] = []
+    let arrayOfChats: any[] = [];
     if (user_id.length > 0) {
       const promiseArray = rawData?.map(async (chat) => {
         // get the name from auth
@@ -26,10 +31,10 @@ const Chat = async() => {
           const otherUserDetails = await fetchUserDetails(chat.p1_id);
           otherName = otherUserDetails?.user.user_metadata.name;
         }
-        console.log("name", otherName)
+        console.log("name", otherName);
         // make sure the chats with all blanks are not displayed
         let i = chat.messages.length - 1;
-        console.log("chat messagess", i)
+        console.log("chat messagess", i);
         for (i; i >= 0; i--) {
           if (chat.messages[i].message !== "") {
             break;
@@ -41,44 +46,42 @@ const Chat = async() => {
             latest_message: chat.messages[i].message,
             other_name: otherName,
             chat_id: chat.id,
-            image_string: await fetchImage(chat.post_id)
-          })
+            image_string: await fetchImage(chat.post_id),
+          });
         }
-      })
-      const promises = promiseArray ?? [] //make sure it is always an array
-      await Promise.all(promises) //wait for all the promises to  resolve
+      });
+      const promises = promiseArray ?? []; //make sure it is always an array
+      await Promise.all(promises); //wait for all the promises to  resolve
       return arrayOfChats;
     }
   }
-  
-  const fetchImage = async (post_id:string) => {
+
+  const fetchImage = async (post_id: string) => {
     const image_string = await fetchImageString(post_id);
-    console.log("image_string", image_string)
+    console.log("image_string", image_string);
     return image_string;
-  }
+  };
   const fetchedChatArray = (await getData()) ?? [];
   const userDetails = await checkLoggedIn();
   // fetch from allChats all rows that have either p1 or p2 == currentUserId
   return (
-    <div className='text-center'>
-    {userDetails ?
-    <div className='text-center'>
-      <div className='flex-center flex-col text-center mx-auto'>
-      <h1 className='scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl mb-8 mx-auto'> Chats </h1>
-      </div>
-    <br />
-      {fetchedChatArray.length===0 ?
-        <div>Loading...</div>
-        :
-        <ChatList data={fetchedChatArray} />} 
+    <div className="text-center">
+      {userDetails ? (
+        <div className="text-center">
+          <div className="flex-center flex-col text-center mx-auto">
+            <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl mb-8 mx-auto">
+              {" "}
+              Chats{" "}
+            </h1>
+          </div>
+          <br />
+          <ChatList data={fetchedChatArray} />
+        </div>
+      ) : (
+        <>{redirect("/")}</>
+      )}
     </div>
-      :
-      <>
-        {redirect('/')}
-      </>
-    }
-    </div>
-    )
-}
+  );
+};
 
-export default Chat
+export default Chat;

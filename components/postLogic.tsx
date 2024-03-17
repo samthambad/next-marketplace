@@ -66,14 +66,11 @@ const PostServer = ({ query }: { query?: string }) => {
   // console.log("query in logic", query);
   // make user undefined for conditions below
   if (user === "") setUser(undefined);
-  // console.log("user in posts", user);
-  // console.log("posts", posts);
   const router = useRouter();
   const clickDelete = (id: string) => {
     // server function but works in client component, same for chatWithPoster
     // works as you don't need to use any data from the function
     deletePost(id);
-    // console.log("delete button pressed");
     setRefresh(!refresh);
   };
   const chatWithPoster = async (

@@ -101,6 +101,7 @@ export async function fetchFilteredPostId(post_id: string) {
   if (error) {
     console.log("fetching filtered posts error", error);
   }
+  console.log("post data:", data);
   return data?.[0];
 }
 

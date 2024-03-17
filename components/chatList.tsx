@@ -1,5 +1,5 @@
-'use client'
-import React from 'react'
+"use client";
+import React from "react";
 import {
   Table,
   TableBody,
@@ -7,48 +7,77 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table"
-import { useRouter } from 'next/navigation';
-import Image from 'next/image';
+} from "@/components/ui/table";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
 
-const ChatList = ({data}:{data:any[]}) => {
-  const router = useRouter()
+const ChatList = ({ data }: { data: any[] }) => {
+  const router = useRouter();
   // console.log("dataaa", data)
-  function goToChat(chat_id:number) {
-    router.push(`/chat/${chat_id}`)
-    router.refresh() //refresh otherwise it wont fetch
+  function goToChat(chat_id: number) {
+    router.push(`/chat/${chat_id}`);
+    router.refresh(); //refresh otherwise it wont fetch
   }
-  if (!data) {
-    return (
-      <div>Loading chats...</div>
-    )
+  console.log("dataaaa", data);
+  if (data.length === 0) {
+    return <div>You have no chats</div>;
   }
-    return (
+  return (
     <div>
-      <h1 className='mb-4 border border-gray-300 mx-auto w-80 rounded font-bold'>All Chats</h1>
-      <br className='max-md:hidden mt-4 mx-auto'/>
-      <Table className='w-[80%] mx-auto border'>
-        <TableHeader >
-          <TableRow >
+      <h1 className="mb-4 border border-gray-300 mx-auto w-80 rounded font-bold">
+        All Chats
+      </h1>
+      <br className="max-md:hidden mt-4 mx-auto" />
+      <Table className="w-[80%] mx-auto border">
+        <TableHeader>
+          <TableRow>
             <TableHead className="w-[20%] text-center">Post Image</TableHead>
             <TableHead className="w-[20%] text-center">Post Title</TableHead>
-            <TableHead className="w-[20%] text-center">Recent Message</TableHead>
+            <TableHead className="w-[20%] text-center">
+              Recent Message
+            </TableHead>
             <TableHead className="w-[20%] text-center">User</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {data.map((chat) => (
-            <TableRow key={chat.chat_id} onClick={() => goToChat(chat.chat_id)} className='hover:bg-blue-500'>
-              <TableCell className='flex justify-center'>{chat.image_string !== null && <Image width={100} height={100} src={chat.image_string} style={{ maxHeight: '100px', maxWidth: '100px' }} alt='post'/>}</TableCell>  
+            <TableRow
+              key={chat.chat_id}
+              onClick={() => goToChat(chat.chat_id)}
+              className="hover:bg-blue-500"
+            >
+              <TableCell className="flex justify-center">
+                {chat.image_string !== null && (
+                  <Image
+                    width={100}
+                    height={100}
+                    src={chat.image_string}
+                    style={{ maxHeight: "100px", maxWidth: "100px" }}
+                    alt="post"
+                  />
+                )}
+              </TableCell>
               <TableCell className="text-center">{chat.title}</TableCell>
-              <TableCell>{chat.latest_message}</TableCell>
+              <TableCell>
+                {chat.latest_message.substring(0, 4) === "data" ? (
+                  <Image
+                    src={chat.latest_message}
+                    width={100}
+                    height={100}
+                    alt="post"
+                    className="mx-auto"
+                  ></Image>
+                ) : (
+                  chat.latest_message
+                )}
+              </TableCell>
               <TableCell className="text-center">{chat.other_name}</TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
     </div>
-    )
-  }
-  
-  export default ChatList
+  );
+};
+
+export default ChatList;
