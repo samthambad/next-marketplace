@@ -34,7 +34,7 @@ const RealtimeChatDisplay = ({ chats }: { chats: any }) => {
     return () => {
       supabase.removeChannel(channel);
     };
-  }, [chatsDisplayed, setChatsDisplayed, uploadNow]);
+  }, [chatsDisplayed, setChatsDisplayed, uploadNow, createMsg]);
 
   const handleMsg = (text: string) => {
     setCreateMsg(text);
@@ -83,7 +83,7 @@ const RealtimeChatDisplay = ({ chats }: { chats: any }) => {
           {chatsDisplayed.messages.map((messageObj: any, index: number) => {
             if (messageObj.message.substring(0, 4) === "data") {
               return (
-                <div>
+                <div key={index}>
                   <div>{messageObj.user_name}:</div>
                   <Image
                     src={messageObj.message}
