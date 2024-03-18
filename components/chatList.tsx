@@ -27,16 +27,20 @@ const ChatList = ({ data }: { data: any[] }) => {
       <h1 className="mb-4 border border-gray-300 mx-auto w-80 rounded font-bold">
         All Chats
       </h1>
-      <br className="max-md:hidden mt-4 mx-auto" />
-      <Table className="w-[80%] mx-auto border">
-        <TableHeader>
+      <br className="max-md:hidden mt-4" />
+      <Table className="w-[80%] mx-auto border whitespace-nowrap">
+        <TableHeader className="bg-blue-200">
           <TableRow>
-            <TableHead className="w-[20%] text-center">Post Image</TableHead>
-            <TableHead className="w-[20%] text-center">Post Title</TableHead>
-            <TableHead className="w-[20%] text-center">
+            <TableHead className="w-[20%] text-center border">
+              Post Image
+            </TableHead>
+            <TableHead className="w-[20%] text-center border">
+              Post Title
+            </TableHead>
+            <TableHead className="w-[20%] text-center border">
               Recent Message
             </TableHead>
-            <TableHead className="w-[20%] text-center">User</TableHead>
+            <TableHead className="w-[20%] text-center border">User</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -44,10 +48,10 @@ const ChatList = ({ data }: { data: any[] }) => {
             <TableRow
               key={chat.chat_id}
               onClick={() => goToChat(chat.chat_id)}
-              className="hover:bg-blue-500"
+              className="hover:bg-blue-500 focus:blue-500"
             >
-              <TableCell className="flex justify-center">
-                {chat.image_string !== null && (
+              <TableCell className="flex justify-center border">
+                {chat.image_string !== "" && (
                   <Image
                     width={100}
                     height={100}
@@ -57,8 +61,8 @@ const ChatList = ({ data }: { data: any[] }) => {
                   />
                 )}
               </TableCell>
-              <TableCell className="text-center">{chat.title}</TableCell>
-              <TableCell>
+              <TableCell className="text-center border">{chat.title}</TableCell>
+              <TableCell className="border">
                 {chat.latest_message.substring(0, 4) === "data" ? (
                   <Image
                     src={chat.latest_message}
