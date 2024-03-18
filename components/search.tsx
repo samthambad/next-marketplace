@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
-import { useSearchParams, useRouter, usePathname } from 'next/navigation';
-import { useDebouncedCallback } from 'use-debounce'; // for delaying function from executing
+import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import { useSearchParams, useRouter, usePathname } from "next/navigation";
+import { useDebouncedCallback } from "use-debounce"; // for delaying function from executing
 
 export default function Search({ placeholder }: { placeholder: string }) {
   // useSearchParams
@@ -11,20 +11,21 @@ export default function Search({ placeholder }: { placeholder: string }) {
   const { replace } = useRouter();
   const pathname = usePathname();
 
-  const handleSearch = useDebouncedCallback((term) => { //timer starts when starting typing and resets everytime term changes, 300ms after last change function runs
-    const params = new URLSearchParams(searchParams);// Web API that provides utility methods for manipulating the URL query parameters
-    params.set('page','1')
+  const handleSearch = useDebouncedCallback((term) => {
+    //timer starts when starting typing and resets everytime term changes, 300ms after last change function runs
+    const params = new URLSearchParams(searchParams); // Web API that provides utility methods for manipulating the URL query parameters
+    params.set("page", "1");
     if (term) {
-      params.set('query', term);
+      params.set("query", term);
     } else {
-      params.delete('query')
+      params.delete("query");
     }
     // updates the URL
     replace(`${pathname}?${params.toString()}`);
   }, 300);
 
   return (
-    <div className="relative flex flex-1 flex-shrink-0 shadow-md hover:shadow-sm dark:hover:shadow-white" style={{width: '30rem', margin: '0 auto'}}>
+    <div className="w-[50%] mx-auto flex flex-1 flex-shrink-0 shadow-md hover:shadow-sm dark:hover:shadow-white">
       <label htmlFor="search" className="sr-only">
         Search
       </label>
@@ -32,9 +33,8 @@ export default function Search({ placeholder }: { placeholder: string }) {
         className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
         placeholder={placeholder}
         onChange={(e) => handleSearch(e.target.value)}
-        defaultValue={searchParams.get('query')?.toString()}
+        defaultValue={searchParams.get("query")?.toString()}
       />
-      <MagnifyingGlassIcon className="absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
     </div>
   );
 }
