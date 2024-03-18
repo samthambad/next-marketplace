@@ -15,7 +15,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+} from "@/components/ui/dropdown-menu";
 
 const Navbar = ({ user }: { user: User | undefined }) => {
   const router = useRouter();
@@ -88,18 +88,32 @@ const Navbar = ({ user }: { user: User | undefined }) => {
               />
             </DropdownMenuTrigger>
             <DropdownMenuContent className="bg-slate-900">
-              <Link href={`/profile/${user?.id}`}>
-                <DropdownMenuItem className="text-white">Profile</DropdownMenuItem>
-              </Link>
               {user ? (
                 <>
-                  <Link href={'/chat'}>
-                    <DropdownMenuItem className="text-white">Chats</DropdownMenuItem>
+                  <Link href={`/profile/${user?.id}`}>
+                    <DropdownMenuItem className="text-white">
+                      Profile
+                    </DropdownMenuItem>
                   </Link>
-                  <DropdownMenuItem className="text-white" onClick={handleLogoutWithGoogle}>Log Out</DropdownMenuItem>
+                  <Link href={"/chat"}>
+                    <DropdownMenuItem className="text-white">
+                      Chats
+                    </DropdownMenuItem>
+                  </Link>
+                  <DropdownMenuItem
+                    className="text-white"
+                    onClick={handleLogoutWithGoogle}
+                  >
+                    Log Out
+                  </DropdownMenuItem>
                 </>
               ) : (
-                <DropdownMenuItem className="text-white" onClick={handleLoginWithGoogle}>Log In</DropdownMenuItem>
+                <DropdownMenuItem
+                  className="text-white"
+                  onClick={handleLoginWithGoogle}
+                >
+                  Log In
+                </DropdownMenuItem>
               )}
             </DropdownMenuContent>
           </DropdownMenu>
