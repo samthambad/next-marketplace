@@ -1,8 +1,8 @@
 "use client";
-import React, { Suspense, useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Textarea } from "./ui/textarea";
 import { Button } from "./ui/button";
-import { checkLoggedIn, createChat } from "@/lib/actions";
+import { createChat } from "@/lib/actions";
 import { supabase } from "@/utils/supabase";
 import Image from "next/image";
 const RealtimeChatDisplay = ({ chats }: { chats: any }) => {
