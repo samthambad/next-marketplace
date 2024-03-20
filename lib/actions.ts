@@ -79,8 +79,8 @@ export async function fetchFilteredPosts(query: string) {
   return data;
 }
 
-export async function fetchFilteredPostsUid() {
-  const userDetails = await checkLoggedIn();
+export async function fetchFilteredPostsUid(userDetails: any) {
+  if (userDetails === null || userDetails === undefined) return
   console.log("user details:", userDetails?.id);
   let { data, error } = await supabase
     .from("posts")

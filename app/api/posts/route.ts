@@ -1,13 +1,12 @@
-import { fetchFilteredPosts} from '../../../lib/actions';
+import { fetchFilteredPosts } from '../../../lib/actions';
 // call server functions here
-export async function POST(req:any, res:any) {
-  const { query }= await req.json();
+export async function POST(req: any, res: any) {
+  const { query } = await req.json();
   try {
     console.log("query in route", query)
     const posts = await fetchFilteredPosts(query);
-    console.log("postss",posts)
-    const newResponse = new Response(JSON.stringify(posts));
-    return newResponse
+    console.log("postss", posts)
+    return new Response(JSON.stringify(posts));
   }
   catch (err) {
     console.log("error in route.ts", err)
