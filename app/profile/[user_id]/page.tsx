@@ -19,7 +19,7 @@ const ProfilePage = async ({ params }: { params: { user_id: string } }) => {
       {/* <Image src={userDetails?.user_metadata.picture} alt="profile" width={100} height={100}></Image> */}
       {/* all the users posts */}
       <div className="flex-center flex-col text-center mx-auto m-2">
-        {/* <PostServer /> */}
+        <PostServer />
       </div>
     </div>
   );
