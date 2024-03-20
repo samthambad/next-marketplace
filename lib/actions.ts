@@ -64,7 +64,7 @@ export async function fetchPosts() {
 
 export async function fetchFilteredPosts(query: string) {
   if (query === undefined || query.length === 0) {
-    return fetchPosts();
+    return await fetchPosts();
   }
   // fetch data from supabase and order by timestamp latest and limit
 
