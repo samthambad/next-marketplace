@@ -87,7 +87,7 @@ const RealtimeChatDisplay = ({ chats }: { chats: any }) => {
               if (messageObj.message.substring(0, 4) === "data") {
                 return (
                   <div key={index}>
-                    <div>{messageObj.user_name}:</div>
+                    <div className="text-sm">{messageObj.user_name}:</div>
                     <Image
                       src={messageObj.message}
                       alt="chat"
