@@ -101,7 +101,7 @@ const PostServer = ({ query }: { query?: string }) => {
         Latest Posts
       </h1>
       <ul className="grid grid-cols-1 sm:grid-cols-4 gap-2 mx-auto">
-        {posts?.map((post: any) => (
+        {posts && posts.map((post: any) => (
           <li key={post.id} className="p-2">
             <Card
               style={{ width: "100%", height: "100%" }}
