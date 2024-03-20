@@ -8,14 +8,10 @@ export async function GET(req: any, res: any) {
       const newResponse = new Response(JSON.stringify(posts));
       return newResponse;
     } else {
-      return new Response(JSON.stringify({ status: 200 }), {
-        headers: { "Content-Type": "application/json" },
-      });
+      return new Response(JSON.stringify({ status: 200 }))
     }
   } catch (err) {
     console.log("error in route.ts", err);
-    return new Response(JSON.stringify({ status: 400 }), {
-      headers: { "Content-Type": "application/json" },
-    });
+    return new Response(JSON.stringify({ status: 400 }))
   }
 }
