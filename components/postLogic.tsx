@@ -94,7 +94,7 @@ const PostServer = ({ query }: { query?: string }) => {
   } else if (posts === undefined) {
     return <div className="mt-8 font-bold text-blue-500">Loading posts...</div>;
   }
-  console.log("posts::", posts)
+  console.log("posts:", posts)
   return (
     <div>
       <h1 className="mb-8 border border-gray-300 mx-auto w-80 rounded font-bold">
