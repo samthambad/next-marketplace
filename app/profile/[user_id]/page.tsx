@@ -1,6 +1,6 @@
 import PostServer from "@/components/postLogic";
 import { checkLoggedIn } from "@/lib/actions";
-
+export const dynamic = "force-dynamic"
 const ProfilePage = async ({ params }: { params: { user_id: string } }) => {
   const userDetails = await checkLoggedIn();
   const user_name = userDetails?.user_metadata.full_name;
