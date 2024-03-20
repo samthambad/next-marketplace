@@ -63,7 +63,6 @@ export async function fetchPosts() {
 }
 
 export async function fetchFilteredPosts(query: string) {
-  console.log("value of query:", query);
   if (query === undefined || query.length === 0) {
     return fetchPosts();
   }
