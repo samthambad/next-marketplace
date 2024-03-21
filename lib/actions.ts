@@ -79,13 +79,12 @@ export async function fetchFilteredPosts(query: string) {
   return data;
 }
 
-export async function fetchFilteredPostsUid(userDetails: any) {
-  if (userDetails === null || userDetails === undefined) return
-  console.log("user details:", userDetails?.id);
+export async function fetchFilteredPostsUid(id: string) {
+  if (id === null || id === undefined) return
   let { data, error } = await supabase
     .from("posts")
     .select()
-    .match({ user_id: userDetails?.id });
+    .match({ user_id: id });
   if (error) {
     console.log("fetching filtered posts by uid error", error);
   }
@@ -253,7 +252,6 @@ export async function fetchUserDetails(user_id: string) {
     console.log("error fetching user details:", error);
     return;
   }
-  console.log("user details:", data);
   return data;
 }
 

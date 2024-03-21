@@ -12,18 +12,25 @@ import { createChat, deletePost } from "@/lib/actions";
 import { Button } from "./ui/button";
 import Image from "next/image";
 
-const PostServer = ({ query }: { query?: string }) => {
+const PostServer = ({ query, id }: { query?: string, id?: string }) => {
   const [posts, setPosts] = useState<any[]>();
   const [refresh, setRefresh] = useState(false);
   const [user, setUser] = useState<any>();
-  console.log("query is undefined", query === undefined);
   useEffect(() => {
     // get posts according to uid
-    if (query === undefined) {
+    if (query === undefined && id !== undefined) {
       const getPosts = async () => {
         try {
           console.log("getting using id");
-          const response = await fetch("/api/postsUid");
+          const response = await fetch("/api/postsUid", {
+            method: "POST",
+            headers: {
+              "Content-type": "application/json",
+            },
+            body: JSON.stringify({
+              id: id,
+            }),
+          });
           const result = await response.json();
           setPosts(result);
         } catch (error) {
@@ -32,7 +39,7 @@ const PostServer = ({ query }: { query?: string }) => {
       };
       getPosts();
       // get posts according to query
-    } else {
+    } else if (id === undefined && query !== undefined) {
       const getPosts = async (query: string) => {
         try {
           const response = await fetch("/api/posts", {

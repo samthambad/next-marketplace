@@ -1,8 +1,9 @@
-import { checkLoggedIn, fetchFilteredPostsUid } from "@/lib/actions";
+import { fetchFilteredPostsUid } from "@/lib/actions";
 
-export async function GET(req: any, res: any) {
-  const userDetails = await checkLoggedIn()
-  const posts = await fetchFilteredPostsUid(userDetails);
+export async function POST(req: any, res: any) {
+  const { id } = await req.json();
+  console.log("id in api", id)
+  const posts = await fetchFilteredPostsUid(id);
   console.log("postss", posts);
   if (posts) {
     return new Response(JSON.stringify(posts));
