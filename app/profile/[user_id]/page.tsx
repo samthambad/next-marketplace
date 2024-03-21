@@ -1,13 +1,17 @@
 import PostServer from "@/components/postLogic";
-import { checkLoggedIn } from "@/lib/actions";
+import { fetchUserDetails } from "@/lib/actions";
+import Image from "next/image";
+
 const ProfilePage = async ({ params }: { params: { user_id: string } }) => {
-  const userDetails = await checkLoggedIn();
-  const user_name = userDetails?.user_metadata.full_name;
+  // use params to get user info
+  const userDetails = await fetchUserDetails(params.user_id)
+  console.log("userDetails", userDetails)
+  const user_name = userDetails?.user.user_metadata.name
   return (
     <div>
       <div className="flex items-center justify-center align-middle mb-8 text-center">
         <img
-          src={userDetails?.user_metadata.picture}
+          src={userDetails?.user.user_metadata.picture}
           alt=""
           className="mr-2"
         ></img>

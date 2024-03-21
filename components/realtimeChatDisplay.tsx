@@ -87,16 +87,16 @@ const RealtimeChatDisplay = ({ chats }: { chats: any }) => {
               if (messageObj.message.substring(0, 4) === "data") {
                 return (
                   <div key={index}>
-                    <div className="text-sm flex justify-between">{messageObj.user_name}:</div>
+                    <div className="text-sm flex justify-between" >{messageObj.user_name}:</div>
                     <div className="flex justify-between">
                       <Image
                         src={messageObj.message}
                         alt="chat"
                         width={300}
                         height={100}
-                        className=""
+                        className="mr-2"
                       />
-                      <span className="justify-end text-xs text-gray-400 content-end place-self-end pb-1">{messageObj.time}</span>
+                      <span className="justify-end text-xs text-gray-400 content-end place-self-end pb-1">{messageObj.time?.substring(0, 31)}</span>
                     </div>
                   </div>
                 );

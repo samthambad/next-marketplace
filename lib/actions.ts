@@ -253,7 +253,7 @@ export async function fetchUserDetails(user_id: string) {
     console.log("error fetching user details:", error);
     return;
   }
-  // console.log("user details:", data);
+  console.log("user details:", data);
   return data;
 }
 

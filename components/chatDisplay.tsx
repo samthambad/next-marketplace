@@ -2,6 +2,7 @@ import {
   checkLoggedIn,
   fetchFilteredChatsChatId,
   fetchFilteredPostId,
+  fetchUserDetails,
 } from "@/lib/actions";
 import RealtimeChatDisplay from "./realtimeChatDisplay";
 import ChatStatusBar from "./chatStatusBar";
@@ -18,19 +19,21 @@ const ChatDisplay = async ({ chatId }: { chatId: string }) => {
     image_string_first = image_string[0];
   }
   const { title }: { title: string } = post_details;
-
   const userDetails = await checkLoggedIn();
+  let otherUserId = ""
+  if (userDetails?.id === chats?.[0].p1_id) otherUserId = chats?.[0].p2_id
+  else if (userDetails?.id === chats?.[0].p2_id) otherUserId = chats?.[0].p1_id
+
+  const otherUser = await fetchUserDetails(otherUserId)
   // check that either person is logged in
-  if (
-    userDetails?.id === chats?.[0].p1_id ||
-    userDetails?.id === chats?.[0].p2_id
-  ) {
+  if (otherUserId.length !== 0) {
     return (
       <div>
         <ChatStatusBar
           postTitle={title}
           image_string_first={image_string_first}
           postId={post_id}
+          otherUser={otherUser}
         />
         <RealtimeChatDisplay chats={chats?.[0]} />
       </div>
