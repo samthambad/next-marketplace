@@ -78,7 +78,6 @@ const PostServer = ({ query }: { query?: string }) => {
     post_creator_id: string,
     post_name: string
   ) => {
-    console.log("chat button pressed");
     const chatId = await createChat("", id, post_name, post_creator_id);
     router.push(`/chat/${chatId}`);
     router.refresh();

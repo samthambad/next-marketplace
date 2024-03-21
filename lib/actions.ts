@@ -146,6 +146,7 @@ export interface message {
   message: string;
   user_id: string;
   user_name: string;
+  time: string;
 }
 export async function createChat(
   newMessage: string,
@@ -153,6 +154,7 @@ export async function createChat(
   post_name: string,
   user_id_post_creator?: string
 ) {
+  const timestamp: string = new Date().toString()
   // if the same post_id and same users are there, then dont create a new chat
   console.log("the new msg:", newMessage);
   const userDetails = await checkLoggedIn();
@@ -177,6 +179,7 @@ export async function createChat(
       message: newMessage,
       user_id: userId,
       user_name: userDetails?.user_metadata.name,
+      time: timestamp,
     });
     let { error } = await supabase
       .from("allChats")
@@ -203,6 +206,7 @@ export async function createChat(
         message: newMessage,
         user_id: userId,
         user_name: userDetails?.user_metadata.name,
+        time: timestamp,
       },
     ];
     console.log("new messagesArray:", messagesArray);
