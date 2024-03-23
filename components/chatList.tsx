@@ -28,7 +28,7 @@ const ChatList = ({ data }: { data: any[] }) => {
         All Chats
       </h1>
       <br className="max-md:hidden mt-4" />
-      <Table className="w-[80%] mx-auto border whitespace-nowrap">
+      <Table className="w-[80%] mx-auto border whitespace-nowrap shadow-md">
         <TableHeader className="bg-blue-200">
           <TableRow>
             <TableHead className="w-[20%] text-center border">
