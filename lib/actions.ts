@@ -80,7 +80,7 @@ export async function fetchFilteredPosts(query: string) {
 }
 
 export async function fetchFilteredPostsUid(id: string) {
-  if (id === null || id === undefined) return
+  if (id === null || id === undefined) return;
   let { data, error } = await supabase
     .from("posts")
     .select()
@@ -99,7 +99,6 @@ export async function fetchFilteredPostId(post_id: string) {
   if (error) {
     console.log("fetching filtered posts error", error);
   }
-  console.log("post data:", data);
   return data?.[0];
 }
 
@@ -108,6 +107,21 @@ export async function deletePost(id: string) {
   if (error) {
     console.log("deleting post error:", error);
   }
+}
+
+export async function deleteImageFromPost(index: number, postId: number) {
+  let { data } = await supabase.from("posts").select().match({ id: postId });
+  const image_array = data?.[0].image_string;
+  let new_array: string[] = [];
+  for (let i = 0; i < image_array.length; i++) {
+    if (i !== index) new_array.push(image_array[i]);
+  }
+  // update the image array in supabase
+  let { error } = await supabase
+    .from("posts")
+    .update({ image_string: new_array })
+    .match({ id: postId });
+  if (error) console.log("error updating image_array:", error);
 }
 
 export async function fetchFilteredChatsUserId(user_id: string) {
@@ -153,7 +167,7 @@ export async function createChat(
   post_name: string,
   user_id_post_creator?: string
 ) {
-  const timestamp: string = new Date().toString()
+  const timestamp: string = new Date().toString();
   // if the same post_id and same users are there, then dont create a new chat
   console.log("the new msg:", newMessage);
   const userDetails = await checkLoggedIn();

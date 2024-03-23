@@ -32,3 +32,14 @@ if there is already a chat present for the post_id, go to that chat
 otherwise make a new chat that is relevant to p1,p2,post_id, if any changes there is new url
 
 add a click timeout for the button
+
+## Edit post
+
+[x]create an edit/[post_id] route
+[x]fetch the post according to its id
+[x]display it onto a textarea. edit the title and description that way
+[ ]image?
+-> display the image in order
+-> add a delete button to each image
+-> add the ability to add images to end of list
+[ ] update the post according to id

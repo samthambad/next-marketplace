@@ -112,7 +112,6 @@ const Input = () => {
           }}
           type="submit"
           placeholder="Submit"
-          value="Create"
           className="border border-gray-300 p-2 rounded-md hover:bg-blue-400 mx-auto block"
         />
       </form>

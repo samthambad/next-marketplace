@@ -14,6 +14,7 @@ const PostDetailsAndActions = ({ user_id, post_id, title, current_user_id, descr
   const clickDelete = (id: string) => {
     // server function but works in client component, same for chatWithPoster
     // works as you don't need to use any data from the function
+    // doesn't delete the chat
     deletePost(id);
     router.push('/')
     router.refresh()
@@ -27,6 +28,7 @@ const PostDetailsAndActions = ({ user_id, post_id, title, current_user_id, descr
       <div>
         {current_user_id?.length > 0 && user_id !== current_user_id && <Button className='mb-2 hover:bg-blue-800 bg-blue-500 text-white' onClick={() => chatWithPoster(post_id, user_id, title)}>Chat</Button>}
         {user_id === current_user_id && <Button className='mb-2 hover:bg-red-700 bg-red-500 text-white' onClick={() => clickDelete(post_id)}>Delete</Button>}
+        {user_id === current_user_id && <Button className='mb-2 hover:bg-green-700 bg-green-500 text-white' onClick={() => clickDelete(post_id)}>Edit</Button>}
       </div>
     </div>
   )
