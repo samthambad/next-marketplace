@@ -40,11 +40,7 @@ const RealtimeChatDisplay = ({ chats }: { chats: any }) => {
   const sendMsg = async () => {
     console.log("sending msg");
     try {
-      await createChat(
-        createMsg,
-        chatsDisplayed.post_id,
-        chatsDisplayed.post_name
-      );
+      await createChat(createMsg, chatsDisplayed.post_id, chatsDisplayed.post_name);
       const textElement = document.getElementById("text");
       if (textElement) {
         (textElement as HTMLInputElement).value = "";

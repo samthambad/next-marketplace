@@ -111,6 +111,7 @@ const Input = () => {
             router.refresh();
           }}
           type="submit"
+          value="Create"
           placeholder="Submit"
           className="border border-gray-300 p-2 rounded-md hover:bg-blue-400 mx-auto block"
         />
