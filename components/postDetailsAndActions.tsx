@@ -19,6 +19,11 @@ const PostDetailsAndActions = ({ user_id, post_id, title, current_user_id, descr
     router.push('/')
     router.refresh()
   }
+
+  const editPost = (post_id: any) => {
+    router.push(`/edit/${post_id}`)
+    router.refresh()
+  }
   return (
     <div className='flex justify-between align-middle'>
       <div>
@@ -28,7 +33,7 @@ const PostDetailsAndActions = ({ user_id, post_id, title, current_user_id, descr
       <div>
         {current_user_id?.length > 0 && user_id !== current_user_id && <Button className='mb-2 hover:bg-blue-800 bg-blue-500 text-white' onClick={() => chatWithPoster(post_id, user_id, title)}>Chat</Button>}
         {user_id === current_user_id && <Button className='mb-2 hover:bg-red-700 bg-red-500 text-white' onClick={() => clickDelete(post_id)}>Delete</Button>}
-        {user_id === current_user_id && <Button className='mb-2 hover:bg-green-700 bg-green-500 text-white' onClick={() => clickDelete(post_id)}>Edit</Button>}
+        {user_id === current_user_id && <Button className='mb-2 hover:bg-green-700 bg-green-500 text-white' onClick={() => editPost(post_id)}>Edit</Button>}
       </div>
     </div>
   )
