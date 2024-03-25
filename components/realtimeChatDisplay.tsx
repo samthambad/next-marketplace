@@ -60,7 +60,7 @@ const RealtimeChatDisplay = ({ chats }: { chats: any }) => {
       const reader = new FileReader();
       reader.readAsDataURL(file);
       let base64Img: string = "";
-      await new Promise<void>((resolve, reject) => {
+      await new Promise<void>((resolve) => {
         reader.onloadend = () => {
           base64Img = reader.result as string;
           resolve();
