@@ -12,14 +12,14 @@ const ChatDisplay = async ({ chatId }: { chatId: string }) => {
   const chats = await fetchFilteredChatsChatId(chatId);
   const { post_id } = chats?.[0];
   const post_details = await fetchFilteredPostId(post_id);
-  console.log("post_details:", post_details);
   const image_string = post_details?.image_string ?? ""
   let image_string_first: string = "";
   if (image_string !== null) {
     image_string_first = image_string?.[0] ?? "";
   }
-  let title = post_details?.image_string ?? ""
-  if (title = '') title = "post was deleted"
+  let title = post_details?.title
+  if (title === "") title = "post was deleted"
+  console.log("title:", title)
   const userDetails = await checkLoggedIn();
   let otherUserId = ""
   if (userDetails?.id === chats?.[0].p1_id) otherUserId = chats?.[0].p2_id

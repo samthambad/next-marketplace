@@ -8,12 +8,7 @@ import Image from "next/image";
 const RealtimeChatDisplay = ({ chats }: { chats: any }) => {
   const [createMsg, setCreateMsg] = useState("");
   const [chatsDisplayed, setChatsDisplayed] = useState(chats);
-  const [uploadNow, setUploadNow] = useState(false);
   useEffect(() => {
-    if (uploadNow && createMsg !== "") {
-      sendMsg();
-      setUploadNow(false);
-    }
     const channel = supabase
       .channel("realtime chats")
       .on(
@@ -32,15 +27,15 @@ const RealtimeChatDisplay = ({ chats }: { chats: any }) => {
     return () => {
       supabase.removeChannel(channel);
     };
-  }, [chatsDisplayed, setChatsDisplayed, uploadNow, createMsg]);
+  }, [chatsDisplayed, setChatsDisplayed, createMsg]);
 
   const handleMsg = (text: string) => {
     setCreateMsg(text);
   };
-  const sendMsg = async () => {
+  const sendMsg = async (msg: string) => {
     console.log("sending msg");
     try {
-      await createChat(createMsg, chatsDisplayed.post_id, chatsDisplayed.post_name);
+      await createChat(msg, chatsDisplayed.post_id, chatsDisplayed.post_name);
       const textElement = document.getElementById("text");
       if (textElement) {
         (textElement as HTMLInputElement).value = "";
@@ -49,7 +44,6 @@ const RealtimeChatDisplay = ({ chats }: { chats: any }) => {
       console.log("error sending message", error);
     }
   };
-  console.log("chats:", chatsDisplayed);
   const fileClick = () => {
     document.getElementById("fileInput")?.click();
   };
@@ -68,9 +62,7 @@ const RealtimeChatDisplay = ({ chats }: { chats: any }) => {
       });
 
       if (base64Img.length > 0) {
-        setCreateMsg(base64Img);
-        console.log("base64Img:", createMsg);
-        setUploadNow(true);
+        await sendMsg(base64Img)
       }
     }
   };
@@ -127,7 +119,7 @@ const RealtimeChatDisplay = ({ chats }: { chats: any }) => {
             Image
           </Button>
           <Button
-            onClick={() => sendMsg()}
+            onClick={() => sendMsg(createMsg)}
             className="mr-2 hover:bg-blue-500 hover:text-white"
             variant="outline"
           >
