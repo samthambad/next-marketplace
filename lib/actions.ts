@@ -98,6 +98,7 @@ export async function fetchFilteredPostId(post_id: string) {
     .match({ id: post_id });
   if (error) {
     console.log("fetching filtered posts error", error);
+    return
   }
   return data?.[0];
 }
@@ -113,15 +114,39 @@ export async function deleteImageFromPost(index: number, postId: number) {
   let { data } = await supabase.from("posts").select().match({ id: postId });
   const image_array = data?.[0].image_string;
   let new_array: string[] = [];
+  console.log("old array length b4 deleting:", image_array.length)
   for (let i = 0; i < image_array.length; i++) {
     if (i !== index) new_array.push(image_array[i]);
   }
-  // update the image array in supabase
+  console.log("new array length after deleting:", new_array.length)
   let { error } = await supabase
     .from("posts")
     .update({ image_string: new_array })
     .match({ id: postId });
-  if (error) console.log("error updating image_array:", error);
+  if (error) console.log("error removing from image_array:", error);
+}
+
+export async function addImageToPost(postId: number, image: string) {
+  let { data } = await supabase.from("posts").select().match({ id: postId });
+  const image_array: string[] = data?.[0].image_string;
+  let whetherPush = true
+  console.log("old image array length:", image_array.length)
+  for (let i = 0; i < image_array.length; i++) {
+    if (image_array[i] === "") {
+      image_array[i] = image
+      console.log("image replaces the ''")
+      whetherPush = false
+      break
+    }
+  }
+  // if there was no blank space
+  if (whetherPush) image_array.push(image)
+  console.log("new image array length:", image_array.length)
+  let { error } = await supabase
+    .from("posts")
+    .update({ image_string: image_array })
+    .match({ id: postId });
+  if (error) console.log("error adding to image_array:", error);
 }
 
 export async function fetchFilteredChatsUserId(user_id: string) {

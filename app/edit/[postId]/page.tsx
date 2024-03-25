@@ -38,7 +38,7 @@ const EditPost = async ({ params }: { params: { postId: string } }) => {
             type="submit"
             value="Edit"
             placeholder="Submit"
-            className="border border-gray-300 text-white hover:bg-blue-700 bg-blue-500 p-2 rounded-md block mb-4 mx-2"
+            className="border border-gray-300 text-white hover:bg-blue-700 bg-blue-500 p-2 rounded-md w-3/5 mb-4 mx-2"
           />
         </form>
         <ImageDisplay image_array={image_array} postId={+params.postId} />
