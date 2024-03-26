@@ -1,32 +1,35 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { updatePost } from "@/lib/actions";
 import { useRouter } from "next/navigation";
 
 const EditInput = ({ postData, params }: { postData: any; params: any }) => {
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false)
   const editReq = async (formData: FormData) => {
     await updatePost(formData, +params.postId);
   };
   return (
     <div>
-      <form className="text-center" action={editReq}>
-        <span className="mx-auto font-semibold rounded-md border p-1">
-          Title
-        </span>
-        <input
-          autoComplete="off"
-          className="border border-gray-300 p-2 rounded-md block mb-2 mx-auto mt-2"
-          type="text"
-          name="title"
-          defaultValue={postData.title}
-          placeholder="Enter title..."
-        ></input>
-        <span className="mx-2 font-semibold rounded-md border p-1">
+      <form className="w-1/2" action={editReq}>
+        <label>
+          <span>
+            Title
+          </span>
+          <input
+            autoComplete="off"
+            className="border border-gray-300 p-2 rounded-md block mb-2 mx-auto mt-2"
+            type="text"
+            name="title"
+            defaultValue={postData.title}
+            placeholder="Enter title..."
+          ></input>
+        </label>
+        <span>
           Description
         </span>
         <textarea
-          className="border border-gray-300 p-2 rounded-md block mt-2 mb-4 w-3/5 mx-auto"
+          className="border"
           name="description"
           placeholder="Enter description..."
         >
@@ -35,13 +38,14 @@ const EditInput = ({ postData, params }: { postData: any; params: any }) => {
         <input
           onClick={() => {
             // add image to db
+            setIsLoading(true)
             router.push("/search");
           }}
           type="submit"
-          value="Edit"
-          placeholder="Submit"
-          className="border border-gray-300 text-white bg-slate-500 hover:bg-slate-600  p-2 rounded-md w-3/5 mb-4 mx-2"
-        />
+          value={isLoading ? "Editing..." : "Edit"}
+          disabled={isLoading}
+          className="border border-gray-300 text-white bg-slate-500 hover:bg-slate-600  p-2 rounded-md"
+        ></input>
       </form>
     </div>
   );

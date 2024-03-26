@@ -6,8 +6,12 @@ import Compressor from "compressorjs";
 import Image from "next/image";
 
 const Input = () => {
+  let allowSubmit = true
   const router = useRouter();
   const [previews, setPreviews] = useState<string[]>([]);
+  const [title, setTitle] = useState("")
+  const [description, setDescription] = useState("")
+  const [isLoading, setIsLoading] = useState(false)
   const [files, setFiles] = useState<File[]>([]);
 
   const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
@@ -88,36 +92,43 @@ const Input = () => {
 
   return (
     <div>
-      <form
-        action={createPostReq}
-        className="shadow-md hover:shadow-md dark:hover:shadow-white border border-gray-300 p-4 mb-4 rounded-lg w-4/5 mx-auto"
-      >
+      <form className="w-1/2"
+        action={createPostReq}>
         <input
+          required
           autoComplete="off"
           className="border border-gray-300 p-2 rounded-md block mb-4 mx-auto"
           type="text"
           name="title"
+          onChange={(e) => setTitle(e.target.value)}
           placeholder="Enter title..."
         ></input>
         <textarea
-          className="border border-gray-300 p-2 rounded-md block mb-4 mx-auto w-4/5"
+          required
+          className="border border-gray-300 p-2 rounded-md block"
           name="description"
+          onChange={(e) => setDescription(e.target.value)}
           placeholder="Enter description..."
         ></textarea>
         <input
           onClick={() => {
+            if (title === "" || description === "") {
+              allowSubmit = false
+            }
             // add image to db
             router.push("/search");
+            setIsLoading(true);
             router.refresh();
           }}
           type="submit"
-          value="Create"
+          disabled={isLoading || !allowSubmit}
+          value={isLoading ? "Creating" : "Create"}
           placeholder="Submit"
           className="border border-gray-300 p-2 rounded-md hover:bg-blue-400 mx-auto block"
         />
       </form>
       <div
-        className="drop-area border py-10 border-dotted border-gray-500 p-4 rounded-lg w-4/5 mx-auto"
+        className="drop-area border py-10 border-dotted border-gray-500 p-4 rounded-lg w-1/2 mx-auto"
         onDrop={handleDrop}
         onDragOver={(e) => e.preventDefault()}
       >

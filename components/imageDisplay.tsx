@@ -80,7 +80,7 @@ const ImageDisplay = ({ image_array, postId, }: { image_array: any; postId: numb
             image.length > 0 && (
               <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3 flex items-end ">
                 <div className="p-1">
-                  <Card className="shadow-md hover:shadow-sm dark:hover:shadow-white">
+                  <Card className="shadow-md dark:hover:shadow-white">
                     <CardContent className="flex-col p-1 hover:bg-grey-700 text-center justify-between">
                       <Image width={500} height={500} src={image} alt={`post ${index}`} />
                       <Button variant="outline" className="text-white hover:bg-red-700 bg-red-500 w-full" onClick={() => deleteImage(index)}>
@@ -97,7 +97,7 @@ const ImageDisplay = ({ image_array, postId, }: { image_array: any; postId: numb
         <CarouselNext />
       </Carousel>
       <input type="file" id="fileInput" style={{ display: "none" }} onChange={addImage} />
-      <Button variant='outline' className=" mt-2 text-white hover:bg-blue-700 bg-blue-500 w-3/5 mx-auto" onClick={fileClick} >Add Image</Button>
+      <Button variant='outline' className=" mt-2 text-white hover:bg-blue-700 bg-blue-500 w-1/2 mx-auto" onClick={fileClick} >Add Image</Button>
     </div>
   );
 };
