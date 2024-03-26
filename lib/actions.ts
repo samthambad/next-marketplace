@@ -19,7 +19,6 @@ export async function checkLoggedIn() {
 }
 
 export async function createPost(formData: FormData) {
-  console.log("uploading images to supabase");
   const userDetails = await checkLoggedIn();
   const imageArray: string[] = [];
   // max 5 images allowed
@@ -141,12 +140,18 @@ export async function addImageToPost(postId: number, image: string) {
   }
   // if there was no blank space
   if (whetherPush) image_array.push(image)
-  console.log("new image array length:", image_array.length)
   let { error } = await supabase
     .from("posts")
     .update({ image_string: image_array })
     .match({ id: postId });
   if (error) console.log("error adding to image_array:", error);
+}
+
+export async function updatePost(formData: FormData, postId: number) {
+  let { error } = await supabase.from("posts")
+    .update({ title: formData.get("title"), description: formData.get("description") })
+    .match({ id: postId })
+  if (error) console.log("error updating post")
 }
 
 export async function fetchFilteredChatsUserId(user_id: string) {

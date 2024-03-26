@@ -39,6 +39,13 @@ const ImageDisplay = ({ image_array, postId, }: { image_array: any; postId: numb
   }
   const deleteImage = async (index: number) => {
     await deleteImageFromPost(index, postId);
+    let newArray: string[] = []
+    for (let i = 0; i < images.length; i++) {
+      if (i !== index) {
+        newArray.push(images[i])
+      }
+    }
+    setImages(newArray)
     console.log("deleting image")
   };
 
@@ -57,15 +64,16 @@ const ImageDisplay = ({ image_array, postId, }: { image_array: any; postId: numb
       });
       if (base64Img.length > 0) {
         await addImageToPost(postId, base64Img)
+        setImages([...images, base64Img])
         console.log("image added to post")
       }
     }
   };
   const fileClick = () => {
     document.getElementById("fileInput")?.click();
-  };
+  }
   return (
-    <div className="">
+    <div className="text-center border-blue-500 border-2 mb-4 p-2 rounded-md mx-2 shadow-md">
       <Carousel opts={{ align: "start", }} className="w-[90%] mx-auto">
         <CarouselContent>
           {images.map((image: string, index: number) =>
@@ -89,7 +97,7 @@ const ImageDisplay = ({ image_array, postId, }: { image_array: any; postId: numb
         <CarouselNext />
       </Carousel>
       <input type="file" id="fileInput" style={{ display: "none" }} onChange={addImage} />
-      <Button variant='outline' className=" mt-2 text-white hover:bg-blue-700 bg-blue-500 w-4/5 mx-2" onClick={fileClick} >Add Image</Button>
+      <Button variant='outline' className=" mt-2 text-white hover:bg-blue-700 bg-blue-500 w-3/5 mx-auto" onClick={fileClick} >Add Image</Button>
     </div>
   );
 };
