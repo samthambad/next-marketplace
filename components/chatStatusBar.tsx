@@ -28,11 +28,15 @@ const ChatStatusBar = ({
     router.push(`/profile/${otherUserId}`)
     router.refresh();
   }
+  console.log("image_string_first", image_string_first)
   return (
     <div className="flex p-2 mx-4 justify-between items-center gap-[2vw] mb-10 pt-2 pb-2 border rounded shadow-md hover:shadow-sm dark:hover:shadow-white">
       <div>
-        <span className="font-semibold mb-2">{postTitle}</span>
-        {image_string_first !== "" && (
+        {postTitle !== "" ?
+        (<span className="font-semibold mb-2">{postTitle}</span>) :
+        <span>Post has no title</span>}
+        
+        {image_string_first !== "" ?(
           <Image
             width={100}
             height={100}
@@ -43,7 +47,7 @@ const ChatStatusBar = ({
             }}
             alt="post"
           />
-        )}
+        ):<p className="text-sm text-gray-300">Post has no image</p>}
       </div>
       <p className="hover:text-blue-500" onClick={goToUser}>
         {otherUserName}

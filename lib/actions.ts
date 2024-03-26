@@ -310,9 +310,9 @@ export async function fetchImageString(post_id: string) {
   }
   if (data?.[0] !== undefined) {
     const { image_string } = data[0];
+    // only returns 1st image
     if (image_string !== null) return image_string[0];
   } else {
     console.log("supabase data is null");
-    return;
   }
 }

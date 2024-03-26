@@ -50,8 +50,9 @@ const ChatList = ({ data }: { data: any[] }) => {
               onClick={() => goToChat(chat.chat_id)}
               className="hover:bg-blue-500 focus:blue-500"
             >
-              <TableCell className="flex justify-center border">
-                {chat.image_string !== "" && (
+              <TableCell className="flex justify-center ">
+                {(chat.image_string !== undefined) ? (
+                  console.log("image", chat.image_string),
                   <Image
                     width={100}
                     height={100}
@@ -59,7 +60,7 @@ const ChatList = ({ data }: { data: any[] }) => {
                     style={{ maxHeight: "100px", maxWidth: "100px" }}
                     alt="post"
                   />
-                )}
+                ):<p className="text-sm text-gray-300">Post has no image</p>}
               </TableCell>
               <TableCell className="text-center border">{chat.title}</TableCell>
               <TableCell className="border">
