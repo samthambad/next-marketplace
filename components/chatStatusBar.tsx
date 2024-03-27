@@ -34,7 +34,7 @@ const ChatStatusBar = ({
     <div className="flex p-2 mx-4 justify-between items-center gap-[2vw] mb-10 pt-2 pb-2 border rounded shadow-md hover:shadow-sm dark:hover:shadow-white">
       <div>
         {postTitle !== undefined ?
-        (<span className="font-semibold mb-2">{postTitle}</span>) :
+        (<span className="font-semibold mb-2 hover:text-blue-500" onClick={() => goToPost(postId)}>{postTitle}</span>) :
         <span className="text-red-700 font-semibold">Post was deleted</span>}
         {image_string_first !== "" ?(
           <Image
