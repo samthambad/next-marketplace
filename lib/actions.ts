@@ -19,6 +19,7 @@ export async function checkLoggedIn() {
 }
 
 export async function createPost(formData: FormData) {
+  console.log("a new post is being created in actions")
   const userDetails = await checkLoggedIn();
   const imageArray: string[] = [];
   // max 5 images allowed
@@ -34,6 +35,7 @@ export async function createPost(formData: FormData) {
       imageArray.push(image);
     }
   }
+  console.log("title", formData.get("title"))
   let { error } = await supabase.from("posts").insert({
     title: formData.get("title"),
     description: formData.get("description"),

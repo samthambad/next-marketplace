@@ -4,7 +4,6 @@ export async function POST(req: any, res: any) {
   const { query } = await req.json();
   console.log("query in route", query)
   const posts = await fetchFilteredPosts(query);
-  console.log("postss", posts)
   if (posts) {
     return new Response(JSON.stringify(posts));
   }

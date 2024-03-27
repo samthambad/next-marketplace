@@ -34,7 +34,6 @@ const ImageDisplay = ({ image_array, postId, }: { image_array: any; postId: numb
     };
   }, [images, setImages])
   if (!Array.isArray(images)) {
-    console.log("image_array", image_array);
     return <div>No images to display</div>;
   }
   const deleteImage = async (index: number) => {

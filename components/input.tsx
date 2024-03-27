@@ -83,6 +83,7 @@ const Input = () => {
   };
 
   const createPostReq = async (formData: FormData) => {
+    console.log("creating a post request")
     previews.forEach((preview, index) => {
       formData.append(`image${index}`, preview);
     });
@@ -112,13 +113,15 @@ const Input = () => {
         ></textarea>
         <input
           onClick={() => {
-            if (title === "" || description === "") {
+            if (title.length === 0 || description.length === 0) {
               allowSubmit = false
             }
+            else {
+              router.push("/search");
+              setIsLoading(true);
+              router.refresh();
+            }
             // add image to db
-            router.push("/search");
-            setIsLoading(true);
-            router.refresh();
           }}
           type="submit"
           disabled={isLoading || !allowSubmit}

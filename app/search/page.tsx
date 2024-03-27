@@ -14,7 +14,6 @@ const SearchPage = ({
   };
 }) => {
   const query = searchParams?.query ?? '';
-  console.log("query in page", query)
   return (
     <div className='flex-center flex-col text-center mx-auto'>
       <h1 className='scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl mb-4 mx-auto'> Search </h1>
