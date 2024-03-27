@@ -44,7 +44,8 @@ const Chat = async () => {
           arrayOfChats.push({
             title: chat.post_name,
             latest_message: chat.messages[i].message,
-            latest_message_time: chat.messages[i].time ?? "",
+            latest_message_time: chat.messages[i].readable_time ?? "",
+            time: chat.messages[i].time ?? 0,
             other_name: otherName,
             chat_id: chat.id,
             image_string: await fetchImage(chat.post_id),
@@ -53,6 +54,7 @@ const Chat = async () => {
       });
       const promises = promiseArray ?? []; //make sure it is always an array
       await Promise.all(promises); //wait for all the promises to  resolve
+      arrayOfChats.sort((a,b) => (a.time > b.time) ? -1: ((b.time > a.time) ? 1 : 0))
       return arrayOfChats;
     }
   }

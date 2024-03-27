@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { Textarea } from "./ui/textarea";
 import { Button } from "./ui/button";
-import { createChat } from "@/lib/actions";
+import { createChat, message } from "@/lib/actions";
 import { supabase } from "@/utils/supabase";
 import Image from "next/image";
 const RealtimeChatDisplay = ({ chats }: { chats: any }) => {
@@ -71,7 +71,7 @@ const RealtimeChatDisplay = ({ chats }: { chats: any }) => {
       {chatsDisplayed.messages.length > 0 &&
         chatsDisplayed.messages[0].message !== "" && (
           <ul className="text-left border rounded  mx-2 my-4 px-4 py-2 overflow-auto shadow hover:shadow-sm dark:hover:shadow-white">
-            {chatsDisplayed.messages.map((messageObj: any, index: number) => {
+            {chatsDisplayed.messages.map((messageObj: message, index: number) => {
               if (messageObj.message.substring(0, 4) === "data") {
                 return (
                   <div key={index}>
@@ -84,7 +84,7 @@ const RealtimeChatDisplay = ({ chats }: { chats: any }) => {
                         height={100}
                         className="mr-2"
                       />
-                      <span className="justify-end text-xs text-gray-400 content-end place-self-end pb-1">{messageObj.time?.substring(0, 31)}</span>
+                      <span className="justify-end text-xs text-gray-400 content-end place-self-end pb-1">{messageObj.readable_time?.substring(0, 31)}</span>
                     </div>
                   </div>
                 );
@@ -95,7 +95,7 @@ const RealtimeChatDisplay = ({ chats }: { chats: any }) => {
                       <span className="mr-2">
                         {messageObj.user_name}: <span className="font-semibold text-blue-500">{messageObj.message}</span>
                       </span>
-                      <span className="justify-end text-xs text-gray-400"><em>{messageObj.time?.substring(0, 31)}</em></span>
+                      <span className="justify-end text-xs text-gray-400"><em>{messageObj.readable_time?.substring(0, 31)}</em></span>
                     </div>
                   </li>
                 );
