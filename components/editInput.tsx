@@ -7,6 +7,7 @@ const EditInput = ({ postData, params }: { postData: any; params: any }) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false)
   const editReq = async (formData: FormData) => {
+    setIsLoading(true)
     await updatePost(formData, +params.postId);
   };
   return (
@@ -38,7 +39,6 @@ const EditInput = ({ postData, params }: { postData: any; params: any }) => {
         <input
           onClick={() => {
             // add image to db
-            setIsLoading(true)
             router.push("/search");
           }}
           type="submit"

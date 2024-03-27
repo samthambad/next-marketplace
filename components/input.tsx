@@ -83,6 +83,7 @@ const Input = () => {
   };
 
   const createPostReq = async (formData: FormData) => {
+    setIsLoading(true);
     console.log("creating a post request")
     previews.forEach((preview, index) => {
       formData.append(`image${index}`, preview);
@@ -118,7 +119,6 @@ const Input = () => {
             }
             else {
               router.push("/search");
-              setIsLoading(true);
               router.refresh();
             }
             // add image to db

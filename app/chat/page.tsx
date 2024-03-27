@@ -44,6 +44,7 @@ const Chat = async () => {
           arrayOfChats.push({
             title: chat.post_name,
             latest_message: chat.messages[i].message,
+            latest_message_time: chat.messages[i].time ?? "",
             other_name: otherName,
             chat_id: chat.id,
             image_string: await fetchImage(chat.post_id),

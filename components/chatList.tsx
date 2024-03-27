@@ -40,6 +40,7 @@ const ChatList = ({ data }: { data: any[] }) => {
             <TableHead className="w-[20%] text-center border">
               Recent Message
             </TableHead>
+            <TableHead className="w-[20%] text-center border">Time</TableHead>
             <TableHead className="w-[20%] text-center border">User</TableHead>
           </TableRow>
         </TableHeader>
@@ -76,6 +77,7 @@ const ChatList = ({ data }: { data: any[] }) => {
                   chat.latest_message
                 )}
               </TableCell>
+              <TableCell>{chat.latest_message_time.substring(0,31)}</TableCell>
               <TableCell className="text-center">{chat.other_name}</TableCell>
             </TableRow>
           ))}
