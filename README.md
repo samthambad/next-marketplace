@@ -5,13 +5,9 @@ This is a online open marketplace with Realtime Chat functionality that is made 
 It utilises both server and client components for efficiency and interactivity.
 
 ## Current Features
-- Create, Delete Posts
+- Create, Read, Update Delete Posts. Add/Remove text and Images from Post
 - Send Chats to Users who have posts
-
+- View all Chats
+- Profile page
 ## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-```
+[Visit](https://next-marketplace-git-main-sams-projects-2d55d388.vercel.app/)
