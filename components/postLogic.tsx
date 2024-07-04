@@ -69,7 +69,7 @@ const PostServer = ({ query, id }: { query?: string, id?: string }) => {
       }
     };
     getUser();
-  }, [query, refresh, setRefresh]);
+  }, [query, refresh, setRefresh, id]);
   // console.log("query in logic", query);
   // make user undefined for conditions below
   if (user === "") setUser(undefined);
