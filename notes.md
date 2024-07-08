@@ -43,3 +43,5 @@ add a click timeout for the button
 -> add a delete button to each image
 -> add the ability to add images to end of list
 [ ] update the post according to id
+
+## Wishlist feature
