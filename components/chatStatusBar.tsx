@@ -20,7 +20,6 @@ const ChatStatusBar = ({
     router.push(`/post/${post_id}`);
     router.refresh();
   };
-  console.log("otherUser details", otherUser)
   const otherUserId = otherUser.user.id
   const otherUserName = otherUser.user.user_metadata.name
 
@@ -28,19 +27,18 @@ const ChatStatusBar = ({
     router.push(`/profile/${otherUserId}`)
     router.refresh();
   }
-  console.log("image_string_first", image_string_first)
-  console.log("postTitle", postTitle)
   return (
     <div className="flex p-2 mx-4 justify-between items-center gap-[2vw] mb-10 pt-2 pb-2 border rounded shadow-md hover:shadow-sm dark:hover:shadow-white">
       <div>
         {postTitle !== undefined ?
-        (<span className="font-semibold mb-2 hover:text-blue-500" onClick={() => goToPost(postId)}>{postTitle}</span>) :
+        (<span className="font-semibold mb-2 cursor-pointer hover:text-blue-500" onClick={() => goToPost(postId)}>{postTitle}</span>) :
         <span className="text-red-700 font-semibold">Post was deleted</span>}
         {image_string_first !== "" ?(
           <Image
             width={100}
             height={100}
             src={image_string_first}
+            className="cursor-pointer"
             style={{ maxWidth: "100px", maxHeight: "100px" }}
             onClick={() => {
               goToPost(postId);
@@ -49,7 +47,7 @@ const ChatStatusBar = ({
           />
         ):<p className="text-sm text-gray-300">Post has no image</p>}
       </div>
-      <p className="hover:text-blue-500" onClick={goToUser}>
+      <p className="hover:text-blue-500 cursor-pointer" onClick={goToUser}>
         {otherUserName}
       </p>
     </div>

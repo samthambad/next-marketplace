@@ -110,7 +110,7 @@ const PostServer = ({ query, id }: { query?: string, id?: string }) => {
           <li key={post.id} className="p-2">
             <Card
               style={{ width: "100%", height: "100%" }}
-              className=" mx-auto flex flex-col h-full shadow-md hover:shadow-md dark:hover:shadow-white"
+              className=" mx-auto flex flex-col h-full shadow-md hover:shadow-md dark:hover:shadow-white cursor-pointer"
             >
               <div className="mt-auto text-center">
                 <CardHeader>

@@ -31,10 +31,10 @@ const Chat = async () => {
           const otherUserDetails = await fetchUserDetails(chat.p1_id);
           otherName = otherUserDetails?.user.user_metadata.name;
         }
-        console.log("name", otherName);
+        // console.log("name", otherName);
         // make sure the chats with all blanks are not displayed
         let i = chat.messages.length - 1;
-        console.log("chat messagess", i);
+        // console.log("chat messagess", i);
         for (i; i >= 0; i--) {
           if (chat.messages[i].message !== "") {
             break;
@@ -61,7 +61,7 @@ const Chat = async () => {
 
   const fetchImage = async (post_id: string) => {
     const image_string = await fetchImageString(post_id);
-    console.log("image_string", image_string);
+    // console.log("image_string", image_string);
     return image_string;
   };
   const fetchedChatArray = (await getData()) ?? [];

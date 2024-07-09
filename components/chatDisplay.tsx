@@ -19,7 +19,6 @@ const ChatDisplay = async ({ chatId }: { chatId: string }) => {
   }
   let title = post_details?.title
   if (title === "") title = "post was deleted"
-  console.log("title:", title)
   const userDetails = await checkLoggedIn();
   let otherUserId = ""
   if (userDetails?.id === chats?.[0].p1_id) otherUserId = chats?.[0].p2_id

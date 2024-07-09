@@ -18,7 +18,6 @@ const ChatList = ({ data }: { data: any[] }) => {
     router.push(`/chat/${chat_id}`);
     router.refresh(); //refresh otherwise it wont fetch
   }
-  console.log("dataaaa", data);
   if (data.length === 0) {
     return <div>You have no chats</div>;
   }
@@ -53,7 +52,7 @@ const ChatList = ({ data }: { data: any[] }) => {
             >
               <TableCell className="flex justify-center ">
                 {(chat.image_string !== undefined) ? (
-                  console.log("image", chat.image_string),
+                  // console.log("image", chat.image_string),
                   <Image
                     width={100}
                     height={100}
