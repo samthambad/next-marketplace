@@ -3,6 +3,7 @@ import { createChat, deletePost } from "@/lib/actions";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { Button } from "./ui/button";
+import { MdDelete, MdEdit } from "react-icons/md";
 const PostDetailsAndActions = ({
   user_id,
   post_id,
@@ -62,14 +63,14 @@ const PostDetailsAndActions = ({
           <Button
             className="mb-2 hover:bg-red-700 bg-red-500 text-white mr-2"
             onClick={() => clickDelete(post_id)}>
-            Delete
+            <MdDelete/>
           </Button>
         )}
         {user_id === current_user_id && (
           <Button
             className="mb-2 hover:bg-green-700 bg-green-500 text-white"
             onClick={() => editPost(post_id)}>
-            Edit
+            <MdEdit />
           </Button>
         )}
       </div>

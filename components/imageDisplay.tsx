@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { addImageToPost, deleteImageFromPost } from "@/lib/actions";
 import { useState, useEffect } from "react";
 import { supabase } from "@/utils/supabase";
+import { MdDelete } from "react-icons/md";
 const ImageDisplay = ({ image_array, postId, }: { image_array: any; postId: number; }) => {
   const [images, setImages] = useState(image_array)
   useEffect(() => {
@@ -30,6 +31,7 @@ const ImageDisplay = ({ image_array, postId, }: { image_array: any; postId: numb
       )
       .subscribe();
     return () => {
+      
       supabase.removeChannel(channel);
     };
   }, [images, setImages])
@@ -83,7 +85,7 @@ const ImageDisplay = ({ image_array, postId, }: { image_array: any; postId: numb
                     <CardContent className="flex-col p-1 hover:bg-grey-700 text-center justify-between">
                       <Image width={500} height={500} src={image} alt={`post ${index}`} />
                       <Button variant="outline" className="text-white hover:bg-red-700 bg-red-500 w-full" onClick={() => deleteImage(index)}>
-                        Delete
+                        <MdDelete/>
                       </Button>
                     </CardContent>
                   </Card>

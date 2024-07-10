@@ -10,6 +10,9 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { createChat, deletePost } from "@/lib/actions";
 import { Button } from "./ui/button";
+import Link from "next/link";
+import { MdDelete } from "react-icons/md";
+import { IoChatbubblesSharp } from "react-icons/io5";
 import Image from "next/image";
 
 const PostServer = ({ query, id }: { query?: string, id?: string }) => {
@@ -106,46 +109,29 @@ const PostServer = ({ query, id }: { query?: string, id?: string }) => {
         Latest Posts
       </h1>
       <ul className="grid grid-cols-1 sm:grid-cols-4 gap-2 mx-auto">
-        {posts && posts.map((post: any) => (
+        {posts?.map((post: any) => (
           <li key={post.id} className="p-2">
             <Card
               style={{ width: "100%", height: "100%" }}
-              className=" mx-auto flex flex-col h-full shadow-md hover:shadow-md dark:hover:shadow-white cursor-pointer"
+              className="mx-auto flex flex-col h-full shadow-md hover:shadow-md dark:hover:shadow-white cursor-pointer"
             >
-              <div className="mt-auto text-center">
-                <CardHeader>
-                  {post.image_string !== null &&
-                    post.image_string.length > 0 && (
-                      <Image
-                        width={300}
-                        height={300}
-                        src={post.image_string[0]}
-                        alt="post-image-1"
-                        onClick={() => {
-                          router.push(`/post/${post.id}`);
-                          router.refresh();
-                        }}
-                        className="mx-auto mb-1"
-                        style={{ maxHeight: "300px", maxWidth: "100%" }}
-                      />
-                    )}
-                  <CardTitle
-                    onClick={() => {
-                      router.push(`/post/${post.id}`);
-                      router.refresh();
-                    }}
-                  >
-                    {post.title}
-                  </CardTitle>
-                  <CardDescription
-                    onClick={() => {
-                      router.push(`/post/${post.id}`);
-                      router.refresh();
-                    }}
-                  >
-                    {post.description}
-                  </CardDescription>
-                </CardHeader>
+              <div className="mt-auto text-center ">
+                <Link href={`/post/${post.id}`} target="_blank" >
+                  <CardHeader className="">
+                    {post.image_string?.length > 0 && (
+                        <Image
+                          width={300}
+                          height={300}
+                          src={post.image_string[0]}
+                          alt="post-image-1"
+                          className="mx-auto mb-1"
+                          style={{ maxHeight: "300px", maxWidth: "100%" }}
+                        />
+                      )}
+                    <CardTitle>{post.title}</CardTitle>
+                    <CardDescription>{post.description}</CardDescription>
+                  </CardHeader>
+                </Link>
               </div>
               <div className="text-right justify-end">
                 <CardFooter
@@ -174,7 +160,7 @@ const PostServer = ({ query, id }: { query?: string, id?: string }) => {
                     variant="outline"
                     className="mb-2 hover:bg-red-600"
                   >
-                    Delete
+                    <MdDelete/>
                   </Button>
                 )}
                 {user?.id !== undefined && user?.id !== post.user_id && (
@@ -185,7 +171,7 @@ const PostServer = ({ query, id }: { query?: string, id?: string }) => {
                     variant="outline"
                     className="mb-2 hover:bg-blue-500"
                   >
-                    Chat
+                    <IoChatbubblesSharp/>
                   </Button>
                 )}
               </div>
