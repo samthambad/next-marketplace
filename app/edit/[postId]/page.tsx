@@ -7,14 +7,17 @@ const EditPost = async ({ params }: { params: { postId: string } }) => {
   const postData = await fetchFilteredPostId(params.postId);
   const userDetails = await checkLoggedIn();
   let image_array: string[] = [];
-  for (const element of postData.image_string) {
-    image_array.push(element);
+  if (postData.image_string){
+    for (const element of postData.image_string) {
+      image_array.push(element);
+    }
   }
-  console.log("image_array: ", Array.isArray(image_array));
   if (userDetails?.id === postData.user_id) {
     return (
       <div>
+        {image_array.length >= 0 && 
         <ImageDisplay image_array={image_array} postId={+params.postId} />
+        }
         <EditInput postData={postData} params={params} />
       </div>
     );
