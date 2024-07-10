@@ -19,7 +19,6 @@ export async function checkLoggedIn() {
 }
 
 export async function createPost(formData: FormData) {
-  console.log("a new post is being created in actions")
   const userDetails = await checkLoggedIn();
   const imageArray: string[] = [];
   // max 5 images allowed
@@ -217,7 +216,6 @@ export async function createChat(
     console.log("chat already exists");
     // get the messages array from dataBeforeAdding and append firstMessage
     let messagesArray: message[] = dataBeforeAdding?.[0].messages;
-    console.log("previous messagesArray:", messagesArray);
     // cleanup messageArray by removing messageObj with message = ""
     messagesArray = messagesArray.filter(
       (messageObj) => messageObj.message.length > 0

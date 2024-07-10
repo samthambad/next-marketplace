@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import {toast} from "react-hot-toast"
 import { Textarea } from "./ui/textarea";
 import { Button } from "./ui/button";
 import { createChat, message } from "@/lib/actions";
@@ -33,16 +34,19 @@ const RealtimeChatDisplay = ({ chats }: { chats: any }) => {
     setCreateMsg(text);
   };
   const sendMsg = async (msg: string) => {
-    console.log("sending msg");
     try {
+      const sendingMessageToast = toast.loading("Sending message")
       await createChat(msg, chatsDisplayed.post_id, chatsDisplayed.post_name);
       const textElement = document.getElementById("text");
       if (textElement) {
         (textElement as HTMLInputElement).value = "";
+        toast.dismiss(sendingMessageToast)
       }
     } catch (error) {
+      toast.error("Error sending message") 
       console.log("error sending message", error);
     }
+    toast.success("Message sent")
   };
   const fileClick = () => {
     document.getElementById("fileInput")?.click();

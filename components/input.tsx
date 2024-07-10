@@ -97,22 +97,6 @@ const Input = () => {
       <form className="w-1/2"
         action={createPostReq}>
         <input
-          required
-          autoComplete="off"
-          className="border border-gray-300 p-2 rounded-md block mb-4 mx-auto"
-          type="text"
-          name="title"
-          onChange={(e) => setTitle(e.target.value)}
-          placeholder="Enter title..."
-        ></input>
-        <textarea
-          required
-          className="border border-gray-300 p-2 rounded-md block"
-          name="description"
-          onChange={(e) => setDescription(e.target.value)}
-          placeholder="Enter description..."
-        ></textarea>
-        <input
           onClick={() => {
             if (title.length === 0 || description.length === 0) {
               allowSubmit = false
@@ -129,6 +113,22 @@ const Input = () => {
           placeholder="Submit"
           className="border border-gray-300 p-2 rounded-md hover:bg-blue-400 mx-auto block"
         />
+        <input
+          required
+          autoComplete="off"
+          className="border border-gray-300 p-2 rounded-md block mb-4 mx-auto"
+          type="text"
+          name="title"
+          onChange={(e) => setTitle(e.target.value)}
+          placeholder="Enter title..."
+        ></input>
+        <textarea
+          required
+          className="border border-gray-300 p-2 rounded-md block"
+          name="description"
+          onChange={(e) => setDescription(e.target.value)}
+          placeholder="Enter description..."
+        ></textarea>
       </form>
       <div
         className="drop-area border py-10 border-dotted border-gray-500 p-4 rounded-lg w-1/2 mx-auto"
@@ -156,7 +156,7 @@ const Input = () => {
           </div>
         ))}
         <p className="font-bold mt-2">
-          Number of files to be uploaded: <em>{previews.length}</em>
+          Number of images to be used: <em>{previews.length}</em>
         </p>
       </div>
     </div>
