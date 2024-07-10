@@ -294,7 +294,6 @@ export async function checkIfAlreadyPresentChat(
 }
 
 export async function fetchUserDetails(user_id: string) {
-  console.log("user_id:", user_id);
   const { data, error } = await supabase.auth.admin.getUserById(user_id);
   if (error) {
     console.log("error fetching user details:", error);
