@@ -31,7 +31,7 @@ const ImageDisplay = ({ image_array, postId, }: { image_array: any; postId: numb
       )
       .subscribe();
     return () => {
-      
+
       supabase.removeChannel(channel);
     };
   }, [images, setImages])
@@ -50,8 +50,8 @@ const ImageDisplay = ({ image_array, postId, }: { image_array: any; postId: numb
     console.log("deleting image")
   };
 
-  const addImage = async (event: any) => {
-    const files = event.target.files;
+  const addImage = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = event.target.files ?? [];
     if (files.length > 0) {
       const file = files[0];
       const reader = new FileReader();
@@ -85,7 +85,7 @@ const ImageDisplay = ({ image_array, postId, }: { image_array: any; postId: numb
                     <CardContent className="flex-col p-1 hover:bg-grey-700 text-center justify-between">
                       <Image width={500} height={500} src={image} alt={`post ${index}`} />
                       <Button variant="outline" className="text-white hover:bg-red-700 bg-red-500 w-full" onClick={() => deleteImage(index)}>
-                        <MdDelete/>
+                        <MdDelete />
                       </Button>
                     </CardContent>
                   </Card>
