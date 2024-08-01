@@ -59,8 +59,18 @@ const ImageDisplay = ({ image_array, postId, }: { image_array: any; postId: numb
       let base64Img: string = "";
       await new Promise<void>((resolve) => {
         reader.onloadend = () => {
-          base64Img = reader.result as string;
-          resolve();
+          let img = document.createElement("img");
+          img.src = reader.result as string;
+          img.onload = (e: any) => {
+            let canvas = document.createElement("canvas");
+            canvas.width = 790;
+            const aspectRatio = e.target.width / e.target.height;
+            canvas.height = canvas.width / aspectRatio;
+            const context = canvas.getContext("2d") as CanvasRenderingContext2D;
+            context.drawImage(img, 0, 0, canvas.width, canvas.height);
+            base64Img = context.canvas.toDataURL("image/png", 85);
+            resolve();
+          };
         };
       });
       if (base64Img.length > 0) {
@@ -98,7 +108,7 @@ const ImageDisplay = ({ image_array, postId, }: { image_array: any; postId: numb
         <CarouselNext />
       </Carousel>
       <input type="file" id="fileInput" style={{ display: "none" }} onChange={addImage} />
-      <Button variant='outline' className=" mt-2 text-white hover:bg-blue-700 bg-blue-500 w-1/2 mx-auto" onClick={fileClick} >Add Image</Button>
+      <Button variant='outline' className=" mt-2 text-white hover:bg-green-700 bg-green-500 w-1/2 mx-auto" onClick={fileClick} >Add Image</Button>
     </div>
   );
 };

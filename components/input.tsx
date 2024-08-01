@@ -12,7 +12,6 @@ const Input = () => {
   const [title, setTitle] = useState("")
   const [description, setDescription] = useState("")
   const [isLoading, setIsLoading] = useState(false)
-  // const [files, setFiles] = useState<File[]>([]);
 
   const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
     console.log("dropped");
@@ -24,49 +23,6 @@ const Input = () => {
     const newFiles = Array.from(e.target.files ?? []);
     generatePreviews(newFiles);
   };
-  // const handleImages = async (newFiles: File[]) => {
-  //   const newCompressedFiles: File[] = [];
-
-  //   // Create an array of promises for compressing each file
-  //   const compressionPromises = newFiles.map(
-  //     (file) =>
-  //       new Promise<File>((resolve, reject) => {
-  //         if (file.size <= 10 * 1024 * 1024) {
-  //           // Compress image
-  //           new Compressor(file, {
-  //             quality: 0.6,
-  //             maxWidth: 900,
-  //             maxHeight: 900,
-  //             strict: true,
-  //             resize: 'contain',
-  //             success(result) {
-  //               newCompressedFiles.push(result as File);
-  //               resolve(result as File); // Resolve the promise with the compressed file
-  //             },
-  //             error(err) {
-  //               console.log("Compression error:", err.message);
-  //               reject(err); // Reject the promise if there's an error
-  //             },
-  //           });
-  //         } else {
-  //           alert(
-  //             `File ${file.name} exceeds the size limit of 10MB and will not be uploaded`
-  //           );
-  //           reject(
-  //             new Error(`File ${file.name} exceeds the size limit of 10MB`)
-  //           ); // Reject the promise if file size exceeds the limit
-  //         }
-  //       })
-  //   );
-  //   try {
-  //     // Wait for all compression promises to resolve
-  //     await Promise.all(compressionPromises);
-  //     return newCompressedFiles
-  //   } catch (error) {
-  //     console.error("Error handling images:", error);
-  //   }
-
-  // };
   const generatePreviews = async (newFiles: File[]) => {
     const newPreviews: string[] = [];
     const promises = newFiles.map((file) => {
@@ -79,9 +35,8 @@ const Input = () => {
           img.onload = (e: any) => {
             let canvas = document.createElement("canvas");
             canvas.width = 790;
-            let ratio = canvas.width / e.target.width;
-            console.log("ratio", ratio)
-            canvas.height = e.target.height * ratio; // Ensure canvas height is at least the image height
+            const aspectRatio = e.target.width / e.target.height;
+            canvas.height = canvas.width / aspectRatio;
             const context = canvas.getContext("2d") as CanvasRenderingContext2D;
             context.drawImage(img, 0, 0, canvas.width, canvas.height);
             let newImageUrl = context.canvas.toDataURL("image/png", 85);
@@ -98,7 +53,6 @@ const Input = () => {
     console.log("newPreviews", newPreviews.length);
     // Update state with previews and compressed files
     setPreviews([...previews, ...newPreviews]);
-    // setFiles([...files, ...newCompressedFiles]);
   };
   const createPostReq = async (formData: FormData) => {
     setIsLoading(true);

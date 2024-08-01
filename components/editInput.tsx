@@ -42,7 +42,7 @@ const EditInput = ({ postData, params }: { postData: any; params: any }) => {
             router.push("/search");
           }}
           type="submit"
-          value={isLoading ? "Editing..." : "Edit"}
+          value={isLoading ? "Editing..." : "Complete Edit"}
           disabled={isLoading}
           className="border border-gray-300 text-white bg-slate-500 hover:bg-slate-600  p-2 rounded-md"
         ></input>
