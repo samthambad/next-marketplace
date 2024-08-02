@@ -1,4 +1,5 @@
 "use client";
+import { FaFileUpload } from "react-icons/fa";
 import { createPost } from "@/lib/actions";
 import { useRouter } from "next/navigation";
 import React, { useState, ChangeEvent } from "react";
@@ -13,14 +14,22 @@ const Input = () => {
   const [description, setDescription] = useState("")
   const [isLoading, setIsLoading] = useState(false)
 
-  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
-    console.log("dropped");
-    e.preventDefault();
-    const newFiles = Array.from(e.dataTransfer.files);
-    generatePreviews(newFiles);
-  };
-  const handleFileInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const newFiles = Array.from(e.target.files ?? []);
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement> | React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault(); // Prevent default for all events
+
+    let newFiles: File[] = [];
+
+    if ('dataTransfer' in e) {
+      // This is a drag event
+      if (e.dataTransfer.files) {
+        newFiles = Array.from(e.dataTransfer.files);
+      }
+    } else if ('target' in e && e.target instanceof HTMLInputElement) {
+      // This is a change event from file input
+      if (e.target.files) {
+        newFiles = Array.from(e.target.files);
+      }
+    }
     generatePreviews(newFiles);
   };
   const generatePreviews = async (newFiles: File[]) => {
@@ -66,7 +75,7 @@ const Input = () => {
 
   return (
     <div>
-      <form className="w-1/2"
+      <form className="w-1/2 px-0"
         action={createPostReq}>
         <input
           onClick={() => {
@@ -83,12 +92,12 @@ const Input = () => {
           disabled={isLoading || !allowSubmit}
           value={isLoading ? "Creating" : "Create"}
           placeholder="Submit"
-          className="border border-gray-300 p-2 rounded-md hover:bg-blue-400 mx-auto block"
+          className="border border-gray-300 rounded-md hover:bg-blue-400 mx-auto block"
         />
         <input
           required
           autoComplete="off"
-          className="border border-gray-300 p-2 rounded-md block mb-4 mx-auto"
+          className="border border-gray-300 rounded-md block mb-4 mx-auto"
           type="text"
           name="title"
           onChange={(e) => setTitle(e.target.value)}
@@ -96,7 +105,7 @@ const Input = () => {
         ></input>
         <textarea
           required
-          className="border border-gray-300 p-2 rounded-md block"
+          className="border border-gray-300 rounded-md block"
           name="description"
           onChange={(e) => setDescription(e.target.value)}
           placeholder="Enter description..."
@@ -104,7 +113,7 @@ const Input = () => {
       </form>
       <div
         className="drop-area border py-10 border-dotted border-gray-500 p-4 rounded-lg w-1/2 mx-auto"
-        onDrop={handleDrop}
+        onDrop={handleFileChange}
         onDragOver={(e) => e.preventDefault()}
       >
         <p className="mb-2">
@@ -113,8 +122,16 @@ const Input = () => {
         <input
           type="file"
           accept="image/*"
-          onChange={handleFileInputChange}
+          onChange={handleFileChange}
+          className="hidden"
+          id="file-upload"
         ></input>
+        <label
+          htmlFor="file-upload"
+          className="cursor-pointer bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded inline-block"
+        >
+          <FaFileUpload />
+        </label>
         {previews.map((preview, index) => (
           <div className="mx-auto" key={index}>
             <Image
