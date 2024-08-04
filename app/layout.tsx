@@ -14,7 +14,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
   return (
     <html lang="en" className={dm_serif.className}>
       <body>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
           <div className='flex flex-col min-h-screen '>
             <main className='flex-grow'>
               <Navbar user={userDetails} />
