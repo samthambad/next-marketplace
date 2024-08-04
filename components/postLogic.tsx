@@ -105,7 +105,7 @@ const PostServer = ({ query, id }: { query?: string, id?: string }) => {
   }
   return (
     <div>
-      <h1 className="mb-8 border border-gray-300 mx-auto w-80 rounded font-bold">
+      <h1 className="mb-8 mx-auto w-80 font-mono">
         Latest Posts
       </h1>
       <ul className="grid grid-cols-1 sm:grid-cols-4 gap-2 mx-auto">
@@ -113,21 +113,21 @@ const PostServer = ({ query, id }: { query?: string, id?: string }) => {
           <li key={post.id} className="p-2">
             <Card
               style={{ width: "100%", height: "100%" }}
-              className="mx-auto flex flex-col h-full shadow-md hover:shadow-md dark:hover:shadow-white cursor-pointer"
+              className="font-mono mx-auto flex flex-col h-full shadow-md hover:shadow-md dark:hover:shadow-white cursor-pointer"
             >
               <div className="mt-auto text-center ">
                 <Link href={`/post/${post.id}`} target="_blank" >
                   <CardHeader className="">
                     {post.image_string?.length > 0 && (
-                        <Image
-                          width={300}
-                          height={300}
-                          src={post.image_string[0]}
-                          alt="post-image-1"
-                          className="mx-auto mb-1"
-                          style={{ maxHeight: "300px", maxWidth: "100%" }}
-                        />
-                      )}
+                      <Image
+                        width={300}
+                        height={300}
+                        src={post.image_string[0]}
+                        alt="post-image-1"
+                        className="mx-auto mb-1"
+                        style={{ maxHeight: "300px", maxWidth: "100%" }}
+                      />
+                    )}
                     <CardTitle>{post.title}</CardTitle>
                     <CardDescription>{post.description}</CardDescription>
                   </CardHeader>
@@ -160,7 +160,7 @@ const PostServer = ({ query, id }: { query?: string, id?: string }) => {
                     variant="outline"
                     className="mb-2 hover:bg-red-600"
                   >
-                    <MdDelete/>
+                    <MdDelete />
                   </Button>
                 )}
                 {user?.id !== undefined && user?.id !== post.user_id && (
@@ -171,7 +171,7 @@ const PostServer = ({ query, id }: { query?: string, id?: string }) => {
                     variant="outline"
                     className="mb-2 hover:bg-blue-500"
                   >
-                    <IoChatbubblesSharp/>
+                    <IoChatbubblesSharp />
                   </Button>
                 )}
               </div>

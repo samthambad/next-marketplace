@@ -74,7 +74,7 @@ const Input = () => {
   };
 
   return (
-    <div>
+    <div className="font-mono">
       <form className="w-1/2 px-0"
         action={createPostReq}>
         <input

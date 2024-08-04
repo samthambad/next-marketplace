@@ -49,7 +49,7 @@ const EachPost = async ({ params }: { params: { postId: string } }) => {
         <CarouselPrevious />
         <CarouselNext />
       </Carousel>
-      <div className="border rounded-md p-4 mt-4 border-blue-200 shadow-md hover:shadow-sm dark:hover:shadow-white border">
+      <div className="font-mono border rounded-md p-4 mt-4 border-blue-200 shadow-md hover:shadow-sm dark:hover:shadow-white border">
         <h1 className='scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl mt-4 mb-4'>{title}</h1>
         <p className="text-sm font-sans">Listed at : <em>{readable_time}</em></p>
         <PostDetailsAndActions user_id={user_id} post_id={params.postId} title={title} current_user_id={user?.id} description={description} user_name={user_name} />

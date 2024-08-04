@@ -23,11 +23,7 @@ const ChatList = ({ data }: { data: any[] }) => {
   }
   return (
     <div>
-      <h1 className="mb-4 border border-gray-300 mx-auto w-80 rounded font-bold">
-        All Chats
-      </h1>
-      <br className="max-md:hidden mt-4" />
-      <Table className="w-[80%] mx-auto border whitespace-nowrap shadow-md">
+      <Table className="w-[80%] mx-auto border whitespace-nowrap shadow-md font-mono">
         <TableHeader className="bg-blue-200">
           <TableRow>
             <TableHead className="w-[20%] text-center border">
@@ -60,7 +56,7 @@ const ChatList = ({ data }: { data: any[] }) => {
                     style={{ maxHeight: "100px", maxWidth: "100px" }}
                     alt="post"
                   />
-                ):<p className="text-sm text-gray-300">Post has no image</p>}
+                ) : <p className="text-sm text-gray-300">Post has no image</p>}
               </TableCell>
               <TableCell className="text-center border">{chat.title}</TableCell>
               <TableCell className="border">
@@ -76,7 +72,7 @@ const ChatList = ({ data }: { data: any[] }) => {
                   chat.latest_message
                 )}
               </TableCell>
-              <TableCell>{chat.latest_message_time.substring(0,31)}</TableCell>
+              <TableCell>{chat.latest_message_time.substring(0, 31)}</TableCell>
               <TableCell className="text-center">{chat.other_name}</TableCell>
             </TableRow>
           ))}

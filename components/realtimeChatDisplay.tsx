@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import {toast} from "react-hot-toast"
+import { toast } from "react-hot-toast"
 import { Textarea } from "./ui/textarea";
 import { Button } from "./ui/button";
 import { createChat, message } from "@/lib/actions";
@@ -43,7 +43,7 @@ const RealtimeChatDisplay = ({ chats }: { chats: any }) => {
         toast.dismiss(sendingMessageToast)
       }
     } catch (error) {
-      toast.error("Error sending message") 
+      toast.error("Error sending message")
       console.log("error sending message", error);
     }
     toast.success("Message sent")
@@ -71,7 +71,7 @@ const RealtimeChatDisplay = ({ chats }: { chats: any }) => {
     }
   };
   return (
-    <div className="overflow-x-auto">
+    <div className="overflow-x-auto font-mono">
       {chatsDisplayed.messages.length > 0 &&
         chatsDisplayed.messages[0].message !== "" && (
           <ul className="text-left border rounded  mx-2 my-4 px-4 py-2 overflow-auto shadow hover:shadow-sm dark:hover:shadow-white">
