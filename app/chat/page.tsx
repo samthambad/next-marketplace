@@ -54,7 +54,7 @@ const Chat = async () => {
       });
       const promises = promiseArray ?? []; //make sure it is always an array
       await Promise.all(promises); //wait for all the promises to  resolve
-      arrayOfChats.sort((a,b) => (a.time > b.time) ? -1: ((b.time > a.time) ? 1 : 0))
+      arrayOfChats.sort((a, b) => (a.time > b.time) ? -1 : ((b.time > a.time) ? 1 : 0))
       return arrayOfChats;
     }
   }
