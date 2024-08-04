@@ -119,14 +119,14 @@ const PostServer = ({ query, id }: { query?: string, id?: string }) => {
                 <Link href={`/post/${post.id}`} target="_blank" >
                   <CardHeader className="">
                     {post.image_string?.length > 0 && (
-                      <Image
-                        width={300}
-                        height={300}
-                        src={post.image_string[0]}
-                        alt="post-image-1"
-                        className="mx-auto mb-1"
-                        style={{ maxHeight: "300px", maxWidth: "100%" }}
-                      />
+                      <div className="w-full h-48 relative mb-4">
+                        <Image
+                          src={post.image_string[0]}
+                          alt="post-image"
+                          layout="fill"
+                          objectFit="contain"
+                        />
+                      </div>
                     )}
                     <CardTitle>{post.title}</CardTitle>
                     <CardDescription>{post.description}</CardDescription>
