@@ -2,9 +2,11 @@
 import React, { useState } from "react";
 import { updatePost } from "@/lib/actions";
 import { useRouter } from "next/navigation";
-
+import { handlePriceChange } from "./input";
+import PriceInput from "./price";
 const EditInput = ({ postData, params }: { postData: any; params: any }) => {
   const router = useRouter();
+  const [price, setPrice] = useState('');
   const [isLoading, setIsLoading] = useState(false)
   const editReq = async (formData: FormData) => {
     setIsLoading(true)
@@ -12,7 +14,7 @@ const EditInput = ({ postData, params }: { postData: any; params: any }) => {
   };
   return (
     <div>
-      <form className="w-1/2" action={editReq}>
+      <form className="w-1/2 font-mono" action={editReq}>
         <label>
           <span>
             Title
@@ -26,6 +28,7 @@ const EditInput = ({ postData, params }: { postData: any; params: any }) => {
             placeholder="Enter title..."
           ></input>
         </label>
+        <PriceInput price={price} setPrice={setPrice} />
         <span>
           Description
         </span>

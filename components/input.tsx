@@ -5,12 +5,15 @@ import { useRouter } from "next/navigation";
 import React, { useState, ChangeEvent } from "react";
 import Compressor from "compressorjs";
 import Image from "next/image";
+import toast from "react-hot-toast";
+import PriceInput from "./price";
 
 const Input = () => {
   let allowSubmit = true
   const router = useRouter();
   const [previews, setPreviews] = useState<string[]>([]);
   const [title, setTitle] = useState("")
+  const [price, setPrice] = useState('');
   const [description, setDescription] = useState("")
   const [isLoading, setIsLoading] = useState(false)
 
@@ -72,14 +75,32 @@ const Input = () => {
     // console.log("images0",formData.get("images0"))
     await createPost(formData);
   };
+  const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    const sanitizedValue = value.replace(/[^\d.]/g, '');
+    const [integerPart, decimalPart] = sanitizedValue.split('.');
+    let formattedValue;
+    if (decimalPart === undefined) {
+      // No decimal point entered
+      formattedValue = integerPart;
+    } else {
+      // Limit decimal to 2 places
+      formattedValue = `${integerPart}.${decimalPart.slice(0, 2)}`;
+    }
+    // Ensure only one decimal point
+    if ((formattedValue.match(/\./g) || []).length > 1) {
+      return; // Do not update state if there's more than one decimal point
+    }
+    setPrice(formattedValue);
+  };
 
   return (
     <div className="font-mono">
-      <form className="w-1/2 px-0"
+      <form className="w-1/2 px-0 font-mono"
         action={createPostReq}>
         <input
           onClick={() => {
-            if (title.length === 0 || description.length === 0) {
+            if (title.length === 0 || description.length === 0 || price.length === 0) {
               allowSubmit = false
             }
             else {
@@ -103,6 +124,7 @@ const Input = () => {
           onChange={(e) => setTitle(e.target.value)}
           placeholder="Enter title..."
         ></input>
+        <PriceInput price={price} setPrice={setPrice} />
         <textarea
           required
           className="border border-gray-300 rounded-md block"

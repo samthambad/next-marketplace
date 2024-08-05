@@ -115,7 +115,7 @@ const PostServer = ({ query, id }: { query?: string, id?: string }) => {
               style={{ width: "100%", height: "100%" }}
               className="font-mono mx-auto flex flex-col h-full shadow-md hover:shadow-md dark:hover:shadow-white cursor-pointer"
             >
-              <div className="mt-auto text-center ">
+              <div className="mt-auto text-left">
                 <Link href={`/post/${post.id}`} target="_blank" >
                   <CardHeader className="">
                     {post.image_string?.length > 0 && (
@@ -129,6 +129,7 @@ const PostServer = ({ query, id }: { query?: string, id?: string }) => {
                       </div>
                     )}
                     <CardTitle>{post.title}</CardTitle>
+                    <CardDescription>${post.price}</CardDescription>
                     <CardDescription>{post.description}</CardDescription>
                   </CardHeader>
                 </Link>
