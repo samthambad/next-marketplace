@@ -99,7 +99,7 @@ const RealtimeChatDisplay = ({ chats }: { chats: any }) => {
                       <span className="mr-2">
                         {messageObj.user_name}: <span className="font-semibold text-blue-500">{messageObj.message}</span>
                       </span>
-                      <span className="justify-end text-xs text-gray-400 font-sans"><em>{messageObj.readable_time?.substring(0, 31)}</em></span>
+                      <span className="justify-end text-xs text-gray-400"><em>{messageObj.readable_time?.substring(0, 31)}</em></span>
                     </div>
                   </li>
                 );
