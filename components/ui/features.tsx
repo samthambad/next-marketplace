@@ -6,11 +6,11 @@ const Features = () => {
   return (
     <div className="py-16 overflow-hidden">
       <div className="container m-auto px-6 space-y-8 text-gray-800 md:px-12">
-        <div className="mt-16 grid border divide-x divide-y rounded-xl overflow-hidden sm:grid-cols-2 lg:divide-y-0 lg:grid-cols-4 xl:grid-cols-4">
+        <div className="mt-16 grid border divide-x divide-y rounded-xl overflow-hidden grid-cols-1 lg:divide-y-0 lg:grid-cols-4 xl:grid-cols-4">
           <div className="relative group bg-white transition hover:z-[1] hover:shadow-2xl dark:bg-inherit">
             <div className="relative p-8 space-y-8">
               <RiInfinityLine className="h-8 w-8 dark" />
-              <div className="space-y-2">
+              <div className="space-y-2 text-wrap">
                 <h5 className="text-xl text-gray-800 font-medium transition group-hover:text-yellow-600">
                   Unlimited listings
                 </h5>

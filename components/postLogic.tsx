@@ -108,7 +108,7 @@ const PostServer = ({ query, id }: { query?: string, id?: string }) => {
       <h1 className="mb-8 mx-auto w-80 font-mono">
         Latest Posts
       </h1>
-      <ul className="grid grid-cols-1 sm:grid-cols-4 gap-2 mx-auto">
+      <ul className="grid grid-cols-1 sm:grid-cols-3 gap-2 mx-auto justify-center max-w-[70%] xl:max-w-[50%] ">
         {posts?.map((post: any) => (
           <li key={post.id} className="p-2">
             <Card

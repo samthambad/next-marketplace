@@ -1,4 +1,5 @@
 "use client";
+import { RxHamburgerMenu } from "react-icons/rx";
 import Link from "next/link";
 import React, { useState } from "react";
 import { supabaseBrowser } from "@/lib/supabase/client";
@@ -79,13 +80,7 @@ const Navbar = ({ user }: { user: User | undefined }) => {
         <div className="flex">
           <DropdownMenu>
             <DropdownMenuTrigger>
-              <Image
-                src={"/menu.png"}
-                alt="dropdown"
-                width={37}
-                height={100}
-                onClick={() => setToggleDropDown(!toggleDropdown)}
-              />
+              <RxHamburgerMenu className="w-6 h-6" />
             </DropdownMenuTrigger>
             <DropdownMenuContent className="bg-slate-900">
               {user ? (

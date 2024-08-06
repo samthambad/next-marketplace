@@ -10,9 +10,9 @@ const Home = async () => {
         <h1 className='scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl'>Marketplace
           <br className='max-md:hidden' />
         </h1>
-        <span className="leading-7 [&:not(:first-child)]:mt-6">Open and free exchange of goods and services. Login to access all the features.</span>
+        <span className="leading-7 [&:not(:first-child)]:mt-6 px-2 lg:px-0">Open and free exchange of goods and services. Login to access all the features.</span>
       </div>
-      <div className="container max-w-[50%] m-auto">
+      <div className="container max-w-[80%] md:max-w-[50%] m-auto">
         <Features />
       </div>
     </section>
