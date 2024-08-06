@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 import { updatePost } from "@/lib/actions";
 import { useRouter } from "next/navigation";
-import { handlePriceChange } from "./input";
 import PriceInput from "./price";
 const EditInput = ({ postData, params }: { postData: any; params: any }) => {
   const router = useRouter();
