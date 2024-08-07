@@ -43,23 +43,23 @@ const Navbar = ({ user }: { user: User | undefined }) => {
       <Link href="/" className="hover:text-blue-500  font-bold">
         Home
       </Link>
-      <Link href="/search" className={`hover:text-blue-500 font-bold ${pathname.includes("/search") ? "text-blue-500" : ""}`}>
+      <Link href="/search" className={`hover:text-blue-500 font-bold ${pathname.includes("/search") && "text-blue-500"}`}>
         Search
       </Link>
       <div className="hidden sm:gap-[4vw] sm:flex sm:items-center sm:justify-center">
         {user && (
-          <Link href="/createpost" className={`hover:text-blue-500 font-bold ${pathname.includes("/createpost") ? "text-blue-500" : ""}`}>
+          <Link href="/createpost" className={`hover:text-blue-500 font-bold ${pathname.includes("/createpost") && "text-blue-500"}`}>
             Create Post
           </Link>
         )}
         {user && (
-          <Link href="/chat" className={`hover:text-blue-500 font-bold ${pathname.includes("/chat") ? "text-blue-500" : ""}`}>
+          <Link href="/chat" className={`hover:text-blue-500 font-bold ${pathname.includes("/chat") && "text-blue-500"}`}>
             Chats
           </Link>
         )}
         <Link
           href={`/profile/${user?.id}`}
-          className="font-bold hover:text-blue-500"
+          className={`font-bold hover:text-blue-500 ${pathname.includes("/profile") && "text-blue-500"}`}
         >
           {user?.user_metadata.name}
         </Link>
