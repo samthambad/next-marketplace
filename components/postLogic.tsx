@@ -102,16 +102,10 @@ const PostServer = ({ query, id }: { query?: string, id?: string }) => {
     );
   } else if (posts === undefined) {
     return (
-      <div className="mt-8 font-bold text-slate-700">
-        Loading posts...
-        {/* <ul className="grid grid-cols-1 sm:grid-cols-3 gap-2 mx-auto justify-center max-w-[70%] xl:max-w-[50%] "></ul> */}
-        <div className="flex flex-col space-y-3">
-          <Skeleton className="h-[125px] w-[250px] rounded-xl" />
-          <div className="space-y-2">
-            <Skeleton className="h-4 w-[250px]" />
-            <Skeleton className="h-4 w-[200px]" />
-          </div>
-        </div>
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 mx-auto justify-center max-w-[70%] xl:max-w-[50%] ">
+        <Skeleton className="h-[504px] w-[269px] rounded-xl bg-slate-100" />
+        <Skeleton className="h-[504px] w-[269px] rounded-xl bg-slate-100" />
+        <Skeleton className="h-[504px] w-[269px] rounded-xl bg-slate-100" />
       </div>);
   }
   return (
