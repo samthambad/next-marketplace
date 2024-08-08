@@ -37,29 +37,28 @@ const Navbar = ({ user }: { user: User | undefined }) => {
     router.push("/");
     router.refresh();
   };
-  console.log("pathname",)
   return (
     <div className="mx-2 flex items-center justify-center gap-[4vw] mb-10 pt-2">
-      <Link href="/" className="hover:text-blue-500  font-bold">
+      <Link href="/" className="transition duration-200 ease-in-out hover:scale-105  font-bold">
         Home
       </Link>
-      <Link href="/search" className={`hover:text-blue-500 font-bold ${pathname.includes("/search") && "text-blue-500"}`}>
+      <Link href="/search" className={`transition duration-200 ease-in-out hover:scale-105 font-bold ${pathname.includes("/search") && "border-b-2 border-slate-700"}`}>
         Search
       </Link>
       <div className="hidden sm:gap-[4vw] sm:flex sm:items-center sm:justify-center">
         {user && (
-          <Link href="/createpost" className={`hover:text-blue-500 font-bold ${pathname.includes("/createpost") && "text-blue-500"}`}>
+          <Link href="/createpost" className={`transition duration-200 ease-in-out hover:scale-105 font-bold ${pathname.includes("/createpost") && "border-b-2 border-slate-700"}`}>
             Create Post
           </Link>
         )}
         {user && (
-          <Link href="/chat" className={`hover:text-blue-500 font-bold ${pathname.includes("/chat") && "text-blue-500"}`}>
+          <Link href="/chat" className={`transition duration-200 ease-in-out hover:scale-105 font-bold ${pathname.includes("/chat") && "border-b-2 border-slate-700"}`}>
             Chats
           </Link>
         )}
         <Link
           href={`/profile/${user?.id}`}
-          className={`font-bold hover:text-blue-500 ${pathname.includes("/profile") && "text-blue-500"}`}
+          className={`font-bold transition duration-200 ease-in-out hover:scale-105 ${pathname.includes("/profile") && "border-b-2 border-slate-700"}`}
         >
           {user?.user_metadata.name}
         </Link>

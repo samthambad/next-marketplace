@@ -1,6 +1,6 @@
 export default function Loading() {
   return (
-    <div className="font-semibold text-blue-500 text-center">
+    <div className="font-semibold text-slate-700 text-center">
       Loading page...
     </div>
   );

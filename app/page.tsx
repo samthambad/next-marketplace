@@ -1,6 +1,4 @@
-import Search from "@/components/search";
 import Features from "@/components/ui/features";
-import Link from "next/link";
 import React from "react";
 const Home = async () => {
   return (

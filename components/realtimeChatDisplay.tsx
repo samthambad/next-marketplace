@@ -97,7 +97,7 @@ const RealtimeChatDisplay = ({ chats }: { chats: any }) => {
                   <li key={index} className="text-sm whitespace-nowrap">
                     <div className="flex justify-between">
                       <span className="mr-2">
-                        {messageObj.user_name}: <span className="font-semibold text-blue-500">{messageObj.message}</span>
+                        {messageObj.user_name}: <span className="font-semibold text-slate-700">{messageObj.message}</span>
                       </span>
                       <span className="justify-end text-xs text-gray-400"><em>{messageObj.readable_time?.substring(0, 31)}</em></span>
                     </div>
@@ -116,7 +116,7 @@ const RealtimeChatDisplay = ({ chats }: { chats: any }) => {
         />
         <div className="flex justify-end">
           <Button
-            className="mr-2 mb-2 hover:bg-blue-500 hover:text-white"
+            className="mr-2 mb-2 hover:bg-slate-700 hover:text-white"
             variant="outline"
             onClick={fileClick}
           >
@@ -124,7 +124,7 @@ const RealtimeChatDisplay = ({ chats }: { chats: any }) => {
           </Button>
           <Button
             onClick={() => sendMsg(createMsg)}
-            className="mr-2 hover:bg-blue-500 hover:text-white"
+            className="mr-2 hover:bg-slate-700 hover:text-white"
             variant="outline"
           >
             Send

@@ -54,7 +54,7 @@ const PostDetailsAndActions = ({
       <div>
         {current_user_id?.length > 0 && user_id !== current_user_id && (
           <Button
-            className="mb-2 hover:bg-blue-800 bg-blue-500 text-white"
+            className="mb-2 hover:bg-blue-800 bg-slate-700 text-white"
             onClick={() => chatWithPoster(post_id, user_id, title)}>
             Chat
           </Button>
@@ -63,7 +63,7 @@ const PostDetailsAndActions = ({
           <Button
             className="mb-2 hover:bg-red-700 bg-red-500 text-white mr-2"
             onClick={() => clickDelete(post_id)}>
-            <MdDelete/>
+            <MdDelete />
           </Button>
         )}
         {user_id === current_user_id && (

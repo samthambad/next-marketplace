@@ -14,6 +14,8 @@ import Link from "next/link";
 import { MdDelete } from "react-icons/md";
 import { IoChatbubblesSharp } from "react-icons/io5";
 import Image from "next/image";
+import toast from "react-hot-toast";
+import { Skeleton } from "@/components/ui/skeleton"
 
 const PostServer = ({ query, id }: { query?: string, id?: string }) => {
   const [posts, setPosts] = useState<any[]>();
@@ -24,7 +26,6 @@ const PostServer = ({ query, id }: { query?: string, id?: string }) => {
     if (query === undefined && id !== undefined) {
       const getPosts = async () => {
         try {
-          console.log("getting using id");
           const response = await fetch("/api/postsUid", {
             method: "POST",
             headers: {
@@ -37,7 +38,7 @@ const PostServer = ({ query, id }: { query?: string, id?: string }) => {
           const result = await response.json();
           setPosts(result);
         } catch (error) {
-          console.log("error getting posts by uid", error);
+          toast.error(`error getting posts by uid ${error}`);
         }
       };
       getPosts();
@@ -57,7 +58,7 @@ const PostServer = ({ query, id }: { query?: string, id?: string }) => {
           const result = await response.json();
           setPosts(result);
         } catch (error) {
-          console.log("error calling the posts", error);
+          toast.error(`error getting posts by query ${error}`);
         }
       };
       getPosts(query);
@@ -73,7 +74,6 @@ const PostServer = ({ query, id }: { query?: string, id?: string }) => {
     };
     getUser();
   }, [query, refresh, setRefresh, id]);
-  // console.log("query in logic", query);
   // make user undefined for conditions below
   if (user === "") setUser(undefined);
   const router = useRouter();
@@ -101,7 +101,18 @@ const PostServer = ({ query, id }: { query?: string, id?: string }) => {
       </div>
     );
   } else if (posts === undefined) {
-    return <div className="mt-8 font-bold text-blue-500">Loading posts...</div>;
+    return (
+      <div className="mt-8 font-bold text-slate-700">
+        Loading posts...
+        {/* <ul className="grid grid-cols-1 sm:grid-cols-3 gap-2 mx-auto justify-center max-w-[70%] xl:max-w-[50%] "></ul> */}
+        <div className="flex flex-col space-y-3">
+          <Skeleton className="h-[125px] w-[250px] rounded-xl" />
+          <div className="space-y-2">
+            <Skeleton className="h-4 w-[250px]" />
+            <Skeleton className="h-4 w-[200px]" />
+          </div>
+        </div>
+      </div>);
   }
   return (
     <div>
@@ -170,7 +181,7 @@ const PostServer = ({ query, id }: { query?: string, id?: string }) => {
                       chatWithPoster(post.id, post.user_id, post.title)
                     }
                     variant="outline"
-                    className="mb-2 hover:bg-blue-500"
+                    className="mb-2 hover:bg-slate-700"
                   >
                     <IoChatbubblesSharp />
                   </Button>
@@ -183,9 +194,5 @@ const PostServer = ({ query, id }: { query?: string, id?: string }) => {
     </div>
   );
 };
-// console.log("user in logic", user)
-// const currentUserDetails = await checkLoggedIn();
-// const posts = await fetchFilteredPosts(query);
-//client component inside server component
 
 export default PostServer;

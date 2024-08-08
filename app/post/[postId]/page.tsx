@@ -23,9 +23,7 @@ const EachPost = async ({ params }: { params: { postId: string } }) => {
       </div>
     )
   }
-  console.log("image array length", image_string.length)
   const image_string_filtered = image_string.filter((image: string) => image.length > 0)
-  console.log("post title", description)
   return (
     <div className="p-4 w-[90%] mx-auto">
 

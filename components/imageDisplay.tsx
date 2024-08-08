@@ -84,7 +84,7 @@ const ImageDisplay = ({ image_array, postId, }: { image_array: any; postId: numb
     document.getElementById("fileInput")?.click();
   }
   return (
-    <div className="font-mono text-center border-blue-500 border-2 mb-4 p-2 rounded-md mx-2 shadow-md">
+    <div className="font-mono text-center border-slate-700 border-2 mb-4 p-2 rounded-md mx-2 shadow-md">
       <Carousel opts={{ align: "start", }} className="w-[90%] mx-auto">
         <CarouselContent>
           {images.map((image: string, index: number) =>

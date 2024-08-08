@@ -44,7 +44,7 @@ const ChatList = ({ data }: { data: any[] }) => {
             <TableRow
               key={chat.chat_id}
               onClick={() => goToChat(chat.chat_id)}
-              className="hover:bg-blue-500 focus:blue-500"
+              className="hover:bg-slate-700 focus:slate-700"
             >
               <TableCell className="flex justify-center ">
                 {(chat.image_string !== undefined) ? (

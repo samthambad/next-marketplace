@@ -31,9 +31,9 @@ const ChatStatusBar = ({
     <div className="flex p-2 mx-4 justify-between items-center gap-[2vw] mb-10 pt-2 pb-2 border rounded shadow-md hover:shadow-sm dark:hover:shadow-white">
       <div>
         {postTitle !== undefined ?
-        (<span className="font-semibold mb-2 cursor-pointer hover:text-blue-500" onClick={() => goToPost(postId)}>{postTitle}</span>) :
-        <span className="text-red-700 font-semibold">Post was deleted</span>}
-        {image_string_first !== "" ?(
+          (<span className="font-semibold mb-2 cursor-pointer hover:text-slate-700" onClick={() => goToPost(postId)}>{postTitle}</span>) :
+          <span className="text-red-700 font-semibold">Post was deleted</span>}
+        {image_string_first !== "" ? (
           <Image
             width={100}
             height={100}
@@ -45,9 +45,9 @@ const ChatStatusBar = ({
             }}
             alt="post"
           />
-        ):<p className="text-sm text-gray-300">Post has no image</p>}
+        ) : <p className="text-sm text-gray-300">Post has no image</p>}
       </div>
-      <p className="hover:text-blue-500 cursor-pointer" onClick={goToUser}>
+      <p className="hover:text-slate-700 cursor-pointer" onClick={goToUser}>
         {otherUserName}
       </p>
     </div>
