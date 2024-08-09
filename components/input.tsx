@@ -127,7 +127,7 @@ const Input = () => {
         <PriceInput price={price} setPrice={setPrice} />
         <textarea
           required
-          className="border border-gray-300 rounded-md block"
+          className="border border-gray-300 rounded-md block h-40"
           name="description"
           onChange={(e) => setDescription(e.target.value)}
           placeholder="Enter description..."
@@ -162,7 +162,7 @@ const Input = () => {
               alt={`Preview of image ${index + 1}`}
               width={900}
               height={900}
-              className="mx-auto bg-red-500"
+              className="mx-auto"
             />
           </div>
         ))}

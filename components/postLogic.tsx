@@ -135,7 +135,6 @@ const PostServer = ({ query, id }: { query?: string, id?: string }) => {
                     )}
                     <CardTitle>{post.title}</CardTitle>
                     <CardDescription>${post.price}</CardDescription>
-                    <CardDescription>{post.description}</CardDescription>
                   </CardHeader>
                 </Link>
               </div>

@@ -32,7 +32,7 @@ const EditInput = ({ postData, params }: { postData: any; params: any }) => {
           Description
         </span>
         <textarea
-          className="border"
+          className="border h-40"
           name="description"
           placeholder="Enter description..."
         >

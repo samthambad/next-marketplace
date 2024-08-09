@@ -1,5 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import { FaFileUpload } from "react-icons/fa";
+import { MdSend } from "react-icons/md";
 import { toast } from "react-hot-toast"
 import { Textarea } from "./ui/textarea";
 import { Button } from "./ui/button";
@@ -107,32 +109,36 @@ const RealtimeChatDisplay = ({ chats }: { chats: any }) => {
             })}
           </ul>
         )}
-      <div className="relative mx-4 shadow-md border-blue-300">
-        <Textarea
-          id="text"
-          onChange={(e) => handleMsg(e.target.value)}
-          className="w-full mx-auto mb-2 px-3 py-2 border-transparent shadow-sm hover:shadow-sm"
-          placeholder="Enter message..."
-        />
-        <div className="flex justify-end">
-          <Button
-            className="mr-2 mb-2 hover:bg-slate-700 hover:text-white"
-            variant="outline"
-            onClick={fileClick}
-          >
-            Image
-          </Button>
-          <Button
-            onClick={() => sendMsg(createMsg)}
-            className="mr-2 hover:bg-slate-700 hover:text-white"
-            variant="outline"
-          >
-            Send
-          </Button>
+      <div className="flex justify-center items-center p-4">
+        <div className="w-full sm:w-[90%] md:w-[80%] lg:w-[70%] flex flex-col sm:flex-row items-stretch shadow-md border border-blue-300 bg-white rounded-lg p-2">
+          <div className="flex items-center sm:self-stretch order-first sm:order-none">
+            <Button
+              className="flex-shrink-0 p-2 my-2 sm:my-0 sm:mr-2 hover:bg-slate-700 hover:text-white w-full"
+              variant="outline"
+              onClick={fileClick}
+            >
+              <FaFileUpload className="w-5 h-5" />
+            </Button>
+          </div>
+          <Textarea
+            id="text"
+            onChange={(e) => handleMsg(e.target.value)}
+            className="flex-grow px-3 py-2 resize-none min-h-[100px] sm:min-h-0 order-last sm:order-none my-2 sm:my-0 sm:mx-2"
+            placeholder="Enter message..."
+          />
+          <div className="flex items-center sm:self-stretch order-2 sm:order-none">
+            <Button
+              onClick={() => sendMsg(createMsg)}
+              className="flex-shrink-0 p-2 my-2 sm:my-0 hover:bg-slate-700 hover:text-white w-full"
+              variant="outline"
+            >
+              <MdSend className="w-5 h-5" />
+            </Button>
+          </div>
           <input
             type="file"
             id="fileInput"
-            style={{ display: "none" }}
+            className="hidden"
             onChange={handleFileChange}
           />
         </div>
