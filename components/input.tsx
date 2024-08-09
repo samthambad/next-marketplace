@@ -7,6 +7,7 @@ import Compressor from "compressorjs";
 import Image from "next/image";
 import toast from "react-hot-toast";
 import PriceInput from "./price";
+import LimitedInput from "./ui/limitedInput";
 
 const Input = () => {
   let allowSubmit = true
@@ -115,7 +116,7 @@ const Input = () => {
           placeholder="Submit"
           className="border border-gray-300 rounded-md hover:bg-blue-400 mx-auto block"
         />
-        <input
+        {/* <input
           required
           autoComplete="off"
           className="border border-gray-300 rounded-md block mb-4 mx-auto"
@@ -123,15 +124,34 @@ const Input = () => {
           name="title"
           onChange={(e) => setTitle(e.target.value)}
           placeholder="Enter title..."
-        ></input>
+        ></input> */}
+        <LimitedInput
+          type="text"
+          name="title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          placeholder="Enter title..."
+          maxLength={100}  // Character limit for title
+          className="border border-gray-300 rounded-md block mb-4 mx-auto"
+        />
         <PriceInput price={price} setPrice={setPrice} />
-        <textarea
+        {/* <textarea
           required
           className="border border-gray-300 rounded-md block h-40"
           name="description"
           onChange={(e) => setDescription(e.target.value)}
           placeholder="Enter description..."
-        ></textarea>
+        ></textarea> */}
+        <LimitedInput
+          type="textarea"
+          name="description"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          placeholder="Enter description..."
+          maxWords={100}  // Word limit for description
+          showWordCount={true}
+          className="border border-gray-300 rounded-md block h-40"
+        />
       </form>
       <div
         className="drop-area border py-10 border-dotted border-gray-500 p-4 rounded-lg w-1/2 mx-auto"
