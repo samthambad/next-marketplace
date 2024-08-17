@@ -116,32 +116,16 @@ const Input = () => {
           placeholder="Submit"
           className="border border-gray-300 rounded-md hover:bg-blue-400 mx-auto block"
         />
-        {/* <input
-          required
-          autoComplete="off"
-          className="border border-gray-300 rounded-md block mb-4 mx-auto"
-          type="text"
-          name="title"
-          onChange={(e) => setTitle(e.target.value)}
-          placeholder="Enter title..."
-        ></input> */}
         <LimitedInput
           type="text"
           name="title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           placeholder="Enter title..."
-          maxLength={100}  // Character limit for title
+          maxLength={50}  // Character limit for title
           className="border border-gray-300 rounded-md block mb-4 mx-auto"
         />
         <PriceInput price={price} setPrice={setPrice} />
-        {/* <textarea
-          required
-          className="border border-gray-300 rounded-md block h-40"
-          name="description"
-          onChange={(e) => setDescription(e.target.value)}
-          placeholder="Enter description..."
-        ></textarea> */}
         <LimitedInput
           type="textarea"
           name="description"
