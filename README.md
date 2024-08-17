@@ -6,7 +6,7 @@ It utilises both server and client components for efficiency and interactivity.
 
 ## Current Features
 - Create, Read, Update Delete Posts. Add/Remove text and Images from Post
-- Send Chats to Users who have posts
+- Chat with merchants
 - View all Chats
 - Profile page
 ## Getting Started
