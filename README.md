@@ -5,8 +5,11 @@ This is a online open marketplace with Realtime Chat functionality that is made 
 It utilises both server and client components for efficiency and interactivity.
 
 ## Current Features
-- Create, Read, Update Delete Posts. Add/Remove text and Images from Post
-- Chat with merchants
+| Features | Description                                                           | Preview                                           |
+| -------- | --------------------------------------------------------------------- | ------------------------------------------------- |
+| Posts    | CRUD Posts, Search                                                    | <img src="./screenshots/posts.png" width="400">   |
+| Chats    | Chat with sellers/interested buyers and view all your chats in 1 page | <img src="./screenshots/chat.png" width="400">    |
+| Profile  | Manage your posts from the profile page                               | <img src="./screenshots/profile.png" width="400"> |
 - View all Chats
 - Profile page
 ## Getting Started
